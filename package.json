@@ -1,5 +1,5 @@
 {
-  "name": "mypass",
+  "name": "boilerplate",
   "version": "1.0.0",
   "description": "",
   "main": "server.js",
@@ -9,14 +9,13 @@
   },
   "author": "wayne cheng",
   "license": "ISC",
-  "engines": {
-    "node": "6.10.3"
-  },
   "dependencies": {
     "body-parser": "^1.17.2",
     "express": "^4.15.3",
     "express-handlebars": "^3.0.0",
-    "mysql": "^2.13.0",
-    "path": "^0.12.7"
+    "method-override": "^2.3.9",
+    "mysql": "^2.14.0",
+    "path": "^0.12.7",
+    "sequelize": "^4.4.2"
   }
 }

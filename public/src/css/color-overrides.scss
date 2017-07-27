@@ -4,11 +4,30 @@
 /*
 	bluegrey-lighten1 $bg
 */
+@import "_materialize-colors";
+
+$switch-off-circle: #eceff1;
+$switch-off-track: #b0bec5;
+$bg-d: #333;
 $bg-dark: #455a64;
-$bg: #78909c;
+$bg: #607d8b;
+$bg-d1: #78909c;
 $bg-alt: #90a4ae;
+
 $light-bg: #eceff1;
-$light-bg-alt: #f1f4f6;
+$light-bg-l: #f1f4f6;
+
+.switch label .lever {
+	background-color: $bg-alt;
+}
+.switch label .lever:before,
+.switch label .lever:after{
+	background-color: $blue-grey-l5;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+	background-color: $blue-grey-l4;
+}
 
 .collection .collection-item.active {
   background-color: $bg;
@@ -21,10 +40,14 @@ $light-bg-alt: #f1f4f6;
 .progress .determinate 
 {
   background-color: $bg;
+  color: #fff;
 }
 nav {
   background-color: $bg-dark;
   color: #fff;
+}
+nav ul a:hover {
+	background-color: $bg-d1;
 }
 .picker__day--selected,
 .picker__day--selected:hover,
@@ -183,6 +206,6 @@ input[type=range]::-moz-range-thumb {
 .light.btn-large:hover, 
 .light.btn-floating:hover 
 {
-  background-color: $light-bg-alt;
+  background-color: $light-bg-l;
   /*color: #333;*/
 }

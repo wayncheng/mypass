@@ -1,6 +1,62 @@
+@import url("color-overrides.css");
+
+
 html {
 	font-size: 12px;
 }
 body {
-	background-color: yellow;
+	margin: 0;
+	padding: 0;
+	background-color: #fff;
+	text-align: center;
+}
+
+// @import "materialize-overrides";
+
+.page-title {
+	font-size: 3rem;
+	text-align: right;
+	// text-align: left;
+	padding-right: 2rem;
+	font-weight: 700;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+
+	span {
+		display: block;
+		font-size: 14px;
+		font-weight: 300;
+		line-height: 1.5em;
+		color: rgba(0,0,0,0.5);
+	}
+}
+
+header {
+	nav, nav li, nav li a, nav li a i {
+		
+	}
+	nav {
+		height: 4rem;
+		line-height: 4rem;
+
+		.nav-wrapper {
+			ul {
+				display: inline-block;;
+				margin: auto;
+			}
+			ul li,  a i {
+				height: inherit;
+				line-height: inherit;
+			}
+
+			a {
+				font-size: 1rem;
+				
+				i {
+					margin-left: .5rem; 
+				}
+			}
+		}
+	}
 }

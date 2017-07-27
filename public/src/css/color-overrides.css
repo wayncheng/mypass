@@ -4,8 +4,21 @@
 /*
 	bluegrey-lighten1 $bg
 */
+.switch label .lever {
+  background-color: #90a4ae;
+}
+
+.switch label .lever:before,
+.switch label .lever:after {
+  background-color: #eceff1;
+}
+
+.switch label input[type=checkbox]:checked + .lever {
+  background-color: #cfd8dc;
+}
+
 .collection .collection-item.active {
-  background-color: #78909c;
+  background-color: #607d8b;
   color: #eafaf9;
 }
 
@@ -13,12 +26,17 @@
 .fixed-action-btn .fab-backdrop,
 .progress .indeterminate,
 .progress .determinate {
-  background-color: #78909c;
+  background-color: #607d8b;
+  color: #fff;
 }
 
 nav {
   background-color: #455a64;
   color: #fff;
+}
+
+nav ul a:hover {
+  background-color: #78909c;
 }
 
 .picker__day--selected,
@@ -31,7 +49,7 @@ span.badge.new,
 .btn-large,
 .btn-floating {
   color: #fff;
-  background-color: #78909c;
+  background-color: #607d8b;
 }
 
 .btn:focus,
@@ -74,8 +92,8 @@ input[type=tel]:not(.browser-default):focus:not([readonly]),
 input[type=number]:not(.browser-default):focus:not([readonly]),
 input[type=search]:not(.browser-default):focus:not([readonly]),
 textarea.materialize-textarea:focus:not([readonly]) {
-  border-bottom: 1px solid #78909c;
-  box-shadow: 0 1px 0 0 #78909c;
+  border-bottom: 1px solid #607d8b;
+  box-shadow: 0 1px 0 0 #607d8b;
 }
 
 .secondary-content,
@@ -110,7 +128,7 @@ input[type=tel]:not(.browser-default):focus:not([readonly]) + label,
 input[type=number]:not(.browser-default):focus:not([readonly]) + label,
 input[type=search]:not(.browser-default):focus:not([readonly]) + label,
 textarea.materialize-textarea:focus:not([readonly]) + label {
-  color: #78909c;
+  color: #607d8b;
 }
 
 .picker__date-display,
@@ -120,41 +138,41 @@ input[type=range] + .thumb,
 .switch label input[type=checkbox]:checked + .lever:after,
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:after {
-  background-color: #78909c;
+  background-color: #607d8b;
 }
 
 [type="radio"]:checked + label:after,
 [type="radio"].with-gap:checked + label:before,
 [type="radio"].with-gap:checked + label:after {
-  border: 2px solid #78909c;
+  border: 2px solid #607d8b;
 }
 
 [type="checkbox"]:checked + label:before {
-  border-right: 2px solid #78909c;
-  border-bottom: 2px solid #78909c;
+  border-right: 2px solid #607d8b;
+  border-bottom: 2px solid #607d8b;
 }
 
 [type="checkbox"]:indeterminate + label:before {
-  border-right: 2px solid #78909c;
+  border-right: 2px solid #607d8b;
 }
 
 [type="checkbox"].filled-in:checked + label:after {
-  border: 2px solid #78909c;
-  background-color: #78909c;
+  border: 2px solid #607d8b;
+  background-color: #607d8b;
 }
 
 [type="checkbox"].filled-in.tabbed:checked:focus + label:after {
-  background-color: #78909c;
-  border-color: #78909c;
+  background-color: #607d8b;
+  border-color: #607d8b;
 }
 
 input[type=range]::-ms-thumb,
 input[type=range]::-moz-range-thumb {
-  background: #78909c;
+  background: #607d8b;
 }
 
 .spinner-layer {
-  border-color: #78909c;
+  border-color: #607d8b;
 }
 
 .light.btn,
