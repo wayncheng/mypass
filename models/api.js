@@ -2,6 +2,8 @@
 (function(){
 var orm = require('../config/orm.js');
 var table = "users";
+var bcrypt = require("bcryptjs");
+var saltRounds = 10;
 
 var auth = {
   all: function(cb) {
@@ -20,10 +22,17 @@ var auth = {
       cb(res);
     });
 	},
-	get_pw: function(username, cb){
-		orm.get_pw(table,username, function(res){
-			cb(res);
-		} )
+	get_pw: function(username, attempt, cb){
+		orm.get_pw(table, username, function(res){
+			// get the password hash for this user from the database
+			var hash = res[0].pw;
+
+			// compare login attempt (in plain text) with the hash stored in the db.
+			// returns bool
+			bcrypt.compare(attempt,hash,function(err,res){
+				cb(res);
+			})
+		})
 	}
 };
 

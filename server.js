@@ -6,6 +6,7 @@
 	var exphbs = require("express-handlebars");
 	var path = require("path");
 	var methodOverride = require("method-override");
+	// var db = require('./models');
 
 // CONFIG =========================================
 	var app = express();
@@ -59,9 +60,11 @@
   });
 
 // START SERVER ===================================
+// db.sequelize.sync({force: true}) .then(function(){
   app.listen(port, function() {
     console.log(`-------------------------------------------------------
                                           ready @ ${port}`);
   });
+// })
 //==================================================	
 })();

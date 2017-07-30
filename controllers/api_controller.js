@@ -4,6 +4,10 @@
   var api = require("../models/api.js");
   var bodyParser = require("body-parser");
   var router = express.Router();
+  // var db = require("../models");
+	var bcrypt = require("bcryptjs");
+	var saltRounds = 10;
+	
 
   /////////////////////////////////////////////////////
   router.get("/api/all", function(req, res) {
@@ -16,37 +20,46 @@
   //==================================================
   router.post("/api/:authtype/setup", function(req, res) {
     var authtype = req.params.authtype;
-    var phase = 'setup';
+    var phase = "setup";
     console.log(`POST /api/${authtype}/${phase}`);
     var rb = req.body;
-		console.log("rb", rb);
-		
-    api.create(
-      ["username", "email", "pw", "firstname", "lastname"],
-      [rb.username, rb.email, rb.pw, rb.firstname, rb.lastname],
-      function() {
-        console.log("res", res);
-        res.redirect("/login/text");
-      }
-    );
-	});
-	
+    console.log("rb", rb);
+    // var pw_raw = rb.pw;
+
+    bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
+      console.log("hash", hash);
+
+      api.create(
+        ["username", "email", "pw", "firstname", "lastname"],
+        [rb.username, rb.email, hash, rb.firstname, rb.lastname],
+        function() {
+          // console.log("res", res);
+          res.redirect("/login/text");
+        }
+      );
+    });
+  });
+
   //==================================================
   router.post("/api/:authtype/login", function(req, res) {
     var authtype = req.params.authtype;
-    var phase = 'login';
+    var phase = "login";
     console.log(`POST /api/${authtype}/${phase}`);
-    var rb = req.body;
-		console.log("rb", rb);
-		
-    api.create(
-      ["username", "email", "pw", "firstname", "lastname"],
-      [rb.username, rb.email, rb.pw, rb.firstname, rb.lastname],
-      function() {
-        console.log("res", res);
-        res.redirect("/login/text");
-      }
-    );
+		console.log('req.body.pw',req.body.pw);
+
+
+		// bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
+      api.get_pw(req.body.username, req.body.pw, function(response) {
+        // console.log("res", res);
+				console.log("access granted?", response);
+				if (response === true){
+					res.redirect('/login/face')
+				}
+				else {
+					res.redirect('/login/text')
+				}
+      });
+    // });
   });
 
   /////////////////////////////////////////////////////

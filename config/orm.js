@@ -64,6 +64,17 @@
         }
         cb(result);
       });
+    },
+    //==================================================
+    get_pw: function(table, username, cb) {
+      // var queryString = `DELETE FROM ${table} WHERE ${col} = ${target};`;
+      var queryString = `SELECT pw FROM ${table} WHERE username = "${username}";`;
+      console.log(queryString);
+
+      connection.query(queryString, function(err, result) {
+        if (err) { throw err; }
+        cb(result);
+      });
     }
     //==================================================
   };
