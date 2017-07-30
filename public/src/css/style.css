@@ -50,3 +50,8 @@ header nav .nav-wrapper a {
 header nav .nav-wrapper a i {
   margin-left: .5rem;
 }
+
+form.text-form {
+  max-width: 400px;
+  margin: auto;
+}

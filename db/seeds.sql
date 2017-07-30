@@ -1,6 +1,6 @@
 
-INSERT INTO users (username,pw,firstname,lastname)
+INSERT INTO users (username,email,pw,firstname,lastname)
 VALUES
-('batman','robin','Bruce','Wayne'),
-('pb','jelly','Peanut','Butter')
+('batman','bruce@wayne.com','robin','Bruce','Wayne'),
+('pb','pb@gmail.com','jelly','Peanut','Butter')
 ;

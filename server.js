@@ -22,7 +22,8 @@
 	
 	// Set Body Parser
 	app.use(bodyParser.json());
-	app.use(bodyParser.urlencoded({ extended: true }));
+	// app.use(bodyParser.urlencoded({ extended: true }));
+	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.text());
 	app.use(bodyParser.json({ type: 'application/vnd.api+json'}));	
 	
@@ -38,8 +39,8 @@
 // ROUTES =========================================
 	// api has to be before routes or else everything would
 	// would hit routes (including api routes)
-	var api = require('./controllers/auth_controller.js');
-	app.use('/api/', api); 
+	var api = require('./controllers/api_controller.js');
+	app.use('/', api); 
 	
 	var routes = require("./controllers/model_controller.js");
 	app.use("/", routes);
