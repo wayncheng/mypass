@@ -18,9 +18,9 @@
   });
 
   //==================================================
-  router.post("/api/:authtype/setup", function(req, res) {
+  router.post("/api/:authtype/signup", function(req, res) {
     var authtype = req.params.authtype;
-    var phase = "setup";
+    var phase = "signup";
     console.log(`POST /api/${authtype}/${phase}`);
     var rb = req.body;
     console.log("rb", rb);

@@ -8,15 +8,15 @@
   var model = require("../models/model.js");
 
 //==================================================
-  router.get("/setup/:authtype", function(req, res) {
+  router.get("/signup/:authtype", function(req, res) {
 	var authtype = req.params.authtype;
 
 		res.render(authtype, {
-			title: 'setup '+ authtype,
+			title: 'signup '+ authtype,
 			authtype: authtype,
-			api_phase: 'setup',
-			layout: 'setup',
-			isSetup: true,
+			api_phase: 'signup',
+			layout: 'signup',
+			issignup: true,
 		})
   });
   router.get("/login/:authtype", function(req, res) {
@@ -27,7 +27,7 @@
 			authtype: authtype,
 			api_phase: 'login',
 			layout: 'login',
-			isSetup: false,
+			issignup: false,
 		})
   });
 

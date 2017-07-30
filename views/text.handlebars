@@ -1,42 +1,43 @@
-<h3>Text</h3>
+<h5>Text</h5>
 
 
 <div class="row">
 	<form action="/api/text/{{api_phase}}" class="text-form" method="POST">
-	{{#if isSetup}}
-		<div class="row">
+	{{#if isSignup}}
+		{{!-- <div class="row">
 			<div class="input-field col s12 m6">
-				<input id="firstname" name="firstname" type="text" class="validate">
+				<input id="firstname" name="firstname" type="text" class="validate signup">
 				<label for="firstname">First Name</label>
 			</div>
 			<div class="input-field col s12 m6">
-				<input id="lastname" name="lastname" type="text" class="validate">
+				<input id="lastname" name="lastname" type="text" class="validate signup">
 				<label for="lastname">Last Name</label>
 			</div>
-		</div>
+		</div> --}}
 		<div class="row">
 			<div class="input-field">
-				<input id="email" name="email" type="text" class="validate">
+				<input id="email" name="email" type="email" class="validate signup">
 				<label for="email">email</label>
 			</div>
 		</div>
 	{{/if}}
 		<div class="row">
 			<div class="input-field">
-				<input id="username" name="username" type="text" class="validate">
+				{{!-- <input id="username" name="username" type="text" class="validate signup" pattern="^[a-z0-9_]*$" title="Username can only contain alphanumeric characters and underscores"> --}}
+				 <input id="username" name="username" type="text" class="signup"> 
 				<label for="username">username</label>
 			</div>
 		</div>
 		<div class="row">
 			<div class="input-field">
-				<input id="password" name="pw" type="password" class="validate">
+				<input id="password" name="pw" type="password" class="signup pw">
 				<label for="password">password</label>
 			</div>
 		</div>
-	{{#if isSetup}}
+	{{#if issignup}}
 		<div class="row">
 			<div class="input-field">
-				<input id="confirm-password" type="password" class="validate">
+				<input id="confirm-password" type="password" class="signup pw">
 				<label for="confirm-password">confirm password</label>
 			</div>
 		</div>
