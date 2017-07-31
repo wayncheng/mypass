@@ -20,11 +20,13 @@ html {
 	// @include linear-gradient($blue-grey, $blue-grey-d2);
 	// @include linear-gradient(#8EC5FC,#E0C3FC);
 	// @include linear-gradient(#8BC6EC,#9599E2);
+	// @include linear-gradient(#0093E9,#80D0C7);
+	// @include linear-gradient(#FAACA8,#DDD6F3);
+    // @include linear-gradient(#2afadf, #4c83ff);
 
 
   &.signup,
   &.login {
-    @include linear-gradient(#2afadf, #4c83ff);
     color: #fff;
 
     header {
@@ -105,8 +107,13 @@ header {
 .progress, 
 .step.done,
 .step.active {
-	background-color: #acece6 !important;
-	color: #fff;
+	// background-color: #acece6 !important;
+	// background-color: rgba(255,255,255,1) !important;
+	// background-color: #ecf0f1 !important;
+	// background-color: #fff !important;
+	// background-color: #ecf0f1;
+	background-color: #3498db !important;
+	color: #fff !important;
 
 
 }

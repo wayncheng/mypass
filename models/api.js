@@ -5,7 +5,7 @@ var table = "users";
 var bcrypt = require("bcryptjs");
 var saltRounds = 10;
 
-var auth = {
+var api = {
   all: function(cb) {
     orm.all(table, function(res) {
       cb(res);
@@ -33,9 +33,17 @@ var auth = {
 				cb(res);
 			})
 		})
-	}
+	},
+	// signup: {
+	// 	text: {
+	// 	},
+	// 	face: {
+	// 	},
+	// 	voice: {
+	// 	}
+	// }
 };
 
 
-module.exports = auth;
+module.exports = api;
 })();

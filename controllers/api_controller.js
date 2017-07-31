@@ -8,6 +8,7 @@
 	var bcrypt = require("bcryptjs");
 	var saltRounds = 10;
 	
+var flow = ['text','face','voice'];
 
   /////////////////////////////////////////////////////
   router.get("/api/all", function(req, res) {
@@ -21,10 +22,16 @@
   router.post("/api/:authtype/signup", function(req, res) {
     var authtype = req.params.authtype;
     var phase = "signup";
-    console.log(`POST /api/${authtype}/${phase}`);
     var rb = req.body;
-    console.log("rb", rb);
-    // var pw_raw = rb.pw;
+    console.log(`POST /api/${authtype}/${phase}`);
+		// Set next auth type. 
+		var next_type = next_guide[authtype];
+		var next_guide = {
+			'text': 'face',
+			'face': 'voice',
+			'voice': 'done'
+		}
+		
 
     bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
       console.log("hash", hash);
@@ -34,7 +41,7 @@
         [rb.username, rb.email, hash, rb.firstname, rb.lastname],
         function() {
           // console.log("res", res);
-          res.redirect("/login/text");
+          res.redirect(`/signup/${next_type}`);
         }
       );
     });
