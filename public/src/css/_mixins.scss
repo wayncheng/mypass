@@ -1,0 +1,22 @@
+@import "_materialize-colors";
+
+
+// border radius
+@mixin border-radius($radius: 5px) {
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -ms-border-radius: $radius;
+  border-radius: $radius;
+}
+
+// Linear Gradients
+@mixin linear-gradient($top, $bottom, $gradient-angle: 135deg){
+    background: $top; /* Old browsers */
+    // background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,$top), color-stop(100%,$bottom)); /* Chrome,Safari4+ */
+    background: -ms-linear-gradient($gradient-angle, $top 0%, $bottom 100%); /* IE10+ */
+    background: -o-linear-gradient($gradient-angle, $top 0%, $bottom 100%); /* Opera 11.10+ */
+    background: -moz-linear-gradient($gradient-angle, $top 0%,  $bottom 100%); /* FF3.6+ */
+    background: -webkit-linear-gradient($gradient-angle, $top 0%, $bottom 100%); /* Chrome10+,Safari5.1+ */
+    background: linear-gradient($gradient-angle, $top 0%, $bottom 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}

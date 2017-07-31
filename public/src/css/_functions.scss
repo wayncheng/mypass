@@ -1,0 +1,275 @@
+$browser-default-font-size: 16px !default;
+
+/*--------------------------------
+
+	REMs
+
+*/
+
+$rems-on: true !default;
+$rems-base-font-size: $browser-default-font-size / 100% * $html-font-size !default;
+
+@function rem($size, $reverse: false) {
+
+	$html-font-size-units: if(str-index(#{$html-font-size}, px), px, %);
+
+	$unitless: strip-unit($size);
+	$unitless-base: strip-unit(if($html-font-size-units == px, $html-font-size, $rems-base-font-size));
+
+	@if $reverse == false {
+
+		@if $rems-on {
+
+			@if str-index(#{$size}, 'px') {
+
+				@return $unitless / $unitless-base * 1rem;
+
+			} @elseif str-index(#{$size}, 'rem') {
+
+				@return $size;
+
+			}
+
+		} @else {
+
+			@if str-index(#{$size}, 'px') {
+
+				@return $size;
+
+			} @elseif str-index(#{$size}, 'rem') {
+
+				@return $unitless * $unitless-base * 1px;
+
+			}
+
+		}
+
+	} @else {
+
+		@return $unitless * $unitless-base * 1px;
+
+	}
+
+}
+
+
+
+/*--------------------------------
+
+	EMs calculator
+
+*/
+
+$media-query-units: em !default;
+
+@function em($size) {
+
+	$size: if(str-index(#{$size}, 'rem'), rem($size, true), $size);
+
+	$unitless: strip-unit($size);
+	$unitless-base: strip-unit($browser-default-font-size);
+
+	@if $media-query-units == em {
+
+		@return $unitless / $unitless-base * 1em;
+
+	} @else {
+
+		@return $size;
+
+	}
+
+}
+
+
+/*--------------------------------
+
+	Grids
+
+*/
+
+@function grid-calc($index, $total: $grid-column-count) {
+	@if $index == 0 {
+		@return 0%;
+	} @else {
+		@return 100%/($total/$index);
+	}
+}
+
+
+
+/*--------------------------------
+
+	Z-indexing
+
+	use:
+
+		instead of guessing or adding random z-indexes throughout the project (e.g. 100000, 999999, etc.), call the z-index function to generate a z-index from a stacked list of classes
+
+	prerequisits:
+
+		$z-indexes list must exist in variables file
+
+	example:
+
+		.box {
+			z-index: z('box');
+		}
+
+*/
+
+@function z($name) {
+
+	@if index($z-indexes, $name) {
+
+		@return (length($z-indexes) - index($z-indexes, $name)) + 1;
+
+	} @else {
+
+		@warn 'There is no item "#{$name}" in this list; choose one of: #{$z-indexes}';
+
+		@return null;
+
+	}
+
+}
+
+
+
+/*--------------------------------
+
+	Photoshop letter spacing
+
+	use:
+
+		for simple conversion between Photoshop letter-spacing to ems
+
+	prerequisits:
+
+		$ls list must exist in variables file
+
+	example:
+
+		.awesome-heading {
+			letter-spacing: ls('awesome-heading');
+		}
+
+		could generate (if "awesome-heading") is 2nd in the list:
+
+		.awesome-heading {
+			letter-spacing: -0.01em;
+		}
+
+*/
+
+@function ls($name) {
+	$value: map_get($ls, $name);
+	@return $value / 1000 * 1em;
+}
+
+@function ls-basic($value) {
+	@return $value / 1000 * 1em;
+}
+
+
+
+/*--------------------------------
+
+	Map deep get
+
+	Get values from anywhere in a variable list
+
+	http://css-tricks.com/snippets/sass/deep-getset-maps/
+
+*/
+
+@function map-deep-get($map, $keys...) {
+    @each $key in $keys {
+        $map: map-get($map, $key);
+    }
+    @return $map;
+}
+
+
+/*--------------------------------
+
+	Strip unit
+
+*/
+
+@function strip-unit($number) {
+	@if type-of($number) == 'number' and not unitless($number) {
+		@return $number / ($number * 0 + 1);
+	}
+
+	@return $number;
+}
+
+
+/*--------------------------------
+
+	Very simple number functions
+
+*/
+
+@function h($num) {
+	@return $num / 2;
+}
+
+@function n($num) {
+	@return 0 - $num;
+}
+
+@function hn($num) {
+	@return n(h($num));
+}
+
+
+/*--------------------------------
+
+	Photoshop letter spacing
+
+	use:
+
+		get the value of a particular breakpoint
+
+	example:
+
+		.box {
+			width: breakpoint('phone-wide');
+		}
+
+		would generate:
+
+		.box {
+			width: 480px;
+		}
+
+*/
+
+@function breakpoint($name) {
+	@return map_get($breakpoints, $name);
+}
+
+
+/*--------------------------------
+
+	Colour map lookup, retrieving base value by default
+
+*/
+
+@function c($colour, $value: 'base') {
+
+	@if map-has-key($colours, $colour) {
+
+		$colour: map-get($colours, $colour);
+		$colourVal: map-get($colour, $value);
+		@return $colourVal;
+
+	} @else {
+
+		@warn 'Colour name #{$colour} not found in $colours.';
+
+	}
+
+}

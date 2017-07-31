@@ -1,13 +1,246 @@
 @import url("color-overrides.css");
+/*--------------------------------
+
+	Media Queries
+
+	used for outputting content either between media query tags
+
+	example: basic usage
+
+	.element {
+		width: 50%;
+
+		@include mq('tablet-small') {
+			width: 20%;
+		}
+	}
+
+	example: using max-width
+
+	.element {
+		width: 50%;
+
+		@include mq('tablet-small', 'max') {
+			width: 20%;
+		}
+	}
+
+*/
+/*--------------------------------
+
+	Margin / Padding Quick Resets
+
+	example: top & bottom margin set to $spacing-unit
+	.element {
+		@include push--ends;
+	}
+
+	example: left & right padding set to $spacing-unit--small
+	.element {
+		@include soft--sides($spacing-unit--small);
+	}
+
+*/
+/*--------------------------------
+
+	Helper mixins
+
+*/
+/*--------------------------------
+
+	Form input placeholder text
+
+	example:
+
+	input,
+	textarea {
+		@include input-placeholder {
+			color: $grey;
+		}
+	}
+
+*/
+/*--------------------------------
+
+	Retina images
+
+	example:
+
+	.element {
+		@include retina {
+			background-image: url(../img/background@2x.png);
+		}
+	}
+
+*/
+/*--------------------------------
+
+	Content margins
+
+	fore removing first/last child margins
+
+	example: default
+	.element {
+		@include content-margins;
+	}
+
+	output:
+	.element > *:first-child {
+		margin-top: 0;
+	}
+	.element > *:last-child {
+		margin-bottom: 0;
+	}
+
+	example: empty selector
+	.element {
+		@include content-margins('false');
+	}
+
+	output:
+	.element:first-child {
+		margin-top: 0;
+	}
+	.element:last-child {
+		margin-bottom: 0;
+	}
+
+*/
+/*--------------------------------
+
+	CSS Triangle
+
+	used for creating CSS only triangles
+
+	example:
+	.element {
+
+		&::before {
+			@include css-triangle(blue, down);
+		}
+	}
+
+*/
+/*--------------------------------
+
+	Hide text
+
+	example:
+
+	.element {
+		@include hide-text;
+	}
+
+*/
+/*--------------------------------
+
+	Responsive ratio
+
+	Used for creating scalable elements that maintain the same ratio
+
+	example:
+	.element {
+		@include responsive-ratio(400, 300);
+	}
+
+*/
+/*--------------------------------
+
+	Typography
+
+	Text image replacement, with responsive ratio
+
+	HTML:
+
+	<h1 class="element">
+		<span>Text to replace</span>
+	</h1>
+
+	example:
+	.element {
+		@include typography(200, 50, 'hello-world');
+	}
+
+
+*/
+/*--------------------------------
+
+	Icon
+
+	For using fontastic icons in pseudo elements
+
+*/
+/*--------------------------------
+
+	Colours
+
+	background, colour, etc. match up with colour map in _variables.scss
+
+	modify to suit per project
+
+*/
+/*--------------------------------
+
+	Misc
+
+*/
+/*--------------------------------
+
+	Fluid Property
+
+	http://www.adrenalinmedia.com.au/the-agency/insights/this-changes-everything-css-fluid-properties.aspx
+
+	HTML:
+
+	<h1 class="element">
+		<span>Text to replace</span>
+	</h1>
+
+	example:
+	h1 {
+		@include fp(font-size, 50, 100); // 50px at 320, 100px at 1920;
+	}
+
+	output:
+	h1 {
+		font-size: calc(3.125vw + 40px); //This is the magic!
+	}
+
+	@media (max-width:320px){ //Clips the start to the min value
+		font-size:50px;
+	}
+
+	@media (min-width:1920px){ //Clips the end to the max value
+		font-size:100px;
+	}
+
+
+*/
 html {
   font-size: 12px;
-  background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
-  background-image: linear-gradient(135deg, #97abff 10%, #123597 100%);
-  background-image: linear-gradient(135deg, #fccf31 10%, #f55555 100%);
-  background-image: linear-gradient(135deg, #fff886 10%, #f072b6 100%);
-  background-image: linear-gradient(135deg, #f97794 10%, #623aa2 100%);
-  background-image: linear-gradient(135deg, #fec163 10%, #de4313 100%);
-  background-image: linear-gradient(135deg, #2AFADF 10%, #4C83FF 100%);
+}
+
+html.signup, html.login {
+  background: #2afadf;
+  /* Old browsers */
+  background: -ms-linear-gradient(135deg, #2afadf 0%, #4c83ff 100%);
+  /* IE10+ */
+  background: -o-linear-gradient(135deg, #2afadf 0%, #4c83ff 100%);
+  /* Opera 11.10+ */
+  background: -moz-linear-gradient(135deg, #2afadf 0%, #4c83ff 100%);
+  /* FF3.6+ */
+  background: -webkit-linear-gradient(135deg, #2afadf 0%, #4c83ff 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: linear-gradient(135deg, #2afadf 0%, #4c83ff 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#000000',GradientType=0 );
+  /* IE6-9 */
+  color: #fff;
+}
+
+html.signup header nav, html.login header nav {
+  background-color: transparent;
+  box-shadow: none;
 }
 
 body {
@@ -15,9 +248,9 @@ body {
   padding: 0;
   background-color: #fff;
   text-align: center;
-  color: #fff;
+  color: #333;
   background-color: transparent;
-  padding: 2rem 0;
+  padding: 4rem 0 2rem;
   min-height: 100vh;
 }
 
@@ -39,11 +272,15 @@ body {
   color: rgba(0, 0, 0, 0.5);
 }
 
+header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
 header nav {
   height: 4rem;
   line-height: 4rem;
-  background-color: transparent;
-  box-shadow: none;
 }
 
 header nav .nav-wrapper ul {
@@ -65,14 +302,9 @@ header nav .nav-wrapper a i {
   margin-left: .5rem;
 }
 
-form {
-  background-color: #fff;
-  padding: 2rem 3rem;
-  color: #333;
-  border-radius: 1rem;
-}
-
-form.text-form {
-  max-width: 400px;
-  margin: auto;
+.progress,
+.step.done,
+.step.active {
+  background-color: #acece6 !important;
+  color: #fff;
 }

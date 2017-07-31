@@ -10,7 +10,7 @@ console.log('client.js loaded');
 // 3. Cannot start with '_'
 // 4. No spaces
 
-$('#username.signup').on('change',function(e){
+$('#uid.signup').on('change',function(e){
 	e.preventDefault();
 	var $t = $(this);
 	var v = $(this).val().trim();
@@ -68,4 +68,17 @@ $('#confirm-password').on('change', function(e){
 	}
 
 
+})
+
+
+// Toggle password visibility
+// -- on mousedown, changes it to text, so it's visible
+// -- on mouseup, reset type to original (password), which hides it again
+$('#view-password').on('mousedown',function(e){
+	e.preventDefault();
+	$('.pw').attr('type','text');
+})
+$('#view-password').on('mouseup',function(e){
+	e.preventDefault();
+	$('.pw').attr('type','password');
 })

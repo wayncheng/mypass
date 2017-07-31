@@ -24,8 +24,8 @@
 		<div class="row">
 			<div class="input-field">
 				{{!-- <input id="username" name="username" type="text" class="validate signup" pattern="^[a-z0-9_]*$" title="Username can only contain alphanumeric characters and underscores"> --}}
-				 <input id="username" name="username" type="text" class="signup"> 
-				<label for="username">username</label>
+				 <input id="uid" name="uid" type="text" class="signup"> 
+				<label for="uid">username</label>
 			</div>
 		</div>
 		<div class="row">
@@ -41,7 +41,9 @@
 				<label for="confirm-password">confirm password</label>
 			</div>
 		</div>
+		<button type="submit" class="submit-btn btn">Create Account</button>
+		{{else}}
+		<button type="submit" class="submit-btn btn">Login</button>
 	{{/if}}
-		<button type="submit" class="submit-btn btn">Submit</button>
 	</form>
 </div>

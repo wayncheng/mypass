@@ -5,16 +5,57 @@
 	<meta charset="UTF-8">
 	<meta name="author" content="Wayne Cheng">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<base href="public/">
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i" rel="stylesheet">
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/css/materialize.min.css" rel="stylesheet">
 	<link href="src/css/color-overrides.css" rel="stylesheet">
 	<link href="src/css/style.css" rel="stylesheet">
+	<link href="src/css/forms.css" rel="stylesheet">
 </head>
 
 <body>
 <!--======================================================-->
 
+<div class="row">
+		 <div class="step-container">
+		<ul class="step-wrap">
+				 <!-- <li id="step-0" class="step done"><a href="#!">0</a></li>  -->
+				 <li id="step-1" class="step done"><a href="#!">1</a></li> 
+				<li id="step-2" class="step active"><a href="#!">2</a></li>
+				<li id="step-3" class="step"><a href="#!">3</a></li>
+				<li id="steps-done" class="step end-step"> <i class="material-icons">done</i> </li>
+		</ul>
+				<div class="progress-bar">
+					<span class="progress target prog-50"></span>	
+				</div>
+		 </div>
+</div>
+            
+<h5>Text</h5>
+
+<div class="row">
+	<form action="/" class="text-form" method="POST">
+		<div class="row">
+			<h5 class="headline">Login</h5>
+		</div>
+		<div class="row">
+			<div class="input-field">
+				 <input id="uid" name="uid" type="text" class="login"> 
+				<label for="uid">username / email</label>
+			</div>
+		</div>
+		<div class="row">
+			<div class="input-field">
+				<i id="view-password" class="material-icons suffix tooltipped" data-position="right" data-delay="0" data-tooltip="Show Password">visibility</i>
+				<input id="password" name="pw" type="password" class="signup pw">
+				<label for="password">password</label>
+			</div>
+		</div>
+		<button type="submit" class="submit-btn btn">Login</button>
+	</form>
+</div>
 
 
 <!-- Scripts =============================================-->

@@ -1,25 +1,48 @@
 @import url("color-overrides.css");
 @import "_materialize-colors";
+@import "_mixins-lib";
+@import "_mixins";
+// @import "_functions";
+
 // @import url("forms");
 
 html {
   font-size: 12px;
-  background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
-  background-image: linear-gradient(135deg, #97abff 10%, #123597 100%);
-  background-image: linear-gradient(135deg, #fccf31 10%, #f55555 100%);
-  background-image: linear-gradient(135deg, #fff886 10%, #f072b6 100%);
-  background-image: linear-gradient(135deg, #f97794 10%, #623aa2 100%);
-	background-image: linear-gradient(135deg, #fec163 10%, #de4313 100%);
-	background-image: linear-gradient( 135deg, #2AFADF 10%, #4C83FF 100%);
+  // background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
+  // background-image: linear-gradient(135deg, #97abff 10%, #123597 100%);
+  // background-image: linear-gradient(135deg, #fccf31 10%, #f55555 100%);
+  // background-image: linear-gradient(135deg, #fff886 10%, #f072b6 100%);
+  // background-image: linear-gradient(135deg, #f97794 10%, #623aa2 100%);
+  // background-image: linear-gradient(135deg, #fec163 10%, #de4313 100%);
+  // background-image: linear-gradient(135deg, #2AFADF 10%, #4C83FF 100%);
+
+  // @include linear-gradient($blue-grey-l2, $blue-grey);
+	// @include linear-gradient($blue-grey, $blue-grey-d2);
+	// @include linear-gradient(#8EC5FC,#E0C3FC);
+	// @include linear-gradient(#8BC6EC,#9599E2);
+
+
+  &.signup,
+  &.login {
+    @include linear-gradient(#2afadf, #4c83ff);
+    color: #fff;
+
+    header {
+      nav {
+        background-color: transparent;
+        box-shadow: none;
+      }
+    }
+  }
 }
 body {
   margin: 0;
   padding: 0;
   background-color: #fff;
   text-align: center;
-  color: #fff;
+  color: #333;
   background-color: transparent;
-  padding: 2rem 0;
+  padding: 4rem 0 2rem;
   min-height: 100vh;
   // background: rgb(255,58,58);
   // background: -moz-linear-gradient(-45deg, rgba(255,58,58,1) 0%, rgba(255,126,45,1) 100%);
@@ -49,11 +72,12 @@ body {
 }
 
 header {
+  position: absolute;
+  top: 0;
+  width: 100%;
   nav {
     height: 4rem;
     line-height: 4rem;
-    background-color: transparent;
-    box-shadow: none;
 
     .nav-wrapper {
       ul {
@@ -77,14 +101,12 @@ header {
   }
 }
 
-form {
-  background-color: #fff;
-  padding: 2rem 3rem;
-  color: #333;
-  border-radius: 1rem;
 
-  &.text-form {
-    max-width: 400px;
-    margin: auto;
-  }
+.progress, 
+.step.done,
+.step.active {
+	background-color: #acece6 !important;
+	color: #fff;
+
+
 }
