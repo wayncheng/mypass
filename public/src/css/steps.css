@@ -311,3 +311,10 @@
 .step-container .progress-bar .progress.target.prog-100 {
   width: 100%;
 }
+
+.step-container .progress,
+.step-container .step.done,
+.step-container .step.active {
+  background-color: #3498db !important;
+  color: #fff !important;
+}

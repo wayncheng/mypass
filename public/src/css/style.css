@@ -287,10 +287,3 @@ header nav .nav-wrapper a {
 header nav .nav-wrapper a i {
   margin-left: .5rem;
 }
-
-.progress,
-.step.done,
-.step.active {
-  background-color: #3498db !important;
-  color: #fff !important;
-}

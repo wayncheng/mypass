@@ -8,6 +8,12 @@
 	var config    = require(__dirname + '/../config/config.json')[env];
 	var db        = {};
 
+// var config_str = process.env.JDB_CONFIG;
+	// var config		= JSON.stringify(config_str);
+// console.log('config_str',config_str);
+// console.log('config',config);
+// console.log('process.env',process.env);
+
 	if (config.use_env_variable) {
 		var sequelize = new Sequelize(process.env[config.use_env_variable]);
 	} else {

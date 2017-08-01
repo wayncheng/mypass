@@ -3,60 +3,64 @@
 @import "_mixins-lib";
 @import "_mixins";
 
-
 .step-container {
-	position: relative;
-	padding: 0;
-	max-width: 600px;
-	width: 80%;
-	display: inline-block;
+  position: relative;
+  padding: 0;
+  max-width: 600px;
+  width: 80%;
+  display: inline-block;
 
   ul.step-wrap {
     padding: 0;
     line-height: 3rem;
     height: 3rem;
-		position: relative; 
-		z-index: 100;
+    position: relative;
+    z-index: 100;
 
     li.step {
       display: inline-block;
       width: initial;
       font-size: 1.5rem;
-			@include border-radius(50%);
-			background-color: #eee;
-			background-color: #bdc3c7;
-			background-color: #ecf0f1;
+      @include border-radius(50%);
+      background-color: #eee;
+      background-color: #bdc3c7;
+      background-color: #ecf0f1;
       color: #333;
       height: inherit;
       line-height: inherit;
       width: 3rem;
-			margin-top: -1px; 
-			margin-left: -1.5rem; //center each step
-			position: absolute;
-			color: $blue-grey;
+      margin-top: -1px;
+      margin-left: -1.5rem; //center each step
+      position: absolute;
+      color: $blue-grey;
 
-			a {
-				color: inherit;
+      a {
+        color: inherit;
       }
 
-			i.material-icons {
-				font-size: 2rem;
-				line-height: 3rem;
-				display: none;
-			}
+      i.material-icons {
+        font-size: 2rem;
+        line-height: 3rem;
+        display: none;
+      }
 
-			&.done {
-				i.material-icons {
-					display: initial;
-				}
-			}
+      &.done {
+        i.material-icons {
+          display: initial;
+        }
+      }
 
       // &#step-0 { left: 0; }
-      &#step-1 { left: 0; }
-      &#step-2 { left: 50%; }
-      &#step-3 { left: 100%; }
+      &#step-1 {
+        left: 0;
+      }
+      &#step-2 {
+        left: 50%;
+      }
+      &#step-3 {
+        left: 100%;
+      }
       // &#steps-done { left: 100%; }
-			
     }
   }
 
@@ -65,35 +69,37 @@
     height: 1rem;
     position: absolute;
     left: 0;
-		top: 50%;
-		margin: 0;
+    top: 50%;
+    margin: 0;
     margin-top: -0.5rem;
-		background-color: #eee;
-		background-color: #bdc3c7;
-		background-color: #ecf0f1;
-		display: inline-block;
-		z-index: 90;
+    background-color: #eee;
+    background-color: #bdc3c7;
+    background-color: #ecf0f1;
+    display: inline-block;
+    z-index: 90;
 
+    .progress.target {
+      height: 100%;
+      width: 0%;
+      display: inline-block;
+      position: absolute;
+      left: 0;
+      top: 0;
+      margin: 0;
 
+      &.prog-50 {
+        width: 50%;
+      }
+      &.prog-100 {
+        width: 100%;
+      }
+    }
+  }
 
-		.progress.target {
-			height: 100%;
-			width: 0%;
-			display: inline-block;
-			position: absolute;
-			left: 0;
-			top: 0;
-			margin: 0;
-
-			&.prog-50 {
-				width: 50%;
-			}
-			&.prog-100 {
-				width: 100%;
-			}
-		}
-	}
-	
-
-
+  .progress,
+  .step.done,
+  .step.active {
+    background-color: #3498db !important;
+    color: #fff !important;
+  }
 }
