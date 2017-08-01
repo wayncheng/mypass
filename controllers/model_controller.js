@@ -13,13 +13,16 @@
 			res.redirect('/verified');
 		}
 
-    res.render(authtype, {
+		var hbsParams = {
       title: "signup " + authtype,
       authtype: authtype,
       api_phase: "signup",
       layout: "signup",
-      issignup: true
-    });
+      isSignup: true
+    }
+		hbsParams[authtype] = true;
+
+    res.render(authtype, hbsParams);
   });
   router.get("/login/:authtype", function(req, res) {
     var authtype = req.params.authtype;
@@ -29,7 +32,7 @@
       authtype: authtype,
       api_phase: "login",
       layout: "login",
-      issignup: false
+      isSignup: false
     });
   });
 

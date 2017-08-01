@@ -2,24 +2,19 @@
 (function(){
 //==================================================
 	var mysql = require("mysql");
+	var connection;
+	
 	// Connection Config
 	
 	// JawsDB by default
-	// if (process.env.JAWSDB_URL){
-	// 	console.log('JAWSDB connecting...');
-	// 	connection = mysql.createConnection(process.env.JAWSDB_URL)
-	// }
-	// else {
-	// 	console.log('Manual JawsDB connecting...');
-	// 	connection = mysql.createConnection({
-	// 		port: 3306,
-	// 		host: "i943okdfa47xqzpy.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
-	// 		user: "asv49w7g0vr0bxl2",
-	// 		password: "gitl70i25n2lz8l4",
-	// 		database: "w34dm5kk59cqlvw1"
-	// 	});
-
-	// }
+	if (process.env.JAWSDB_URL){
+		console.log('JAWSDB connecting...');
+		connection = mysql.createConnection(process.env.JAWSDB_URL)
+	}
+	else {
+		console.log('Manual JawsDB connecting...');
+		connection = mysql.createConnection('mysql://rbpvai3bzmkoocta:q8z6mv2ycdbs939z@op2hpcwcbxb1t4z9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/hx7hw1d9o9yvnc7h');
+	}
 
 	// local mysql if there is no JawsDB
 	// else {
@@ -35,16 +30,16 @@
 
 
 
-// var connection = mysql.createConnection(process.env.JAWSDB_URL);
+// var connection = mysql.createConnection('mysql://rbpvai3bzmkoocta:q8z6mv2ycdbs939z@op2hpcwcbxb1t4z9.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/hx7hw1d9o9yvnc7h');
 
-// 	// Make connection.
-// 	connection.connect(function(err) {
-// 		if (err) throw err;
-// 		console.log("connected as id " + connection.threadId);
-// 	});
+	// Make connection.
+	connection.connect(function(err) {
+		if (err) throw err;
+		console.log("connected as id " + connection.threadId);
+	});
 
-// 	// Export connection for our ORM to use.
-// 	module.exports = connection;
+	// Export connection for our ORM to use.
+	module.exports = connection;
 
 //==================================================
 })();

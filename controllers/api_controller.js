@@ -25,12 +25,12 @@ var flow = ['text','face','voice'];
     var rb = req.body;
     console.log(`POST /api/${authtype}/${phase}`);
 		// Set next auth type. 
-		var next_type = next_guide[authtype];
 		var next_guide = {
 			'text': 'face',
 			'face': 'voice',
 			'voice': 'done'
 		}
+		var next_type = next_guide[authtype];
 		
 
     bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {

@@ -6,8 +6,13 @@
 	var exphbs = require("express-handlebars");
 	var path = require("path");
 	var methodOverride = require("method-override");
-	var db = require('./models');
+	// var db = require('./models');
 
+  var AWS = require('aws-sdk');
+  AWS.config.region = 'us-west-2';
+  var rekognition = new AWS.Rekognition({region: AWS.config.region});
+var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
+  var multer  = require('multer');
 // CONFIG =========================================
 	var app = express();
 	var port = process.env.PORT || 3000;
@@ -60,11 +65,11 @@
   });
 
 // START SERVER ===================================
-db.sequelize.sync({force: true}) .then(function(){
+// db.sequelize.sync({force: true}) .then(function(){
   app.listen(port, function() {
     console.log(`-------------------------------------------------------
                                           ready @ ${port}`);
   });
-})
+// })
 //==================================================	
 })();
