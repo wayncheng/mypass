@@ -1,0 +1,1 @@
+console.log('text-client.js loaded');
