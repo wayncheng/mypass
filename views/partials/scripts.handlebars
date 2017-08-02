@@ -3,3 +3,12 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 	<script src="src/js/materialize-init.js"></script>
 	<script src="src/js/client.js"></script>
+
+
+{{#if text}}
+	{{> specific-links/text-scripts}}
+{{else if face}}
+	{{> specific-links/face-scripts}}
+{{else if voice}}
+	{{> specific-links/voice-scripts}}
+{{/if}}

@@ -1,10 +1,10 @@
 <h5>Voice Authentication</h5>
 
 <div class="row">
-		<form id="main-form" role="form" action="/api/voice/{{api_phase}}" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m12">
+		<form id="main-form" role="form" action="/api/voice/{{api_phase}}" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m8 offset-m2 l6 offset-l3">
 			
-			<input type="file" accept="audio/*" capture="microphone">
-			
+			<input id="recorder" type="file" accept="audio/*" capture="microphone">
+
 			<audio id="player" controls></audio>
 
 
