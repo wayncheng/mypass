@@ -25,6 +25,7 @@
     res.render(authtype, hbsParams);
   });
   router.get("/login/:authtype", function(req, res) {
+
 		var authtype = req.params.authtype;
 		
 		var hbsParams = {
