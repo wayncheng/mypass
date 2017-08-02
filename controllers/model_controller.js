@@ -26,7 +26,6 @@
   });
   router.get("/login/:authtype", function(req, res) {
     var authtype = req.params.authtype;
-
     res.render(authtype, {
       title: "login " + authtype,
       authtype: authtype,
