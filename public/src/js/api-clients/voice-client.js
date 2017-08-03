@@ -1,73 +1,90 @@
-console.log("voice-client.js loaded");
+var mediaConstraints = {
+    audio: true
+};
 
+navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 
-
-//============================================================
-// https://developers.google.com/web/fundamentals/native-hardware/recording-audio/#use_the_permissions_api_to_check_if_you_already_have_access
-
-// Check/Ask for access to microphone
-navigator.permissions.query({ name: "microphone" }).then(function(result) {
-  if (result.state == "granted") {
-    // Audio access approved!
-		console.log("audio permissions granted");
-		triggerSuccess();
-
-  } else if (result.state == "prompt") {
-    console.log("audio permissions prompt");
-    //==========================================
-    // Should prompt user for permission here //
-		//==========================================
-		triggerSuccess();
-
-  } else if (result.state == "denied") {
-    console.log("audio permissions denied");
-    //=================================
-    // Should handle rejection here. //
-		//=================================
-		prompt('audio permissions denied')
-  }
-  result.onchange = function() {
-    console.log("result", result);
-  };
-});
-
-//============================================================
-function triggerSuccess() {
-  navigator.mediaDevices
-    .getUserMedia({ audio: true, video: false })
-    .then(handleSuccess);
+function onMediaSuccess(stream) {
+    var mediaRecorder = new MediaStreamRecorder(stream);
+    mediaRecorder.mimeType = 'audio/wav'; // check this line for audio/wav
+    mediaRecorder.ondataavailable = function (blob) {
+        // POST/PUT "Blob" using FormData/XHR2
+        var blobURL = URL.createObjectURL(blob);
+        document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
+    };
+    // mediaRecorder.start(3000);
 }
 
-//============================================================
-// ACCESS RAW DATA FROM MIC
-// https://developers.google.com/web/fundamentals/native-hardware/recording-audio/#access_the_raw_data_from_the_microphone
-
-function handleSuccess(stream) {
-  var context = new AudioContext();
-  var input = context.createMediaStreamSource(stream);
-  var processor = context.createScriptProcessor(1024, 1, 1);
-
-  var recorder = document.getElementById("recorder");
-  var player = document.getElementById("player");
-
-  recorder.addEventListener("change", function(e) {
-    var file = e.target.files[0];
-    // Do something with the audio file.
-    player.src = URL.createObjectURL(file);
-  });
-
-  if (window.URL) {
-    player.src = window.URL.createObjectURL(stream);
-  } else {
-    player.src = stream;
-  }
-
-  source.connect(processor);
-  processor.connect(context.destination);
-
-  processor.onaudioprocess = function(e) {
-    console.log("audio data outputing...");
-    // Do something with the data, i.e Convert this to WAV
-    console.log(e.inputBuffer);
-  };
+function onMediaError(e) {
+    console.error('media error', e);
 }
+	
+$('#start').on('click',function(e){
+	e.preventDefault();
+	mediaRecorder.start();
+})
+$('#stop').on('click',function(e){
+	e.preventDefault();
+	mediaRecorder.stop();
+})
+$('#pause').on('click',function(e){
+	e.preventDefault();
+	mediaRecorder.pause();
+})
+$('#resume').on('click',function(e){
+	e.preventDefault();
+	mediaRecorder.resume();
+})
+$('#save').on('click',function(e){
+	e.preventDefault();
+mediaRecorder.save(YourExternalBlob, 'FileName.webm');
+})
+
+// let shouldStop = false;
+//   let stopped = false;
+//   const downloadLink = document.getElementById('download');
+//   const stopButton = document.getElementById('stop');
+
+//   stopButton.addEventListener('click', function() {
+//     shouldStop = true;
+//   })
+
+//   var handleSuccess = function(stream) {
+
+//     var context = new AudioContext();
+//     var input = context.createMediaStreamSource(stream)
+//     var processor = context.createScriptProcessor(1024,1,1);
+
+//     source.connect(processor);
+//     processor.connect(context.destination);
+
+//     processor.onaudioprocess = function(e){
+//       // Do something with the data, i.e Convert this to WAV
+//       console.log(e.inputBuffer);
+// 		};
+		
+//     const options = {mimeType: 'video/webm;codecs=vp9'};
+//     const recordedChunks = [];
+//     const mediaRecorder = new MediaRecorder(stream, options);
+
+//     mediaRecorder.addEventListener('dataavailable', function(e) {
+//       if (e.data.size > 0) {
+//         recordedChunks.push(e.data);
+//       }
+
+//       if(shouldStop === true && stopped === false) {
+//         mediaRecorder.stop();
+//         stopped = true;
+//       }
+//     });
+
+//     mediaRecorder.addEventListener('stop', function() {
+//       downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+//       downloadLink.download = 'acetest.wav';
+//     });
+
+//     mediaRecorder.start();
+//   };
+
+//   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
+//       .then(handleSuccess);

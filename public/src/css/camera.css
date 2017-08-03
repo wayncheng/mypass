@@ -1,0 +1,98 @@
+
+
+#camera-wrap {
+  position: relative;
+  display: inline-block;
+  width: initial;
+  height: initial;
+  margin: 0;
+  width: 100%;
+  height: 100vh;
+  max-width: 480px;
+  max-height: 640px;
+}
+
+#camera {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background-color: #eee;
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+#camera .placeholder {
+  padding: 0.5em;
+}
+
+button {
+  margin: 0.5em;
+}
+
+#shutter {
+  width: 5.25rem;
+  height: 5.25rem;
+  border-radius: 50%;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  margin-left: -30px;
+  padding: 0;
+  z-index: 10;
+  /*border: #c0392b solid 6px;*/
+  border: #ffffff solid 6px;
+  background-color: transparent;
+}
+
+#shutter-filling {
+  display: inline-block;
+  width: 4rem;
+  height: 4rem;
+  margin-top: 4px;
+  border-radius: 50%;
+  background-color: #e74c3c;
+}
+
+#camera-wrap canvas {
+  z-index: 100;
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 0.5rem;
+}
+
+#camera-wrap #confirmation-wrap {
+  z-index: 101;
+}
+
+#confirmation-wrap {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+}
+
+.icon-btn {
+  height: 4rem;
+  width: 4rem;
+  border-radius: 50%;
+  padding: 0;
+}
+
+.icon-btn i {
+  line-height: 4rem;
+  font-size: 2.4rem;
+  padding: 0;
+}
+
+#accept {
+  background-color: #2ecc71;
+}
+
+#deny {
+  background-color: #e74c3c;
+}

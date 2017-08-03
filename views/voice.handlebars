@@ -4,9 +4,17 @@
 		<form id="main-form" role="form" action="/api/voice/{{api_phase}}" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m8 offset-m2 l6 offset-l3">
 			
 			<input id="recorder" type="file" accept="audio/*" capture="microphone">
-
 			<audio id="player" controls></audio>
 
+
+			{{!-- <a id="download">Download</a> --}}
+			{{!-- <button id="stop">Stop</button> --}}
+
+			<a href="#!" id="start" class="btn">start</a>
+			<a href="#!" id="stop" class="btn">stop</a>
+			<a href="#!" id="pause" class="btn">pause</a>
+			<a href="#!" id="save-dialog" class="btn">save-dialog</a>
+			<a href="#!" id="save" class="btn">save</a>
 
 		</form>
 </div>

@@ -1,41 +1,26 @@
 <h5>Face Authentication</h5>
 
+<h3>Test Video</h3>
 <div class="row">
-	<form id="main-form" role="form" action="/api/face/{{api_phase}}" method="POST" enctype="multipart/form-data"  class="face-form col s12 m12">
-		
-		{{!-- Hidden cookie input for extra safeguard. Will appear in req.body. Can check on back end --}}
+	<form id="main-form" role="form" action="/test-endpoint" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:100%">
 		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}">
-
-		{{!-- Standard username text input. Should eventually change to "uid" and accept username or email. --}}
+		<span id="img-b64" class="hidden" name="img-b64"></span>
 		<div class="input-field row">
 			<input id="username" type="text" name="username" autocomplete="off" value="test">
 			<label for="username">username</label>
 		</div>
-
-		{{!-- Photo Input ------
-			Fairly certain it is impossible to do a video login in iOS and Android mobile browsers. Autoplay is not supported and
-			playing a video always launches you into that full screen thing. Rather than having a live feed and taking a snapshot, 
-			the browser fallback is to upload a photo that must follow a few rules
-		--}}
 		<div class="file-field input-field row">
 			<div id="img-input-wrap" class="btn btn-large light">
 				<span> <i class="material-icons">photo</i>PassPhoto </span>
 				<input id="image" type="file" accept="image/*;capture=camera" name="image" class="validate">
 			</div>
 		</div>
-
-		{{!-- Submit Button 
-			Changing text to something other than "submit" for UI/UX reasons. "Submit" is too generic of a word. Better
-			to at least use phrases like "Sign up" or "Login" to indicate what the form does.
-		--}}
 		<div class="input-field row">
 			<button id="submit" type="button" class="btn light"> Submit </button>
 		</div>
-		
 	</form>
 </div>
 
-{{!-- VIDEO SECTION ----------------------------------------------}}
 	<div id="camera-wrap">
 		<div id="camera">
 			<div class="placeholder"> Your browser does not support camera access. We recommend <a href="https://www.google.com/chrome/" target="_blank">Chrome</a>			&mdash; modern, secure, fast browser from Google.<br> It's free. </div>
@@ -48,7 +33,10 @@
 			<button id="accept" class="prompt-btn icon-btn btn"><i class="material-icons">done</i> </button>
 		</div>
 	</div>
-	<div id="camera-info-wrap">
-		<div id="camera_info"></div>
-		<div id="stream_stats"></div>
-	</div>
+<div id="camera-info-wrap">
+	<div id="camera_info"></div>
+	<div id="stream_stats"></div>
+</div>
+
+
+<div id="dump" name="dump"></div>
