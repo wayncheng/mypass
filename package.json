@@ -28,6 +28,7 @@
   },
   "devDependencies": {
     "chai": "^4.1.0",
-    "mocha": "^3.5.0"
+    "mocha": "^3.5.0",
+    "selenium-webdriver": "^3.5.0"
   }
 }
