@@ -98,7 +98,12 @@ header {
         i {
           margin-left: .5rem;
         }
-      }
+			}
+			
+			ul.dropdown-content {
+				opacity: 0;
+				display: none;
+			}
     }
   }
 }

@@ -287,3 +287,8 @@ header nav .nav-wrapper a {
 header nav .nav-wrapper a i {
   margin-left: .5rem;
 }
+
+header nav .nav-wrapper ul.dropdown-content {
+  opacity: 0;
+  display: none;
+}
