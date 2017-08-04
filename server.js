@@ -6,7 +6,7 @@
 	var exphbs = require("express-handlebars");
 	var path = require("path");
 	var methodOverride = require("method-override");
-	require('dotenv').config();
+	// require('dotenv').config();
 	// var db = require('./models');
     var multer  = require('multer');
 // CONFIG =========================================
@@ -28,7 +28,7 @@
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.text());
 	app.use(bodyParser.json({ type: 'application/vnd.api+json'}));	
-  	app.use(bodyParser.urlencoded({extended: false,limit: '50mb'}));
+  	// app.use(bodyParser.urlencoded({extended: false,limit: '50mb'}));
 	
 	// Override with POST having ?_method=
 	app.use(methodOverride("_method")); 
