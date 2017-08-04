@@ -6,13 +6,9 @@
 	var exphbs = require("express-handlebars");
 	var path = require("path");
 	var methodOverride = require("method-override");
+	require('dotenv').config();
 	// var db = require('./models');
-
-  var AWS = require('aws-sdk');
-  AWS.config.region = 'us-west-2';
-  var rekognition = new AWS.Rekognition({region: AWS.config.region});
-var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
-  var multer  = require('multer');
+    var multer  = require('multer');
 // CONFIG =========================================
 	var app = express();
 	var port = process.env.PORT || 3000;
@@ -32,6 +28,7 @@ var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
 	app.use(bodyParser.urlencoded({ extended: false }));
 	app.use(bodyParser.text());
 	app.use(bodyParser.json({ type: 'application/vnd.api+json'}));	
+  	app.use(bodyParser.urlencoded({extended: false,limit: '50mb'}));
 	
 	// Override with POST having ?_method=
 	app.use(methodOverride("_method")); 
@@ -51,6 +48,9 @@ var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
 	var routes = require("./controllers/model_controller.js");
 	app.use("/", routes);
 
+	var faceRoutes = require("./controllers/face_controller.js");
+	app.use("/", faceRoutes);
+
 // ERRORS =========================================
   app.use(function(req, res) {
     res.type("text/html");
@@ -63,6 +63,8 @@ var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
     res.status(500);
     res.render("500");
   });
+
+
 
 // START SERVER ===================================
 // db.sequelize.sync({force: true}) .then(function(){
