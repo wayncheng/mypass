@@ -4,8 +4,8 @@
 	var express = require("express");
   	var router = express.Router();
   	var AWS = require('aws-sdk');
-    var credentials = {accessKeyId: process.env.AMAZON_ACCESS_KEY,
-                        secretAccessKey : process.env.AMAZON_SECRET_ACCESS_KEY};
+    var credentials = {accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+                        secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY};
     AWS.config.credentials = credentials;
     AWS.config.region = 'us-west-2';
     var rekognition = new AWS.Rekognition({region: AWS.config.region});
