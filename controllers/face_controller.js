@@ -11,6 +11,9 @@
     var rekognition = new AWS.Rekognition({region: AWS.config.region});
 	var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
 
+	  
+	var fs = require('fs-extra');
+
 
 
 //POST END POINT WHEN USER TRIES TO LOGIN
@@ -74,14 +77,58 @@
 
 
 //POST IMAGE WHEN USER SIGNS UP
+//SIGNUP REQUIRES 2 STEPS--1. IT CREATES A COLLECTION WITH THE NAME OF USERNAME, 2.IT CREATES THE JSON FILE FOR THE IMAGE.S
 	router.post("/api/face/signup/:username",function(req,res){
-		console.log("Inside face SignUp");
 		var username = req.params.username;
-		
-		
+		var response = "";
+        // Index a dir of faces
+        rekognition.createCollection({ CollectionId: username }, function(err, colData) {
+          if (err) {
+            console.log("createCollection error", err.message);
+            if(err.code == "ResourceAlreadyExistsException"){
+            	res.status(400);
+            	return res.end(err.message);
+            }
+          } 
+          else { // successful response
+            console.log("createCollection success");
+            console.log(colData);
+		      	req.on("data",function(reqData){
+					console.log("DATA on DATA ----",reqData);
+			        console.log("indexFaces...");
+			        rekognition.indexFaces(
+			            {
+			              CollectionId: username,
+			              DetectionAttributes: ["ALL"],
+			              ExternalImageId: username,
+			              Image: {
+			                Bytes: reqData
+			              }
+			            },
+			            function(err, data) {
+			              if (err) {
+			                console.log("indexFaces error", err.message);
+			              } else {
+			                console.log("indexFaces success");
+			                // console.log(data);           // successful response
+			                fs.writeJson(__dirname+"/../uploads/"+username + ".json", data, err => {
+			                  if (err) return console.error(err);
+			                });
+			                res.status(200);
+			                response="Successfully Signed up";
+			                // Run index.js once import complete
+			                // index_mod(user, porty);
+			                return res.end(response);
+			              }
+			            });
+			    });//END OF REQUEST ON DATA
+
+      	}
+        });
 
 
-		return res.end();
+
+		// return res.end();
 	});
 
 	module.exports=router;

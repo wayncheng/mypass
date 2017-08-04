@@ -140,15 +140,19 @@ function upload_snapshot() {
     // var api_url = $("#api_url").val();
     hide_snapshot_controls();
     var username = $("#username").val();
-
-    var formAction = $("#main-form").attr("action");
+    if(username == null || username == undefined || username == "" || username == " "){
+      alert("Please enter the username");
+      $("#upload_status").html("Please enter the username");
+      return;
+    }
+    var formAction = $("#main-form").attr("action");  
     var api_url = formAction+ "/" + username;
     console.log("API_URL ===",api_url);
 
-    if (!api_url.length) {
-      $("#upload_status").html("Please provide URL for the upload");
-      return;
-    }
+    // if (!api_url.length) {
+    //   $("#upload_status").html("Please provide URL for the upload");
+    //   return;
+    // }
 
     clear_upload_data();
     $("#loader").show();
