@@ -47,9 +47,10 @@ var flow = ['text','face','voice'];
     });
   });
 
+  //Changing this route only for Text Login, because creating same route for face Login also
   //==================================================
-  router.post("/api/:authtype/login", function(req, res) {
-    var authtype = req.params.authtype;
+  router.post("/api/text/login", function(req, res) {
+    // var authtype = req.params.authtype;
     var phase = "login";
     console.log(`POST /api/${authtype}/${phase}`);
 		console.log('req.body.pw',req.body.pw);

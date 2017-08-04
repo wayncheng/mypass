@@ -1,14 +1,23 @@
 <h5>Face Authentication</h5>
 
 <h3>Test Video</h3>
+
+<div id="upload_status" class="center-block"></div>
+
+<div id="upload_result" class="center-block"></div>
+
 <div class="row">
-	<form id="main-form" role="form" action="/test-endpoint" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:100%">
+	<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%">
+		
 		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}">
-		<span id="img-b64" class="hidden" name="img-b64"></span>
+		
 		<div class="input-field row">
 			<input id="username" type="text" name="username" autocomplete="off" value="test">
 			<label for="username">username</label>
 		</div>
+		
+		<!-- FOR LOGIN/SIGNUP, THERE IS NO NEED TO UPLOAD A PHOTO, AND PRESS SUBMIT BUTTON -->
+		<!--
 		<div class="file-field input-field row">
 			<div id="img-input-wrap" class="btn btn-large light">
 				<span> <i class="material-icons">photo</i>PassPhoto </span>
@@ -18,6 +27,8 @@
 		<div class="input-field row">
 			<button id="submit" type="button" class="btn light"> Submit </button>
 		</div>
+		-->
+
 	</form>
 </div>
 

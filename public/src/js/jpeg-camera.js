@@ -32,10 +32,6 @@ var measuresSet = false;
 function shutter() {
     var snapshot = camera.capture();
     images.push(snapshot);
-    console.log("IMAGES === ", images);
-
-    var input = document.querySelector("input[type=file]");
-    console.log("input====== ", input.files[0]);
 
     snapshot.get_canvas(updateView);
   }
@@ -141,7 +137,13 @@ function clear_upload_data() {
   }
 
 function upload_snapshot() {
-    var api_url = $("#api_url").val();
+    // var api_url = $("#api_url").val();
+    hide_snapshot_controls();
+    var username = $("#username").val();
+
+    var formAction = $("#main-form").attr("action");
+    var api_url = formAction+ "/" + username;
+    console.log("API_URL ===",api_url);
 
     if (!api_url.length) {
       $("#upload_status").html("Please provide URL for the upload");
@@ -153,6 +155,7 @@ function upload_snapshot() {
     $("#accept").prop("disabled", true);
 
     var snapshot = $(".item.selected").data("snapshot");
+    console.log("Before Uploading Image");
     snapshot.upload({ api_url: api_url }).done(upload_done).fail(upload_fail);
   }
 
@@ -160,31 +163,29 @@ function upload_done(response) {
     $("#accept").prop("disabled", false);
     $("#loader").hide();
     $("#upload_status").html("Upload successful");
+    // $("#upload_result").css("color:green");
+    console.log("RESPONSE === ", response);
     $("#upload_result").html(response);
+    alert("Image Uploaded");
   }
 
 function upload_fail(code, error, response) {
+    console.log("FAIL RESPONSE === ", response);
+
     $("#accept").prop("disabled", false);
     $("#loader").hide();
     $("#upload_status").html(
       "Upload failed with status " + code + " (" + error + ")"
     );
+    $("#upload_result").css("color:red");
     $("#upload_result").html(response);
+    alert("Image Uploading Failed");
+
   }
 
 function discard_snapshot() {
     var element = $(".item.selected").removeClass("item selected");
 
-    // var next = element.nextAll(".item").first();
-
-    // if (!next.size()) { next = element.prevAll(".item").first(); }
-
-    // if (next.size()) {
-    //   next.addClass("selected");
-    //   next.data("snapshot").show();
-    // } else {
-    //   hide_snapshot_controls();
-    // }
     hide_snapshot_controls();
 
     element.data("snapshot").discard();
