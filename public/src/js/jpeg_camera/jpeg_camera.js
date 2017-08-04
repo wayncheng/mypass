@@ -465,7 +465,6 @@
           xhr.onload = handler;
           xhr.onerror = handler;
           xhr.onabort = handler;
-          console.log("blob in JPEG Camera :: ",blob);
           xhr.send(blob);
           return snapshot._xhr = xhr;
         }, "image/jpeg");
