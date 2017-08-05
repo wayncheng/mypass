@@ -1,13 +1,11 @@
 'use strict';
 
-const _ = require('lodash');
-const moment = require('moment');
-const inherits = require('../../utils/inherits');
+var _ = require('lodash');
 
-module.exports = BaseTypes => {
-  const warn = BaseTypes.ABSTRACT.warn.bind(undefined, 'https://msdn.microsoft.com/en-us/library/ms187752%28v=sql.110%29.aspx');
+module.exports = function (BaseTypes) {
+  var warn = BaseTypes.ABSTRACT.warn.bind(undefined, 'https://msdn.microsoft.com/en-us/library/ms187752%28v=sql.110%29.aspx');
 
-  BaseTypes.DATE.types.mssql = [43];
+  BaseTypes.DATE.types.mssql = [42];
   BaseTypes.STRING.types.mssql = [231, 173];
   BaseTypes.CHAR.types.mssql = [175];
   BaseTypes.TEXT.types.mssql = false;
@@ -26,13 +24,9 @@ module.exports = BaseTypes => {
   // BaseTypes.GEOMETRY.types.mssql = [240]; // not yet supported
   BaseTypes.GEOMETRY.types.mssql = false;
 
-  function BLOB(length) {
-    if (!(this instanceof BLOB)) return new BLOB(length);
-    BaseTypes.BLOB.apply(this, arguments);
-  }
-  inherits(BLOB, BaseTypes.BLOB);
+  var BLOB = BaseTypes.BLOB.inherits();
 
-  BLOB.prototype.toSql = function toSql() {
+  BLOB.prototype.toSql = function() {
     if (this._length) {
       if (this._length.toLowerCase() === 'tiny') { // tiny = 2^8
         warn('MSSQL does not support BLOB with the `length` = `tiny` option. `VARBINARY(256)` will be used instead.');
@@ -43,40 +37,32 @@ module.exports = BaseTypes => {
     return 'VARBINARY(MAX)';
   };
 
-  BLOB.prototype._hexify = function _hexify(hex) {
+  BLOB.prototype.$hexify = function (hex) {
     return '0x' + hex;
   };
 
-  function STRING(length, binary) {
-    if (!(this instanceof STRING)) return new STRING(length, binary);
-    BaseTypes.STRING.apply(this, arguments);
-  }
-  inherits(STRING, BaseTypes.STRING);
+  var STRING = BaseTypes.STRING.inherits();
 
-  STRING.prototype.toSql = function toSql() {
+  STRING.prototype.toSql = function() {
     if (!this._binary) {
       return 'NVARCHAR(' + this._length + ')';
-    } else {
+    } else{
       return 'BINARY(' + this._length + ')';
     }
   };
 
   STRING.prototype.escape = false;
-  STRING.prototype._stringify = function _stringify(value, options) {
+  STRING.prototype.$stringify = function (value, options) {
     if (this._binary) {
-      return BLOB.prototype._stringify(value);
+      return BLOB.prototype.$stringify(value);
     } else {
       return options.escape(value);
     }
   };
 
-  function TEXT(length) {
-    if (!(this instanceof TEXT)) return new TEXT(length);
-    BaseTypes.TEXT.apply(this, arguments);
-  }
-  inherits(TEXT, BaseTypes.TEXT);
+  var TEXT = BaseTypes.TEXT.inherits();
 
-  TEXT.prototype.toSql = function toSql() {
+  TEXT.prototype.toSql = function() {
     // TEXT is deprecated in mssql and it would normally be saved as a non-unicode string.
     // Using unicode is just future proof
     if (this._length) {
@@ -89,58 +75,39 @@ module.exports = BaseTypes => {
     return 'NVARCHAR(MAX)';
   };
 
-  function BOOLEAN() {
-    if (!(this instanceof BOOLEAN)) return new BOOLEAN();
-    BaseTypes.BOOLEAN.apply(this, arguments);
-  }
-  inherits(BOOLEAN, BaseTypes.BOOLEAN);
+  var BOOLEAN = BaseTypes.BOOLEAN.inherits();
 
-  BOOLEAN.prototype.toSql = function toSql() {
+  BOOLEAN.prototype.toSql = function() {
     return 'BIT';
   };
 
-  function UUID() {
-    if (!(this instanceof UUID)) return new UUID();
-    BaseTypes.UUID.apply(this, arguments);
-  }
-  inherits(UUID, BaseTypes.UUID);
+  var UUID = BaseTypes.UUID.inherits();
 
-  UUID.prototype.toSql = function toSql() {
+  UUID.prototype.toSql = function() {
     return 'CHAR(36)';
   };
 
-  function NOW() {
-    if (!(this instanceof NOW)) return new NOW();
-    BaseTypes.NOW.apply(this, arguments);
-  }
-  inherits(NOW, BaseTypes.NOW);
+  var NOW = BaseTypes.NOW.inherits();
 
-  NOW.prototype.toSql = function toSql() {
+  NOW.prototype.toSql = function() {
     return 'GETDATE()';
   };
 
-  function DATE(length) {
-    if (!(this instanceof DATE)) return new DATE(length);
-    BaseTypes.DATE.apply(this, arguments);
-  }
-  inherits(DATE, BaseTypes.DATE);
+  var DATE = BaseTypes.DATE.inherits();
 
-  DATE.prototype.toSql = function toSql() {
-    return 'DATETIMEOFFSET';
+  DATE.prototype.toSql = function() {
+    return 'DATETIME2';
   };
 
-  function DATEONLY() {
-    if (!(this instanceof DATEONLY)) return new DATEONLY();
-    BaseTypes.DATEONLY.apply(this, arguments);
-  }
-  inherits(DATEONLY, BaseTypes.DATEONLY);
+  DATE.prototype.$stringify = function (date, options) {
+    date = this.$applyTimezone(date, options);
 
-  DATEONLY.parse = function(value) {
-    return moment(value).format('YYYY-MM-DD');
+    // mssql not allow +timezone datetime format
+    return date.format('YYYY-MM-DD HH:mm:ss.SSS');
   };
 
-  function INTEGER(length) {
-    if (!(this instanceof INTEGER)) return new INTEGER(length);
+  var INTEGER = BaseTypes.INTEGER.inherits(function() {
+    if (!(this instanceof INTEGER)) return new INTEGER();
     BaseTypes.INTEGER.apply(this, arguments);
 
     // MSSQL does not support any options for integer
@@ -151,11 +118,10 @@ module.exports = BaseTypes => {
       this._unsigned = undefined;
       this._zerofill = undefined;
     }
-  }
-  inherits(INTEGER, BaseTypes.INTEGER);
+  });
 
-  function BIGINT(length) {
-    if (!(this instanceof BIGINT)) return new BIGINT(length);
+  var BIGINT = BaseTypes.BIGINT.inherits(function() {
+    if (!(this instanceof BIGINT)) return new BIGINT();
     BaseTypes.BIGINT.apply(this, arguments);
 
     // MSSQL does not support any options for bigint
@@ -166,11 +132,10 @@ module.exports = BaseTypes => {
       this._unsigned = undefined;
       this._zerofill = undefined;
     }
-  }
-  inherits(BIGINT, BaseTypes.BIGINT);
+  });
 
-  function REAL(length, decimals) {
-    if (!(this instanceof REAL)) return new REAL(length, decimals);
+  var REAL = BaseTypes.REAL.inherits(function() {
+    if (!(this instanceof REAL)) return new REAL();
     BaseTypes.REAL.apply(this, arguments);
 
     // MSSQL does not support any options for real
@@ -181,11 +146,10 @@ module.exports = BaseTypes => {
       this._unsigned = undefined;
       this._zerofill = undefined;
     }
-  }
-  inherits(REAL, BaseTypes.REAL);
+  });
 
-  function FLOAT(length, decimals) {
-    if (!(this instanceof FLOAT)) return new FLOAT(length, decimals);
+  var FLOAT = BaseTypes.FLOAT.inherits(function() {
+    if (!(this instanceof FLOAT)) return new FLOAT();
     BaseTypes.FLOAT.apply(this, arguments);
 
     // MSSQL does only support lengths as option.
@@ -205,43 +169,32 @@ module.exports = BaseTypes => {
       warn('MSSQL does not support Float zerofill. `ZEROFILL` was removed.');
       this._zerofill = undefined;
     }
-  }
-  inherits(FLOAT, BaseTypes.FLOAT);
+  });
 
-  function ENUM() {
-    if (!(this instanceof ENUM)) {
-      const obj = Object.create(ENUM.prototype);
-      ENUM.apply(obj, arguments);
-      return obj;
-    }
-    BaseTypes.ENUM.apply(this, arguments);
-  }
-  inherits(ENUM, BaseTypes.ENUM);
-
-  ENUM.prototype.toSql = function toSql() {
+  var ENUM = BaseTypes.ENUM.inherits();
+  ENUM.prototype.toSql = function() {
     return 'VARCHAR(255)';
   };
 
-  const exports = {
-    BLOB,
-    BOOLEAN,
-    ENUM,
-    STRING,
-    UUID,
-    DATE,
-    DATEONLY,
-    NOW,
-    INTEGER,
-    BIGINT,
-    REAL,
-    FLOAT,
-    TEXT
+  var exports = {
+    BLOB: BLOB,
+    BOOLEAN: BOOLEAN,
+    ENUM: ENUM,
+    STRING: STRING,
+    UUID: UUID,
+    DATE: DATE,
+    NOW: NOW,
+    INTEGER: INTEGER,
+    BIGINT: BIGINT,
+    REAL: REAL,
+    FLOAT: FLOAT,
+    TEXT: TEXT
   };
 
-  _.forIn(exports, (DataType, key) => {
+  _.forIn(exports, function (DataType, key) {
     if (!DataType.key) DataType.key = key;
     if (!DataType.extend) {
-      DataType.extend = function extend(oldType) {
+      DataType.extend = function(oldType) {
         return new DataType(oldType.options);
       };
     }

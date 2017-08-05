@@ -1,5 +1,18 @@
 # History
 
+## 1.12.0 / 2017-01-27
+- [update packages] mocha->3.2.0, should->11.2.0
+- [bug fix] `minus` plural & singular form
+- [bug fix] `save` plural & singular form
+
+
+
+## 1.11.0 / 2016-04-20
+- [update packages] mocha->3.0.2, should->11.1.0
+- [bug fix] `inflection.transform` in ES6
+
+
+
 ## 1.10.0 / 2016-04-20
 - [update packages] should->8.3.1
 - [bug fix] `campus` plural & singular form

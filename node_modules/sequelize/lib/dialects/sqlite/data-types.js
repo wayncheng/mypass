@@ -1,10 +1,9 @@
 'use strict';
 
-const _ = require('lodash');
-const inherits = require('../../utils/inherits');
+var _ = require('lodash');
 
-module.exports = BaseTypes => {
-  const warn = BaseTypes.ABSTRACT.warn.bind(undefined, 'https://www.sqlite.org/datatype3.html');
+module.exports = function (BaseTypes) {
+  var warn = BaseTypes.ABSTRACT.warn.bind(undefined, 'https://www.sqlite.org/datatype3.html');
 
   BaseTypes.DATE.types.sqlite = ['DATETIME'];
   BaseTypes.STRING.types.sqlite = ['VARCHAR', 'VARCHAR BINARY'];
@@ -23,25 +22,9 @@ module.exports = BaseTypes => {
   BaseTypes.REAL.types.sqlite = ['REAL'];
   BaseTypes.DOUBLE.types.sqlite = ['DOUBLE PRECISION'];
   BaseTypes.GEOMETRY.types.sqlite = false;
-  BaseTypes.JSON.types.sqlite = ['JSON', 'JSONB'];
 
-  function JSONTYPE() {
-    if (!(this instanceof JSONTYPE)) return new JSONTYPE();
-    BaseTypes.JSON.apply(this, arguments);
-  }
-  inherits(JSONTYPE, BaseTypes.JSON);
-
-  JSONTYPE.parse = function parse(data) {
-    return JSON.parse(data);
-  };
-
-  function DATE(length) {
-    if (!(this instanceof DATE)) return new DATE(length);
-    BaseTypes.DATE.apply(this, arguments);
-  }
-  inherits(DATE, BaseTypes.DATE);
-
-  DATE.parse = function parse(date, options) {
+  var DATE = BaseTypes.DATE.inherits();
+  DATE.parse = function (date, options) {
     if (date.indexOf('+') === -1) {
       // For backwards compat. Dates inserted by sequelize < 2.0dev12 will not have a timestamp set
       return new Date(date + options.timezone);
@@ -50,23 +33,8 @@ module.exports = BaseTypes => {
     }
   };
 
-  function DATEONLY() {
-    if (!(this instanceof DATEONLY)) return new DATEONLY();
-    BaseTypes.DATEONLY.apply(this, arguments);
-  }
-  inherits(DATEONLY, BaseTypes.DATEONLY);
-
-  DATEONLY.parse = function parse(date) {
-    return date;
-  };
-
-  function STRING(length, binary) {
-    if (!(this instanceof STRING)) return new STRING(length, binary);
-    BaseTypes.STRING.apply(this, arguments);
-  }
-  inherits(STRING, BaseTypes.STRING);
-
-  STRING.prototype.toSql = function toSql() {
+  var STRING = BaseTypes.STRING.inherits();
+  STRING.prototype.toSql = function() {
     if (this._binary) {
       return 'VARCHAR BINARY(' + this._length + ')';
     } else {
@@ -74,13 +42,8 @@ module.exports = BaseTypes => {
     }
   };
 
-  function TEXT(length) {
-    if (!(this instanceof TEXT)) return new TEXT(length);
-    BaseTypes.TEXT.apply(this, arguments);
-  }
-  inherits(TEXT, BaseTypes.TEXT);
-
-  TEXT.prototype.toSql = function toSql() {
+  var TEXT = BaseTypes.TEXT.inherits();
+  TEXT.prototype.toSql = function() {
     if (this._length) {
       warn('SQLite does not support TEXT with options. Plain `TEXT` will be used instead.');
       this._length = undefined;
@@ -88,13 +51,8 @@ module.exports = BaseTypes => {
     return 'TEXT';
   };
 
-  function CHAR(length, binary) {
-    if (!(this instanceof CHAR)) return new CHAR(length, binary);
-    BaseTypes.CHAR.apply(this, arguments);
-  }
-  inherits(CHAR, BaseTypes.CHAR);
-
-  CHAR.prototype.toSql = function toSql() {
+  var CHAR = BaseTypes.CHAR.inherits();
+  CHAR.prototype.toSql = function() {
     if (this._binary) {
       return 'CHAR BINARY(' + this._length + ')';
     } else {
@@ -102,14 +60,9 @@ module.exports = BaseTypes => {
     }
   };
 
-  function NUMBER(options) {
-    if (!(this instanceof NUMBER)) return new NUMBER(options);
-    BaseTypes.NUMBER.apply(this, arguments);
-  }
-  inherits(NUMBER, BaseTypes.NUMBER);
-
-  NUMBER.prototype.toSql = function toSql() {
-    let result = this.key;
+  var NUMBER = BaseTypes.NUMBER.inherits();
+  NUMBER.prototype.toSql = function() {
+    var result = this.key;
 
     if (this._unsigned) {
       result += ' UNSIGNED';
@@ -128,55 +81,71 @@ module.exports = BaseTypes => {
     return result;
   };
 
-  function INTEGER(length) {
-    if (!(this instanceof INTEGER)) return new INTEGER(length);
-    BaseTypes.INTEGER.apply(this, arguments);
-  }
-  inherits(INTEGER, BaseTypes.INTEGER);
-
-  INTEGER.prototype.toSql = function toSql() {
+  var INTEGER = BaseTypes.INTEGER.inherits(function(length) {
+    var options = typeof length === 'object' && length || {
+      length: length
+    };
+    if (!(this instanceof INTEGER)) return new INTEGER(options);
+    BaseTypes.INTEGER.call(this, options);
+  });
+  INTEGER.prototype.key = INTEGER.key = 'INTEGER';
+  INTEGER.prototype.toSql = function() {
     return NUMBER.prototype.toSql.call(this);
   };
 
-  function BIGINT(length) {
-    if (!(this instanceof BIGINT)) return new BIGINT(length);
-    BaseTypes.BIGINT.apply(this, arguments);
-  }
-  inherits(BIGINT, BaseTypes.BIGINT);
-
-  BIGINT.prototype.toSql = function toSql() {
+  var BIGINT = BaseTypes.BIGINT.inherits(function(length) {
+    var options = typeof length === 'object' && length || {
+      length: length
+    };
+    if (!(this instanceof BIGINT)) return new BIGINT(options);
+    BaseTypes.BIGINT.call(this, options);
+  });
+  BIGINT.prototype.key = BIGINT.key = 'BIGINT';
+  BIGINT.prototype.toSql = function() {
     return NUMBER.prototype.toSql.call(this);
   };
 
-  function FLOAT(length, decimals) {
-    if (!(this instanceof FLOAT)) return new FLOAT(length, decimals);
-    BaseTypes.FLOAT.apply(this, arguments);
-  }
-  inherits(FLOAT, BaseTypes.FLOAT);
-  FLOAT.prototype.toSql = function toSql() {
+  var FLOAT = BaseTypes.FLOAT.inherits(function(length, decimals) {
+    var options = typeof length === 'object' && length || {
+      length: length,
+      decimals: decimals
+    };
+    if (!(this instanceof FLOAT)) return new FLOAT(options);
+    BaseTypes.FLOAT.call(this, options);
+  });
+  FLOAT.prototype.key = FLOAT.key = 'FLOAT';
+  FLOAT.prototype.toSql = function() {
     return NUMBER.prototype.toSql.call(this);
   };
 
-  function DOUBLE(length, decimals) {
-    if (!(this instanceof DOUBLE)) return new DOUBLE(length, decimals);
-    BaseTypes.DOUBLE.apply(this, arguments);
-  }
-  inherits(DOUBLE, BaseTypes.DOUBLE);
-  DOUBLE.prototype.toSql = function toSql() {
+  var DOUBLE = BaseTypes.DOUBLE.inherits(function(length, decimals) {
+    var options = typeof length === 'object' && length || {
+      length: length,
+      decimals: decimals
+    };
+    if (!(this instanceof DOUBLE)) return new DOUBLE(options);
+    BaseTypes.DOUBLE.call(this, options);
+  });
+  DOUBLE.prototype.key = DOUBLE.key = 'DOUBLE PRECISION';
+  DOUBLE.prototype.toSql = function() {
     return NUMBER.prototype.toSql.call(this);
   };
 
-  function REAL(length, decimals) {
-    if (!(this instanceof REAL)) return new REAL(length, decimals);
-    BaseTypes.REAL.apply(this, arguments);
-  }
-  inherits(REAL, BaseTypes.REAL);
-  REAL.prototype.toSql = function toSql() {
+  var REAL = BaseTypes.REAL.inherits(function(length, decimals) {
+    var options = typeof length === 'object' && length || {
+      length: length,
+      decimals: decimals
+    };
+    if (!(this instanceof REAL)) return new REAL(options);
+    BaseTypes.REAL.call(this, options);
+  });
+  REAL.prototype.key = REAL.key = 'REAL';
+  REAL.prototype.toSql = function() {
     return NUMBER.prototype.toSql.call(this);
   };
 
-  [FLOAT, DOUBLE, REAL].forEach(floating => {
-    floating.parse = function parse(value) {
+  [FLOAT, DOUBLE, REAL].forEach(function (floating) {
+    floating.parse = function (value) {
       if (_.isString(value)) {
         if (value === 'NaN') {
           return NaN;
@@ -190,40 +159,30 @@ module.exports = BaseTypes => {
     };
   });
 
-  function ENUM() {
-    if (!(this instanceof ENUM)) {
-      const obj = Object.create(ENUM.prototype);
-      ENUM.apply(obj, arguments);
-      return obj;
-    }
-    BaseTypes.ENUM.apply(this, arguments);
-  }
-  inherits(ENUM, BaseTypes.ENUM);
+  var ENUM = BaseTypes.ENUM.inherits();
 
-  ENUM.prototype.toSql = function toSql() {
+  ENUM.prototype.toSql = function () {
     return 'TEXT';
   };
 
-  const exports = {
-    DATE,
-    DATEONLY,
-    STRING,
-    CHAR,
-    NUMBER,
-    FLOAT,
-    REAL,
+  var exports = {
+    DATE: DATE,
+    STRING: STRING,
+    CHAR: CHAR,
+    NUMBER: NUMBER,
+    FLOAT: FLOAT,
+    REAL: REAL,
     'DOUBLE PRECISION': DOUBLE,
-    INTEGER,
-    BIGINT,
-    TEXT,
-    ENUM,
-    JSON: JSONTYPE
+    INTEGER: INTEGER,
+    BIGINT: BIGINT,
+    TEXT: TEXT,
+    ENUM: ENUM
   };
 
-  _.forIn(exports, (DataType, key) => {
+  _.forIn(exports, function (DataType, key) {
     if (!DataType.key) DataType.key = key;
     if (!DataType.extend) {
-      DataType.extend = oldType => {
+      DataType.extend = function(oldType) {
         return new DataType(oldType.options);
       };
     }

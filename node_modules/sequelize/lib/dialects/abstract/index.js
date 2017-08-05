@@ -1,6 +1,8 @@
 'use strict';
 
-class AbstractDialect {}
+var AbstractDialect = function() {
+
+};
 
 AbstractDialect.prototype.supports = {
   'DEFAULT': true,
@@ -42,14 +44,7 @@ AbstractDialect.prototype.supports = {
   migrations: true,
   upserts: true,
   constraints: {
-    restrict: true,
-    addConstraint: true,
-    dropConstraint: true,
-    unique: true,
-    default: false,
-    check: true,
-    foreignKey: true,
-    primaryKey: true
+    restrict: true
   },
   index: {
     collate: true,
@@ -57,7 +52,7 @@ AbstractDialect.prototype.supports = {
     parser: false,
     concurrently: false,
     type: false,
-    using: true
+    using: true,
   },
   joinTableDependent: true,
   groupedLimit: true,
@@ -67,5 +62,3 @@ AbstractDialect.prototype.supports = {
 };
 
 module.exports = AbstractDialect;
-module.exports.AbstractDialect = AbstractDialect;
-module.exports.default = AbstractDialect;

@@ -199,6 +199,7 @@
     // 'metal',
     'methane',
     'milk',
+    'minus',
     'money',
     // 'moose',
     'mud',
@@ -355,6 +356,7 @@
       hives     : new RegExp( '(hi|ti)ves$'                    , 'gi' ),
       curves    : new RegExp( '(curve)s$'                      , 'gi' ),
       lrves     : new RegExp( '([lr])ves$'                     , 'gi' ),
+      aves      : new RegExp( '([a])ves$'                      , 'gi' ),
       foves     : new RegExp( '([^fo])ves$'                    , 'gi' ),
       movies    : new RegExp( '(m)ovies$'                      , 'gi' ),
       aeiouyies : new RegExp( '([^aeiouy]|qu)ies$'             , 'gi' ),
@@ -524,6 +526,7 @@
     [ regex.plural.hives    , '$1ve' ],
     [ regex.plural.curves   , '$1' ],
     [ regex.plural.lrves    , '$1f' ],
+    [ regex.plural.aves     , '$1ve' ],
     [ regex.plural.foves    , '$1fe' ],
     [ regex.plural.movies   , '$1ovie' ],
     [ regex.plural.aeiouyies, '$1y' ],
@@ -1065,8 +1068,8 @@
       for( ;i < j; i++ ){
         var method = arr[ i ];
 
-        if( this.hasOwnProperty( method )){
-          str = this[ method ]( str );
+        if( inflector.hasOwnProperty( method )){
+          str = inflector[ method ]( str );
         }
       }
 
@@ -1077,7 +1080,7 @@
 /**
  * @public
  */
-  inflector.version = '1.10.0';
+  inflector.version = '1.12.0';
 
   return inflector;
 }));

@@ -1,0 +1,2 @@
+DROP DATABASE IF EXISTS `mypass_db`;
+CREATE DATABASE `mypass_db`;

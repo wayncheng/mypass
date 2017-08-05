@@ -1,11 +1,10 @@
 'use strict';
 
-const wkx = require('wkx');
-const _ = require('lodash');
-const moment = require('moment-timezone');
-const inherits = require('../../utils/inherits');
+var wkx = require('wkx')
+  , _ = require('lodash')
+  , moment = require('moment-timezone');
 
-module.exports = BaseTypes => {
+module.exports = function (BaseTypes) {
   BaseTypes.ABSTRACT.prototype.dialectTypes = 'https://dev.mysql.com/doc/refman/5.7/en/data-types.html';
 
   BaseTypes.DATE.types.mysql = ['DATETIME'];
@@ -24,56 +23,15 @@ module.exports = BaseTypes => {
   BaseTypes.ENUM.types.mysql = false;
   BaseTypes.REAL.types.mysql = ['DOUBLE'];
   BaseTypes.DOUBLE.types.mysql = ['DOUBLE'];
-  BaseTypes.GEOMETRY.types.mysql = ['GEOMETRY'];
 
-  function BLOB(length) {
-    if (!(this instanceof BLOB)) return new BLOB(length);
-    BaseTypes.BLOB.apply(this, arguments);
-  }
-  inherits(BLOB, BaseTypes.BLOB);
+  var DATE = BaseTypes.DATE.inherits();
 
-  BLOB.parse = function(value, options, next) {
-    const data = next();
-
-    if (Buffer.isBuffer(data) && data.length === 0) {
-      return null;
-    }
-
-    return data;
-  };
-
-  function DECIMAL(precision, scale) {
-    if (!(this instanceof DECIMAL)) return new DECIMAL(precision, scale);
-    BaseTypes.DECIMAL.apply(this, arguments);
-  }
-  inherits(DECIMAL, BaseTypes.DECIMAL);
-
-  DECIMAL.prototype.toSql = function toSql() {
-    let definition = BaseTypes.DECIMAL.prototype.toSql.apply(this);
-
-    if (this._unsigned) {
-      definition += ' UNSIGNED';
-    }
-
-    if (this._zerofill) {
-      definition += ' ZEROFILL';
-    }
-
-    return definition;
-  };
-
-  function DATE(length) {
-    if (!(this instanceof DATE)) return new DATE(length);
-    BaseTypes.DATE.apply(this, arguments);
-  }
-  inherits(DATE, BaseTypes.DATE);
-
-  DATE.prototype.toSql = function toSql() {
+  DATE.prototype.toSql = function () {
     return 'DATETIME' + (this._length ? '(' + this._length + ')' : '');
   };
 
-  DATE.prototype._stringify = function _stringify(date, options) {
-    date = BaseTypes.DATE.prototype._applyTimezone(date, options);
+  DATE.prototype.$stringify = function (date, options) {
+    date = BaseTypes.DATE.prototype.$applyTimezone(date, options);
     // Fractional DATETIMEs only supported on MySQL 5.6.4+
     if (this._length) {
       return date.format('YYYY-MM-DD HH:mm:ss.SSS');
@@ -82,7 +40,7 @@ module.exports = BaseTypes => {
     return date.format('YYYY-MM-DD HH:mm:ss');
   };
 
-  DATE.parse = function parse(value, options) {
+  DATE.parse = function (value, options) {
     value = value.string();
 
     if (value === null) {
@@ -98,31 +56,15 @@ module.exports = BaseTypes => {
     return value;
   };
 
-  function DATEONLY() {
-    if (!(this instanceof DATEONLY)) return new DATEONLY();
-    BaseTypes.DATEONLY.apply(this, arguments);
-  }
-  inherits(DATEONLY, BaseTypes.DATEONLY);
+  var UUID = BaseTypes.UUID.inherits();
 
-  DATEONLY.parse = function parse(value) {
-    return value.string();
-  };
-
-  function UUID() {
-    if (!(this instanceof UUID)) return new UUID();
-    BaseTypes.UUID.apply(this, arguments);
-  }
-  inherits(UUID, BaseTypes.UUID);
-
-  UUID.prototype.toSql = function toSql() {
+  UUID.prototype.toSql = function() {
     return 'CHAR(36) BINARY';
   };
 
-
-  const SUPPORTED_GEOMETRY_TYPES = ['POINT', 'LINESTRING', 'POLYGON'];
-
-  function GEOMETRY(type, srid) {
-    if (!(this instanceof GEOMETRY)) return new GEOMETRY(type, srid);
+  var SUPPORTED_GEOMETRY_TYPES = ['POINT', 'LINESTRING', 'POLYGON'];
+  var GEOMETRY = BaseTypes.GEOMETRY.inherits(function() {
+    if (!(this instanceof GEOMETRY)) return new GEOMETRY();
     BaseTypes.GEOMETRY.apply(this, arguments);
 
     if (_.isEmpty(this.type)) {
@@ -132,15 +74,13 @@ module.exports = BaseTypes => {
     } else {
       throw new Error('Supported geometry types are: ' + SUPPORTED_GEOMETRY_TYPES.join(', '));
     }
-  }
-  inherits(GEOMETRY, BaseTypes.GEOMETRY);
+  });
 
-  GEOMETRY.parse = GEOMETRY.prototype.parse = function parse(value) {
+  GEOMETRY.parse = GEOMETRY.prototype.parse = function(value) {
     value = value.buffer();
 
-    // Empty buffer, MySQL doesn't support POINT EMPTY
-    // check, https://dev.mysql.com/worklog/task/?id=2381
-    if (value.length === 0) {
+    //MySQL doesn't support POINT EMPTY, https://dev.mysql.com/worklog/task/?id=2381
+    if (value === null) {
       return null;
     }
 
@@ -150,38 +90,31 @@ module.exports = BaseTypes => {
     return wkx.Geometry.parse(value).toGeoJSON();
   };
 
-  GEOMETRY.prototype.toSql = function toSql() {
+  GEOMETRY.prototype.toSql = function() {
     return this.sqlType;
   };
 
-  function ENUM() {
-    if (!(this instanceof ENUM)) {
-      const obj = Object.create(ENUM.prototype);
-      ENUM.apply(obj, arguments);
-      return obj;
-    }
-    BaseTypes.ENUM.apply(this, arguments);
-  }
-  inherits(ENUM, BaseTypes.ENUM);
+  var ENUM = BaseTypes.ENUM.inherits();
 
-  ENUM.prototype.toSql = function toSql(options) {
-    return 'ENUM(' + _.map(this.values, value => options.escape(value)).join(', ') + ')';
+  ENUM.prototype.toSql = function (options) {
+    return 'ENUM(' + _.map(this.values, function(value) {
+      return options.escape(value);
+    }).join(', ') + ')';
   };
 
-  const exports = {
-    ENUM,
-    DATE,
-    DATEONLY,
-    UUID,
-    GEOMETRY,
-    DECIMAL,
-    BLOB
+  BaseTypes.GEOMETRY.types.mysql = ['GEOMETRY'];
+
+  var exports = {
+    ENUM: ENUM,
+    DATE: DATE,
+    UUID: UUID,
+    GEOMETRY: GEOMETRY
   };
 
-  _.forIn(exports, (DataType, key) => {
+  _.forIn(exports, function (DataType, key) {
     if (!DataType.key) DataType.key = key;
     if (!DataType.extend) {
-      DataType.extend = function extend(oldType) {
+      DataType.extend = function(oldType) {
         return new DataType(oldType.options);
       };
     }

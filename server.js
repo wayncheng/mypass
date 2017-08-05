@@ -65,13 +65,20 @@
   });
 
 
+//SEQUELIZE INITIALIZATION FOR DATABASE
+var db = require("./models");
+
+db.sequelize.sync({ force: true }).then(function() {
+  app.listen(port, function() {
+    console.log("App listening on PORT " + port);
+     console.log(`-------------------------------------------------------
+                                          ready @ ${port}`);
+  });
+});
 
 // START SERVER ===================================
 // db.sequelize.sync({force: true}) .then(function(){
-  app.listen(port, function() {
-    console.log(`-------------------------------------------------------
-                                          ready @ ${port}`);
-  });
+  
 // })
 //==================================================	
 })();

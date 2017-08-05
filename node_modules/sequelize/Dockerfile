@@ -1,4 +1,4 @@
-FROM node:6.10.3
+FROM node:5
 
 RUN apt-get install libpq-dev
 
