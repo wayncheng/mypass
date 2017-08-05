@@ -4,7 +4,7 @@
   var express = require("express");
   var router = express.Router();
   var bodyParser = require("body-parser");
-  var model = require("../models/model.js");
+  // var model = require("../models/model.js");
   //==================================================
   router.get("/signup/:authtype", function(req, res) {
     var authtype = req.params.authtype;
@@ -18,7 +18,8 @@
       authtype: authtype,
       api_phase: "signup",
       layout: "signup",
-      isSignup: true
+      isSignup: true,
+      username:req.body.username
     }
 		hbsParams[authtype] = true;
 
@@ -33,7 +34,8 @@
       authtype: authtype,
       api_phase: "login",
       layout: "login",
-      isSignup: false
+      isSignup: false,
+      username:req.body.username
 		}
 		hbsParams[authtype] = true;
 		

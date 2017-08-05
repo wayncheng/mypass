@@ -1,15 +1,18 @@
 'use strict';
 
-const hstore = require('pg-hstore')({sanitize : true});
+var hstore = require('pg-hstore')({sanitize : true});
 
-function stringify(data) {
-  if (data === null) return null;
-  return hstore.stringify(data);
+function stringify (data) {
+    if (data === null) return null;
+    return hstore.stringify(data);
 }
-exports.stringify = stringify;
 
-function parse(value) {
-  if (value === null) return null;
-  return hstore.parse(value);
+function parse (value) {
+    if (value === null) return null;
+    return hstore.parse(value);
 }
-exports.parse = parse;
+
+module.exports = {
+    stringify: stringify,
+    parse: parse
+};

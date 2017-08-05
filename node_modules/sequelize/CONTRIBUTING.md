@@ -1,4 +1,4 @@
-_Please note!_ The github issue tracker should only be used for feature requests and bugs with a clear description of the issue and the expected behaviour (see below). All questions belong on [Slack](https://sequelize.slack.com), [StackOverflow](https://stackoverflow.com/questions/tagged/sequelize.js) or [Google groups](https://groups.google.com/forum/#!forum/sequelize).
+_Please note!_ The github issue tracker should only be used for feature requests and bugs with a clear description of the issue and the expected behaviour (see below). All questions belong on [StackOverflow](https://stackoverflow.com/questions/tagged/sequelize.js) or [Google groups](https://groups.google.com/forum/#!forum/sequelize).
 
 # Issues
 Issues are always very welcome - after all, they are a big part of making sequelize better. However, there are a couple of things you can do to make the lives of the developers _much, much_ easier:
@@ -21,7 +21,6 @@ We're glad to get pull request if any functionality is missing or something is b
 
 * Explain the issue that your PR is solving - or link to an existing issue
 * Make sure that all existing tests pass
-* Make sure you followed [coding guidelines](https://github.com/sequelize/sequelize/blob/master/CONTRIBUTING.md#coding-guidelines)
 * Add some tests for your new functionality or a test exhibiting the bug you are solving. Ideally all new tests should not pass _without_ your changes.
   - Use [promise style](http://bluebirdjs.com/docs/why-promises.html) in all new tests. Specifically this means:
     - don't use `EventEmitter`, `QueryChainer` or the `success`, `done` and `error` events
@@ -29,7 +28,7 @@ We're glad to get pull request if any functionality is missing or something is b
     - don't use a done callback in your test, just return the promise chain.
   - Small bugfixes and direct backports to the 1.7 branch are accepted without tests.
 * If you are adding to / changing the public API, remember to add API docs, in the form of [JSDoc style](http://usejsdoc.org/about-getting-started.html) comments. See [section 4a](#4a-check-the-documentation  ) for the specifics.
-* Add an entry to the [changelog](https://github.com/sequelize/sequelize/blob/master/changelog.md), with a link to the issue you are solving
+* Add an entry to [the changelog](https://github.com/sequelize/sequelize/blob/master/changelog.md), with a link to the issue you are solving
 
 Still interested? Coolio! Here is how to get started:
 
@@ -69,22 +68,62 @@ get SQLite tests for free :)
 
 #### 3a. Docker
 
-Makes sure `docker` and `docker-compose` are installed.
+Makes sure Docker and docker-compose are installed.
 
-If running on macOS, install [Docker for Mac](https://docs.docker.com/docker-for-mac/).
+If running on OSX, install [Docker Toolbox](https://docs.docker.com/engine/installation/mac/) and
+ launch `Docker Quickstart Terminal.app`.
 
-Now launch the docker mysql and postgres servers with this command (you can add `-d` to run them in daemon mode):
+Then simply run:
 
-```sh
-docker-compose up postgres-95 mysql-57
-```
-
-Then to run the tests simply run:
 ```sh
 npm run test-docker
 ```
 
+And once in a while you might want to run:
+
+```sh
+npm run build-docker
+```
+
+To rebuild the image (in case of changed dependencies or similar).
+
 If sequelize is unable to connect to mysql you might want to try running `sudo docker-compose up` in a second terminal window.
+
+#### 3b. [Deprecated] Docker and OSX using `boot2docker-cli`:
+
+Docker does not run on OSX natively so you will have to use a VM layer like `boot2docker`. 
+
+[Docker Machine](https://docs.docker.com/machine/) will take care of the VM layer and it is included in Docker Toolbox.
+
+[boot2docker-cli](https://github.com/boot2docker/boot2docker-cli) is a command line interface to manipulate `boot2docker`, it is officially deprecated in favor of Docker Machine. If you insists, you can see [boot2docker-cli/release](https://github.com/boot2docker/boot2docker-cli/releases) for install or you can also use [Homebrew](http://brew.sh) to install `boot2docker` after installing [VirtualBox](https://www.virtualbox.org).
+
+After installing and intializing docker you can pull the docker container:
+```console
+$ boot2docker up
+Waiting for VM and Docker daemon to start...
+......
+Started.
+
+To connect the Docker client to the Docker daemon, please set:
+    export DOCKER_HOST=tcp://192.168.59.103:2375
+
+$ export DOCKER_HOST=tcp://192.168.59.103:2375
+$ docker pull mhansen/sequelize-contribution
+```
+
+And then setup and run the tests:
+```console
+$ CONTAINER=$(docker run -d -i -t mhansen/sequelize-contribution)
+$ CONTAINER_IP=$(docker inspect --format='{{.NetworkSettings.IPAddress}}' $CONTAINER)
+$ SEQ_HOST=$CONTAINER_IP SEQ_USER=sequelize_test make all
+```
+
+These are the same commands as above, although `sudo` is not required.
+
+When you are done with your testing:
+```console
+$ boot2docker down
+```
 
 ### 4. Run the tests ###
 
@@ -92,14 +131,14 @@ All tests are located in the `test` folder (which contains the
 lovely [Mocha](http://visionmedia.github.io/mocha/) tests).
 
 ```console
-$ npm run test-all || test-mysql || test-sqlite || test-mssql || test-postgres || test-postgres-native
+$ npm run test-all || test-mysql || test-sqlite || test-mssql || test-postgres || test-mariadb || test-postgres-native
 
 $ # alternatively you can pass database credentials with $variables when testing
 $ DIALECT=dialect SEQ_DB=database SEQ_USER=user SEQ_PW=password npm test
 ```
 
 #### 4a. Check the documentation
-This step only applies if you have actually changed something in the documentation. Please read [Documentation Contribution Guidelines](https://github.com/sequelize/sequelize/blob/master/CONTRIBUTING.DOCS.md) first.
+This step only applies if you have actually changed something in the documentation. Please read `CONTRIBUTING.DOCS.md` first.
 To generate documentation for the `sequelize.js` file, run (in the sequelize dir)
 
 ```console
@@ -108,28 +147,49 @@ $ npm run docs
 
 The generated documentation will be placed in `docs/tmp.md`.
 
-### 5. Commit ###
+### 5. That's all ###
 
-Sequelize follows the [AngularJS Commit Message Conventions](https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.em2hiij8p46d).
-Example:
+Just commit and send your pull request. Happy hacking and thank you for contributing.
 
-    feat(pencil): add 'graphiteWidth' option
+### 6. Some words about coding style ###
+Have a look at our [.jshintrc](https://github.com/sequelize/sequelize/blob/master/.jshintrc) file for the specifics. As part of the test process, all files will be linted, and your PR will _not_ be accepted if it does not pass linting.
 
-Commit messages are used to automatically generate a changelog, so make sure to follow the convention.
-If you are unsure, you can let [commitizen](https://github.com/commitizen/cz-cli) ask you questions and commit for you (just run `node_modules/.bin/git-cz`).
-When you commit, your commit message will be validated automatically with [validate-commit-msg](https://github.com/kentcdodds/validate-commit-msg).
+#### 6.1. Spaces ####
 
-Then push and send your pull request. Happy hacking and thank you for contributing.
+Use spaces when defining functions.
 
-### Coding Guidelines ###
-Have a look at our [.eslintrc](https://github.com/sequelize/sequelize/blob/master/.eslintrc) file for the specifics. As part of the test process, all files will be linted, and your PR will **not** be accepted if it does not pass linting.
+```js
+function(arg1, arg2, arg3) {
+  return 1;
+}
+```
+
+Use spaces for if statements.
+
+```js
+if (condition) {
+  // do something
+} else {
+  // something else
+}
+```
+
+#### 6.2. Variable declarations ####
+
+```js
+var num  = 1
+  , user = new User()
+  , date = new Date();
+```
+
+#### 6.3. Semicolons ####
+Yes
 
 # Publishing a release
 
-
 1. Ensure that latest build on master is green
 2. Ensure your local code is up to date (`git pull origin master`)
-3. `npm version patch|minor|major` (see [Semantic Versioning](http://semver.org))
+3. `npm version patch|minor|major` (see SemVer)
 4. Update changelog to match version number, commit changelog
 5. `git push --tags origin master`
 6. `npm publish .`

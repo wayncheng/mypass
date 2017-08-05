@@ -1,10 +1,9 @@
 "use strict";
 (function() {
   var express = require("express");
-  var api = require("../models/api.js");
   var bodyParser = require("body-parser");
   var router = express.Router();
-  // var db = require("../models");
+  var db = require("../models");
 	var bcrypt = require("bcryptjs");
 	var saltRounds = 10;
 	
@@ -12,10 +11,12 @@ var flow = ['text','face','voice'];
 
   /////////////////////////////////////////////////////
   router.get("/api/all", function(req, res) {
-    api.all(function(data) {
-      console.log("data", data);
-      res.json(data);
+
+    db.User.findAll({}).then(function(data){
+        console.log("data", data);
+        res.json(data);
     });
+
   });
 
   //==================================================
@@ -36,14 +37,18 @@ var flow = ['text','face','voice'];
     bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
       console.log("hash", hash);
 
-      api.create(
-        ["username", "email", "pw", "firstname", "lastname"],
-        [rb.username, rb.email, hash, rb.firstname, rb.lastname],
-        function() {
-          // console.log("res", res);
+      db.User.create({
+        username: rb.username,
+        email: rb.email,
+        pw: hash,
+        firstname: rb.firstname,
+        lastname: rb.lastname
+
+      }).then(function(data){
+          console.log("res", res);
           res.redirect(`/signup/${next_type}`);
-        }
-      );
+      });
+
     });
   });
 
@@ -52,21 +57,27 @@ var flow = ['text','face','voice'];
   router.post("/api/text/login", function(req, res) {
     // var authtype = req.params.authtype;
     var phase = "login";
-    console.log(`POST /api/${authtype}/${phase}`);
-		console.log('req.body.pw',req.body.pw);
+    // console.log(`POST /api/${authtype}/${phase}`);
+
+        db.User.findOne({
+          where: {
+            username:req.body.uid
+          }
+        }).then(function(data){
+            console.log("access granted?", data.pw);
+
+            bcrypt.compare(req.body.pw, data.pw, function(err,response){
+                if (response === true){
+                res.redirect('/login/face');
+              } else {
+                res.redirect('/login/text');
+              }
+            });  
 
 
-		// bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
-      api.get_pw(req.body.username, req.body.pw, function(response) {
-        // console.log("res", res);
-				console.log("access granted?", response);
-				if (response === true){
-					res.redirect('/login/face')
-				}
-				else {
-					res.redirect('/login/text')
-				}
-      });
+            
+        });
+
     // });
   });
 

@@ -1,0 +1,7 @@
+var path = require('path');
+
+module.exports = {
+  'config': path.resolve('D:/BootCamp/Project2/officialVersion/mypass/', 'config/config.json'),
+  'migrations-path': path.resolve('D:/BootCamp/Project2/officialVersion/mypass/', 'migrations'),
+  'models-path': path.resolve('D:/BootCamp/Project2/officialVersion/mypass/', 'models')
+}

@@ -1,26 +1,24 @@
 'use strict';
 
-const _ = require('lodash');
-const AbstractDialect = require('../abstract');
-const ConnectionManager = require('./connection-manager');
-const Query = require('./query');
-const QueryGenerator = require('./query-generator');
-const DataTypes = require('../../data-types').mysql;
+var _ = require('lodash')
+  , Abstract = require('../abstract')
+  , ConnectionManager = require('./connection-manager')
+  , Query = require('./query')
+  , QueryGenerator = require('./query-generator')
+  , DataTypes = require('../../data-types').mysql;
 
-class MysqlDialect extends AbstractDialect {
-  constructor(sequelize) {
-    super();
-    this.sequelize = sequelize;
-    this.connectionManager = new ConnectionManager(this, sequelize);
-    this.QueryGenerator = _.extend({}, QueryGenerator, {
-      options: sequelize.options,
-      _dialect: this,
-      sequelize
-    });
-  }
-}
+var MysqlDialect = function(sequelize) {
+  this.sequelize = sequelize;
+  this.connectionManager = new ConnectionManager(this, sequelize);
+  this.connectionManager.initPools();
+  this.QueryGenerator = _.extend({}, QueryGenerator, {
+    options: sequelize.options,
+    _dialect: this,
+    sequelize: sequelize
+  });
+};
 
-MysqlDialect.prototype.supports = _.merge(_.cloneDeep(AbstractDialect.prototype.supports), {
+MysqlDialect.prototype.supports = _.merge(_.cloneDeep(Abstract.prototype.supports), {
   'VALUES ()': true,
   'LIMIT ON UPDATE': true,
   'IGNORE': ' IGNORE',
@@ -31,18 +29,13 @@ MysqlDialect.prototype.supports = _.merge(_.cloneDeep(AbstractDialect.prototype.
     length: true,
     parser: true,
     type: true,
-    using: 1
-  },
-  constraints: {
-    dropConstraint: false,
-    check: false
+    using: 1,
   },
   ignoreDuplicates: ' IGNORE',
   updateOnDuplicate: true,
   indexViaAlter: true,
   NUMERIC: true,
-  GEOMETRY: true,
-  REGEXP: true
+  GEOMETRY: true
 });
 
 ConnectionManager.prototype.defaultVersion = '5.6.0';

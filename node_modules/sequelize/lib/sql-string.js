@@ -1,29 +1,38 @@
 'use strict';
 
-const dataTypes = require('./data-types');
-const _ = require('lodash');
+/* jshint -W110 */
+var dataTypes = require('./data-types')
+  , _ = require('lodash')
+  , SqlString = exports;
 
-function escape(val, timeZone, dialect, format) {
-  let prependN = false;
+SqlString.escapeId = function(val, forbidQualified) {
+  if (forbidQualified) {
+    return '`' + val.replace(/`/g, '``') + '`';
+  }
+  return '`' + val.replace(/`/g, '``').replace(/\./g, '`.`') + '`';
+};
+
+SqlString.escape = function(val, timeZone, dialect, format) {
+  var prependN = false;
   if (val === undefined || val === null) {
     return 'NULL';
   }
   switch (typeof val) {
-    case 'boolean':
+  case 'boolean':
     // SQLite doesn't have true/false support. MySQL aliases true/false to 1/0
     // for us. Postgres actually has a boolean type with true/false literals,
     // but sequelize doesn't use it yet.
-      if (dialect === 'sqlite' || dialect === 'mssql') {
-        return +!!val;
-      }
-      return '' + !!val;
-    case 'number':
-      return val + '';
-    case 'string':
+    if (dialect === 'sqlite' || dialect === 'mssql') {
+      return +!!val;
+    }
+    return '' + !!val;
+  case 'number':
+    return val + '';
+  case 'string':
     // In mssql, prepend N to all quoted vals which are originally a string (for
     // unicode compatibility)
-      prependN = dialect === 'mssql';
-      break;
+    prependN = dialect === 'mssql';
+    break;
   }
 
   if (val instanceof Date) {
@@ -39,15 +48,11 @@ function escape(val, timeZone, dialect, format) {
   }
 
   if (Array.isArray(val)) {
-    const partialEscape = _.partial(escape, _, timeZone, dialect, format);
+    var escape = _.partial(SqlString.escape, _, timeZone, dialect, format);
     if (dialect === 'postgres' && !format) {
-      return dataTypes.ARRAY.prototype.stringify(val, {escape: partialEscape});
+      return dataTypes.ARRAY.prototype.stringify(val, {escape: escape});
     }
-    return val.map(partialEscape);
-  }
-
-  if (!val.replace) {
-    throw new Error('Invalid value ' + val);
+    return val.map(escape);
   }
 
   if (dialect === 'postgres' || dialect === 'sqlite' || dialect === 'mssql') {
@@ -55,7 +60,7 @@ function escape(val, timeZone, dialect, format) {
     // http://stackoverflow.com/q/603572/130598
     val = val.replace(/'/g, "''");
   } else {
-    val = val.replace(/[\0\n\r\b\t\\\'\"\x1a]/g, s => {
+    val = val.replace(/[\0\n\r\b\t\\\'\"\x1a]/g, function(s) {
       switch (s) {
         case '\0': return '\\0';
         case '\n': return '\\n';
@@ -68,36 +73,30 @@ function escape(val, timeZone, dialect, format) {
     });
   }
   return (prependN ? "N'" : "'") + val + "'";
-}
-exports.escape = escape;
+};
 
-function format(sql, values, timeZone, dialect) {
+SqlString.format = function(sql, values, timeZone, dialect) {
   values = [].concat(values);
 
-  if (typeof sql !== 'string') {
-    throw new Error('Invalid SQL string provided: ' + sql);
-  }
-  return sql.replace(/\?/g, match => {
+  return sql.replace(/\?/g, function(match) {
     if (!values.length) {
       return match;
     }
 
-    return escape(values.shift(), timeZone, dialect, true);
+    return SqlString.escape(values.shift(), timeZone, dialect, true);
   });
-}
-exports.format = format;
+};
 
-function formatNamedParameters(sql, values, timeZone, dialect) {
-  return sql.replace(/\:+(?!\d)(\w+)/g, (value, key) => {
+SqlString.formatNamedParameters = function(sql, values, timeZone, dialect) {
+  return sql.replace(/\:+(?!\d)(\w+)/g, function(value, key) {
     if ('postgres' === dialect && '::' === value.slice(0, 2)) {
       return value;
     }
 
     if (values[key] !== undefined) {
-      return escape(values[key], timeZone, dialect, true);
+      return SqlString.escape(values[key], timeZone, dialect, true);
     } else {
       throw new Error('Named parameter "' + value + '" has no value in the given object.');
     }
   });
-}
-exports.formatNamedParameters = formatNamedParameters;
+};

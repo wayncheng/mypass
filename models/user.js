@@ -32,7 +32,10 @@
 				type: DataTypes.STRING,
 				allowNull: true
 			}
-		});
+		}, 
+		{
+			timestamps: true
+	});
 		return User;
 	};
 })();

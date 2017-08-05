@@ -1,24 +1,20 @@
 'use strict';
 
-const stores = new Map();
-
-module.exports = dialect => {
-
-  if (!stores.has(dialect)) {
-    stores.set(dialect, new Map());
-  }
+var stores = {};
+module.exports = function (dialect) {
+  stores[dialect] = stores[dialect] || {};
 
   return {
-    clear() {
-      stores.get(dialect).clear();
+    clear: function () {
+      stores[dialect] = {};
     },
-    refresh(dataType) {
-      for (const type of dataType.types[dialect]) {
-        stores.get(dialect).set(type, dataType.parse);
-      }
+    refresh: function (dataType) {
+      dataType.types[dialect].forEach(function (type) {
+        stores[dialect][type] = dataType.parse;
+      });
     },
-    get(type) {
-      return stores.get(dialect).get(type);
+    get: function (type) {
+      return stores[dialect][type];
     }
   };
 };
