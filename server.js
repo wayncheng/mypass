@@ -52,6 +52,9 @@
 
 	var picRoutes = require("./controllers/picture_controller.js");
 	app.use("/", picRoutes);
+	
+	var voiceRoutes = require("./controllers/voice_controller.js");
+	app.use("/", voiceRoutes);
 
 // ERRORS =========================================
   app.use(function(req, res) {

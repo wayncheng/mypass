@@ -27,64 +27,25 @@ $('#stop').on('click',function(e){
 	e.preventDefault();
 	mediaRecorder.stop();
 })
-$('#pause').on('click',function(e){
+
+//==================================================
+// check if user exists
+$('#username').on('change',function(e){
 	e.preventDefault();
-	mediaRecorder.pause();
+	var username = $(this).val().trim();
+
+	$.ajax({
+		type: 'GET',
+		url: '/api/voice/user/'+username
+	}).done(function(res){
+		console.log('res',res);
+
+		if (res === 'UNF') {
+			Materialize.toast(`${username} does not exist yet in VoiceIt's DB.`, 5000)
+		}
+		else if (res === 'SUC'){
+			Materialize.toast(`${username} already exists.`, 5000)
+		}
+	})
+
 })
-$('#resume').on('click',function(e){
-	e.preventDefault();
-	mediaRecorder.resume();
-})
-$('#save').on('click',function(e){
-	e.preventDefault();
-mediaRecorder.save(YourExternalBlob, 'FileName.webm');
-})
-
-// let shouldStop = false;
-//   let stopped = false;
-//   const downloadLink = document.getElementById('download');
-//   const stopButton = document.getElementById('stop');
-
-//   stopButton.addEventListener('click', function() {
-//     shouldStop = true;
-//   })
-
-//   var handleSuccess = function(stream) {
-
-//     var context = new AudioContext();
-//     var input = context.createMediaStreamSource(stream)
-//     var processor = context.createScriptProcessor(1024,1,1);
-
-//     source.connect(processor);
-//     processor.connect(context.destination);
-
-//     processor.onaudioprocess = function(e){
-//       // Do something with the data, i.e Convert this to WAV
-//       console.log(e.inputBuffer);
-// 		};
-		
-//     const options = {mimeType: 'video/webm;codecs=vp9'};
-//     const recordedChunks = [];
-//     const mediaRecorder = new MediaRecorder(stream, options);
-
-//     mediaRecorder.addEventListener('dataavailable', function(e) {
-//       if (e.data.size > 0) {
-//         recordedChunks.push(e.data);
-//       }
-
-//       if(shouldStop === true && stopped === false) {
-//         mediaRecorder.stop();
-//         stopped = true;
-//       }
-//     });
-
-//     mediaRecorder.addEventListener('stop', function() {
-//       downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
-//       downloadLink.download = 'acetest.wav';
-//     });
-
-//     mediaRecorder.start();
-//   };
-
-//   navigator.mediaDevices.getUserMedia({ audio: true, video: false })
-//       .then(handleSuccess);
