@@ -7,7 +7,6 @@
 	var path = require("path");
 	var methodOverride = require("method-override");
 	// require('dotenv').config();
-	// var db = require('./models');
     var multer  = require('multer');
 // CONFIG =========================================
 	var app = express();
@@ -50,6 +49,9 @@
 
 	var faceRoutes = require("./controllers/face_controller.js");
 	app.use("/", faceRoutes);
+
+	var picRoutes = require("./controllers/picture_controller.js");
+	app.use("/", picRoutes);
 
 // ERRORS =========================================
   app.use(function(req, res) {

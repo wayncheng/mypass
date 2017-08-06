@@ -1,0 +1,38 @@
+<h5>Picture Authentication</h5>
+
+<h3>Test Video</h3>
+
+<div id="upload_status1" class="center-block"></div>
+
+<div id="upload_result1" class="center-block"></div>
+
+<div class="row">
+	<form id="main-form1" role="form" action="/api/picture/{{api_phase}}" encType="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%">
+		
+		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}">
+		
+		<div class="input-field row">
+			<input id="username1" type="text" name="username1" autocomplete="off" value="{{username}}">
+			<label for="username1">username</label>
+		</div>
+		
+		<!-- FOR LOGIN, LOGIN USING UPLOAD A PHOTO, AND PRESS SUBMIT BUTTON -->
+		
+		<div class="file-field input-field row">
+			<div id="img-input-wrap" class="btn btn-large light">
+				<span> <i class="material-icons">photo</i>PassPhoto </span>
+				<input id="image1" type="file" name="image">
+			</div>
+		</div>
+		<div class="input-field row">
+			<input id="submit1" type="submit" class="btn light"></input>
+		</div>
+	
+
+	</form>
+</div>
+
+	
+
+
+	
