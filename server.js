@@ -51,6 +51,9 @@
 	var faceRoutes = require("./controllers/face_controller.js");
 	app.use("/", faceRoutes);
 
+	var voiceRoutes = require("./controllers/voice_controller.js");
+	app.use("/", voiceRoutes);
+
 // ERRORS =========================================
   app.use(function(req, res) {
     res.type("text/html");

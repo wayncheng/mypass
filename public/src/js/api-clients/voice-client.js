@@ -1,44 +1,68 @@
 var mediaConstraints = {
-    audio: true
+  audio: true
 };
 
 navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 
+var mediaRecorder;
 function onMediaSuccess(stream) {
-    var mediaRecorder = new MediaStreamRecorder(stream);
-    mediaRecorder.mimeType = 'audio/wav'; // check this line for audio/wav
-    mediaRecorder.ondataavailable = function (blob) {
-        // POST/PUT "Blob" using FormData/XHR2
-        var blobURL = URL.createObjectURL(blob);
-        document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
+  mediaRecorder = new MediaStreamRecorder(stream);
+  mediaRecorder.mimeType = "audio/wav"; // check this line for audio/wav
+  mediaRecorder.recorderType = StereoAudioRecorder;
+  mediaRecorder.audioChannels = 1;
+  mediaRecorder.ondataavailable = function(blob) {
+		mediaRecorder.stop();
+    var blobURL = URL.createObjectURL(blob);
+    // POST/PUT "Blob" using FormData/XHR2
+    var fd = new FormData();
+    fd.append("voice", blob);
+
+  // $.ajax({
+  //   type: 'POST',
+  //   url: '/api/voice-data',
+  //   data: fd,
+  //   contentType: false,
+  //   cache: false,
+  //   processData: false,
+  // }).done(function(r){
+	// 	console.log('r',r);
+	// })
+    var oReq = new XMLHttpRequest();
+		oReq.open("POST", "/api/voice-data", true);
+		// oReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    oReq.onload = function(oEvent) {
+      if (oReq.status == 200) {
+        console.log("uploaded");
+      } else {
+        console.log("error");
+      }
     };
-    // mediaRecorder.start(3000);
+    oReq.send(fd);
+
+    var player = document.getElementById("player");
+    player.src = blobURL;
+    console.log("blobURL", blobURL);
+  };
+  // mediaRecorder.start(3000);
 }
 
 function onMediaError(e) {
-    console.error('media error', e);
+  console.error("media error", e);
 }
-	
-$('#start').on('click',function(e){
-	e.preventDefault();
-	mediaRecorder.start();
-})
-$('#stop').on('click',function(e){
-	e.preventDefault();
-	mediaRecorder.stop();
-})
-$('#pause').on('click',function(e){
-	e.preventDefault();
-	mediaRecorder.pause();
-})
-$('#resume').on('click',function(e){
-	e.preventDefault();
-	mediaRecorder.resume();
-})
-$('#save').on('click',function(e){
-	e.preventDefault();
-mediaRecorder.save(YourExternalBlob, 'FileName.webm');
-})
+
+$("#start").on("click", function(e) {
+  e.preventDefault();
+  mediaRecorder.start(2 * 1000);
+});
+$("#stop").on("click", function(e) {
+  e.preventDefault();
+  mediaRecorder.stop();
+});
+
+$("#save").on("click", function(e) {
+  e.preventDefault();
+  mediaRecorder.save(YourExternalBlob, "FileName.wav");
+});
 
 // let shouldStop = false;
 //   let stopped = false;
@@ -62,7 +86,7 @@ mediaRecorder.save(YourExternalBlob, 'FileName.webm');
 //       // Do something with the data, i.e Convert this to WAV
 //       console.log(e.inputBuffer);
 // 		};
-		
+
 //     const options = {mimeType: 'video/webm;codecs=vp9'};
 //     const recordedChunks = [];
 //     const mediaRecorder = new MediaRecorder(stream, options);

@@ -1,7 +1,8 @@
 "use strict";
 (function() {
   var express = require("express");
-  var api = require("../models/api.js");
+	var api = require("../models/api.js");
+	var authenticator = require('../models/authenticator.js');
   var bodyParser = require("body-parser");
   var router = express.Router();
   // var db = require("../models");
@@ -18,6 +19,9 @@ var flow = ['text','face','voice'];
     });
   });
 
+	
+
+
   //==================================================
   router.post("/api/:authtype/signup", function(req, res) {
     var authtype = req.params.authtype;
@@ -32,19 +36,21 @@ var flow = ['text','face','voice'];
 		}
 		var next_type = next_guide[authtype];
 		
+		if (authtype === 'text'){
+			bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
+				console.log("hash", hash);
 
-    bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
-      console.log("hash", hash);
-
-      api.create(
-        ["username", "email", "pw", "firstname", "lastname"],
-        [rb.username, rb.email, hash, rb.firstname, rb.lastname],
-        function() {
-          // console.log("res", res);
-          res.redirect(`/signup/${next_type}`);
-        }
-      );
-    });
+				api.create(
+					["username", "email", "pw", "firstname", "lastname"],
+					[rb.username, rb.email, hash, rb.firstname, rb.lastname],
+					function() {
+						// console.log("res", res);
+						res.redirect(`/signup/${next_type}`);
+					}
+				);
+			});
+		}
+	
   });
 
   //Changing this route only for Text Login, because creating same route for face Login also
@@ -69,6 +75,16 @@ var flow = ['text','face','voice'];
       });
     // });
   });
+
+
+	router.get('/api/authenticator', function(req,res){
+
+	})
+	router.post('/api/authenticator', function(req,res){
+
+	})
+	
+
 
   /////////////////////////////////////////////////////
   //  Add New User

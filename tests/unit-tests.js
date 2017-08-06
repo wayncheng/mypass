@@ -1,6 +1,8 @@
 'use strict';
 (function(){
-	var should = require("chai").should();
+	// var should = require("chai").should();
+	// var orm = require("./../config/orm.js");
+	
 	// var disemvowel = require("../disemvowel");
 	// describe("Disemvowel", function() {
 	// 	it("should remove all vowels from lower-case strings", function() {
@@ -20,7 +22,10 @@
 	// 		disemvowel(10971).should.equal("10971");
 	// 	});
 	// });
-
-
+describe("ORM", function(){
+	it("should return all columns for all users in db", function(){
+		orm.create('').should.equal("array of all ")
+	})
+})
 
 })();
