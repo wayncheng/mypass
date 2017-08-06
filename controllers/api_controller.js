@@ -20,11 +20,11 @@ var flow = ['text','face','voice'];
   });
 
   //==================================================
-  router.post("/api/:authtype/signup", function(req, res) {
-    var authtype = req.params.authtype;
+  router.post("/api/text/signup", function(req, res) {
+    var authtype = "text";
     var phase = "signup";
     var rb = req.body;
-    console.log(`POST /api/${authtype}/${phase}`);
+    // console.log(`POST /api/${authtype}/${phase}`);
 		// Set next auth type. 
 		var next_guide = {
 			'text': 'face',
