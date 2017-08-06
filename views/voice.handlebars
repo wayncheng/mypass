@@ -1,6 +1,9 @@
 <h5>Voice Authentication</h5>
 
 <div class="row">
+	<h3 id="enrollment-phrase">Today is a nice day to go for a walk.</h3>
+</div>
+<div class="row">
 		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m6 offset-m3 l4 offset-l4"> --}}
 		<form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4">
 			<input id="username" type="text" name="username" placeholder="username">
@@ -11,8 +14,8 @@
 
 		<div class="col s12 m6 offset-m3 l4 offset-l4">
 
-			<input id="recorder" type="file" accept="audio/*" capture="microphone">
-			<audio id="player" controls></audio>
+			{{!-- <input id="recorder" type="file" accept="audio/*" capture="microphone"> --}}
+			{{!-- <audio id="player" controls></audio> --}}
 
 
 			{{!-- <a id="download">Download</a> --}}
