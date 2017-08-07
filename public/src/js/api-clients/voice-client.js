@@ -2,9 +2,15 @@ var mediaConstraints = {
     audio: true
 };
 
+sessionStorage.setItem("userCreated","false");
+sessionStorage.removeItem("enrollCount");
+
+var enrollCount = 0;
+
 navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
 var mediaRecorder;
 function onMediaSuccess(stream) {
+	console.log("inside onMediaSuccess...");
     mediaRecorder = new MediaStreamRecorder(stream);
 		mediaRecorder.mimeType = 'audio/wav'; // check this line for audio/wav
 		mediaRecorder.recorderType = StereoAudioRecorder;
@@ -13,42 +19,131 @@ function onMediaSuccess(stream) {
 				mediaRecorder.stop();
 				Materialize.toast('Recording finished. Sending to server now.', 3000);
 				var username = $('#username').val().trim();
-			 
-				// *******************************************************
-				// I believe if you want to post the blob straight up,
-				// you have to use this FormData, XHR2 method, but if you 
-				// just want to send blobURL, ajax will work fine. 
-				// -- Wayne
-				// *******************************************************
-        // POST/PUT "Blob" using FormData/XHR2
-					// var fd = new FormData();   
-					// fd.append('username', username);
-					// fd.append('blob', blob);
-					// var oReq = new XMLHttpRequest();
-					// oReq.open("POST", '/api/voice/enroll', true);
-					// oReq.onload = function(oEvent) {
-					// 	if (oReq.status == 200) { console.log('uploaded'); }
-					// 	else { console.log('error'); }
-					// };
-					// oReq.send(fd);
 
-				var blobURL = URL.createObjectURL(blob);
-				console.log('blobURL',blobURL);
-				// document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
-				// document.getElementById('player').src = blobURL;
+    			var apiPhase = $("#apiPhase").text();
+    			console.log("API PHASE === ",apiPhase);
+    			var fileType = 'audio';
+    			var formData = new FormData();
+				formData.append(fileType, blob, username+'.wav');
 		
-				$.ajax({
-					type:"POST",
-					url: "/api/voice/enroll",
-					data: {
-						username: username,
-						blobURL: blobURL
+
+		
+		var voiceItApiPhase = "";
+		if(sessionStorage.getItem("enrollCount")){
+			enrollCount = sessionStorage.getItem("enrollCount");
+		}
+
+		if(apiPhase == "signup"){	
+			voiceItApiPhase = "enroll";
+			console.log("sessionStorage.getItem(userCreated)",sessionStorage.getItem("userCreated"));
+			if(sessionStorage.getItem("userCreated") === "false"){
+				$.post("/api/voice/user/"+username,function(res,status){
+					Materialize.toast("User created in VoiceIt DB",3000);
+					if(JSON.parse(res).ResponseCode === "SUC"){
+						sessionStorage.setItem("userCreated","true");
+						sessionStorage.setItem("enrollCount","0");
+
+						enrollOrAuthenticateUser(formData,voiceItApiPhase,username);
+
+					} else{
+						sessionStorage.setItem("userCreated","false");
 					}
-				}).done(function(res){
-					console.log('res',res);
-				})
+
+				});
+			} else{
+				enrollOrAuthenticateUser(formData,voiceItApiPhase,username);
+
+			}
+
+
+		} else if(apiPhase == "login"){
+			voiceItApiPhase = "authenticate";
+			enrollOrAuthenticateUser(formData,voiceItApiPhase,username);
+
+		}
+
+				// $.ajax({
+				// 	type:"POST",
+				// 	url: "/api/voice/" + voiceItApiPhase + "/" +username,
+				// 	data: formData,
+				// 	// body:formData,
+				// 	processData: false,  // prevent jQuery from converting the data
+    // 				contentType: false
+				// }).done(function(res){
+				// 	console.log('res',res);
+
+				// 	if(voiceItApiPhase === "enroll"){
+						
+				// 		enrollCount++;
+				// 		sessionStorage.setItem("enrollCount",enrollCount);
+
+				// 		if(JSON.parse(res).ResponseCode == "SUC" && enrollCount < 3){
+				// 			Materialize.toast("Please press Start Again for Next Enrollment",3000);
+				// 		}
+				// 		if(JSON.parse(res).ResponseCode == "SUC" && enrollCount == 3){
+				// 			Materialize.toast("Successfully Signed Up",3000);
+				// 		}
+				// 	}
+
+				// });
+			// } else if(apiPhase == "login"){
+
+			// 	$.ajax({
+			// 		type:"POST",
+			// 		url: "/api/voice/authenticate/"+username,
+			// 		data: formData,
+			// 		// {
+			// 		// 	username: username,
+			// 		// 	blobURL: blobURL
+			// 		// },
+			// 		body:formData,
+			// 		processData: false,  // prevent jQuery from converting the data
+   //  				contentType: false
+			// 	}).done(function(res){
+			// 		console.log('res',res);
+			// 	});
+
+			// }
+
+				// document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
+
 		}
     // mediaRecorder.start(3000);
+}
+
+function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
+	$.ajax({
+			type:"POST",
+			url: "/api/voice/" + voiceItApiPhase + "/" +username,
+			data: formData,
+			// body:formData,
+			processData: false,  // prevent jQuery from converting the data
+			contentType: false
+		}).done(function(res){
+			console.log('res',res);
+			// return res;
+
+			if(voiceItApiPhase === "enroll"){
+				
+				enrollCount++;
+				sessionStorage.setItem("enrollCount",enrollCount);
+
+				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) < 3){
+					Materialize.toast("Please press Start Again for Next Enrollment",3000);
+				}
+				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) == 3){
+					Materialize.toast("Successfully Signed Up",3000);
+					sessionStorage.removeItem("enrollCount");
+
+					//disable start stop button & create user button
+					//redirect to successful signup/login page
+				}
+			} else if(voiceItApiPhase === "authenticate" && JSON.parse(res).ResponseCode === "SUC"){
+					Materialize.toast("Welcome "+username+"\nYou have successfully Logged In. ",3000);
+
+			}
+
+		});
 }
 
 function onMediaError(e) {
@@ -68,9 +163,10 @@ $('#stop').on('click',function(e){
 //==================================================
 // check if user exists
 $('#username').on('change',function(e){
+	console.log("inside username on change");
 	e.preventDefault();
 	var username = $(this).val().trim();
-
+	console.log("username ==== ",username);
 	$.ajax({
 		type: 'GET',
 		url: '/api/voice/user/'+username
@@ -92,3 +188,14 @@ $('#username').on('change',function(e){
 	})
 
 })
+
+
+
+//NOT IN USE CODE
+
+// mediaRecorder.save(blob, '/uploads/test.wav');
+				// var blobURL = URL.createObjectURL(blob);
+				// console.log("BLOB URL ==== ",blobURL);
+				// console.log('blobURL',blobURL);
+				// document.getElementById('player').src = blobURL;
+				// document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
