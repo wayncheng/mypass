@@ -125,7 +125,29 @@
 
       	}
         });
-
+        //Deletes user from database
+        //Needs to go in api-controller
+        //Add cancel button to handlebars
+        //delete collection also
+     router.delete("/api/face/signup/delete/:username", function(req, res) {
+     	var username = req.params.username;
+     	if(username === usernameVal){
+	   		mypass_test.Users.destroy({
+	      		where: {
+	        		username: username
+	      		}
+	    	}).then(function(mypass_test) {
+	    		rekognition.deleteCollection({
+	    			CollectionId: username
+	    		}),
+	    		console.log("user successfully deleted from DB")
+	      		res.redirect("/")
+	    	});
+	    }
+	    else{
+	    	console.log("No user by this name in DB");
+	    }
+  	});
 
 
 		// return res.end();
