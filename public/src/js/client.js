@@ -22,15 +22,15 @@ $('#uid.signup').on('change',function(e){
 
 
 	// Check username length
-	if ( (v.length < 4) || (v.length > 32) ) {
-		Materialize.toast('Invalid username. Must be between 4-32 characters.', 4000);
+	if ( (v.length < 5) || (v.length > 36) ) {
+		Materialize.toast('Invalid username. Must be between 5-36 characters.', 4000);
 		// $t.prop('invalid',true);
 		$t.addClass('invalid');
 		return;
 	}
 	// Check if alphanumeric and underscores only
-	if ( !v.match(/^[a-zA-Z0-9_]*$/g) ){
-		Materialize.toast('Invalid username. Can only contain alphanumeric characters and underscores (a-z,0-9,_)',4000);
+	if ( !v.match(/^[a-zA-Z0-9]*$/g) ){
+		Materialize.toast('Invalid username. Can only contain alphanumeric characters (a-z,0-9)',4000);
 		// $t.prop('invalid',true);
 		$t.addClass('invalid');
 		return;

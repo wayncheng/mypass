@@ -223,7 +223,7 @@ function hide_snapshot_controls() {
   }
 
 $("#shutter").click(function() {
-  shutter();
+  // shutter();
   shutter_test();
 });
 $("#camera-wrap").on("click", ".item", select_snapshot);
