@@ -240,14 +240,12 @@ body {
   min-height: 100vh;
 }
 
-body {
-  display: flex;
-  min-height: 100vh;
-  flex-direction: column;
+main {
+  padding-bottom: 4rem;
 }
 
-main {
-  flex: 1 0 auto;
+p {
+  font-size: 1.2rem;
 }
 
 .page-title {
