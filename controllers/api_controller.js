@@ -46,7 +46,7 @@ var flow = ['text','face','voice'];
 
       }).then(function(data){
           console.log("res", res);
-          res.redirect(`/signup/${next_type}`);
+          res.redirect(`/signup/${next_type}/`+rb.username);
       });
 
     });

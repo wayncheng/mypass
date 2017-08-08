@@ -6,8 +6,12 @@
   var bodyParser = require("body-parser");
   // var model = require("../models/model.js");
   //==================================================
-  router.get("/signup/:authtype", function(req, res) {
+  router.get("/signup/:authtype/:username?", function(req, res) {
     var authtype = req.params.authtype;
+    var username = "";
+    if(req.params.username){
+      username = req.params.username;
+    }
 
 		if (authtype === 'done') {
 			res.redirect('/verified');
@@ -19,7 +23,7 @@
       api_phase: "signup",
       layout: "signup",
       isSignup: true,
-      username:req.body.username
+      username:username
     }
 		hbsParams[authtype] = true;
 

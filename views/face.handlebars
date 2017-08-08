@@ -10,9 +10,9 @@
 	<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%">
 		
 		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}">
-		
+
 		<div class="input-field row">
-			<input id="username" type="text" name="username" autocomplete="off" value="{{username}}">
+			<input id="username" type="text" name="username" autocomplete="off" value="{{username}}" disabled >
 			<label for="username">username</label>
 		</div>
 		

@@ -6,7 +6,7 @@
 <div class="row">
 		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m6 offset-m3 l4 offset-l4"> --}}
 		<form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4">
-			<input id="username" type="text" name="username" placeholder="username">
+			<input id="username" type="text" name="username" placeholder="username" disabled value="{{username}}">
 			<button class="btn" type="submit">Create User</button>
 		</form>
 
