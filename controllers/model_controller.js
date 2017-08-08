@@ -48,10 +48,15 @@
       title: "Verified Area"
     });
   });
+  router.get("/sitemap", function(req, res) {
+    res.render("sitemap", {
+      title: "Site Map"
+    });
+  });
   //==================================================
   router.get("/", function(req, res) {
-    res.render("index", {
-      title: "home"
+    res.render("landing", {
+      title: "MyPass - Home"
     });
   });
 
