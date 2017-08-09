@@ -10,7 +10,7 @@
     AWS.config.region = 'us-west-2';
     var rekognition = new AWS.Rekognition({region: AWS.config.region});
 	var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
-
+	var db = require("../models");
 	  
 	var fs = require('fs-extra');
 
@@ -125,34 +125,65 @@
 
       	}
         });
-        //Deletes user from database
-        //Needs to go in api-controller
-        //Add cancel button to handlebars
-        //delete collection also
-     router.delete("/api/face/signup/delete/:username", function(req, res) {
-     	var username = req.params.username;
-     	if(username === usernameVal){
-	   		mypass_test.Users.destroy({
-	      		where: {
-	        		username: username
-	      		}
-	    	}).then(function(mypass_test) {
-	    		rekognition.deleteCollection({
-	    			CollectionId: username
-	    		}),
-	    		console.log("user successfully deleted from DB")
-	      		res.redirect("/")
-	    	});
-	    }
-	    else{
-	    	console.log("No user by this name in DB");
-	    }
-  	});
+        
 
 
 		// return res.end();
 	});
 
+	router.delete("/api/face/signup/delete/:username", function(req, res) {
+     	console.log("inside route");
+     	var username = req.params.username;
+
+     	db.User.destroy({
+	      		where: {
+	        		username: username
+	      		}
+	    	}).then(function(db) {
+	    		console.log("user successfully deleted from DB");
+					 };
+					});
+
+
+     	
+     	// 1. On Voice SignUp Cancel - Delete user from voiceIt apis
+     	//2. Delete from rekognition apis
+     	//3. Delete from db
+
+
+
+     	//For deleting from rekognition APIS
+     	//1. CREATE A ROUTE TO DELETE FROM REKOGNITION
+    router.post("/api/delete/:username", function(req, res) {
+     	rekognition.ListCollections({ CollectionId: username }, function(err, data) {
+		          if (err) {
+		            console.log("ListCollection error", err.message);
+		            if(err.code == "ResourceNotFoundException"){
+		            	res.status(400);
+		            	return res.end(err.message);
+		            }
+		          } 
+		          else { // successful response
+		            console.log("ListCollection username exists");
+		            
+					        rekognition.deleteCollection({CollectionId: username}, function(err, data) {
+					              if (err) {
+					                console.log("deleteCollection error", err.message);
+					              } else {
+					                console.log("deleteCollection success");
+					  
+					              }
+					        });
+					    //END OF REQUEST ON DATA
+					 };
+					}
+
+
+	   		
+	    	
+	    
+  	
+
 	module.exports=router;
 
-})();
+}();

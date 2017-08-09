@@ -1,7 +1,12 @@
 console.log('text-client.js loaded');
 
-$('.cancel-btnFace').on('submit',function(e){
-	e.preventDefault();
+
+$('#cancel-btnText').on('submit',function(event){
+	console.log(event);
+	window.location.href = "#/";
+	console.log("after window");
+
+
 	
 
 	
