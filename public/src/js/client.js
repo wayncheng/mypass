@@ -9,48 +9,71 @@ console.log('client.js loaded');
 // 2. Can only contain alphanumeric or '_'
 // 3. Cannot start with '_'
 // 4. No spaces
+var invalidUnameError = "";
+var invalidPwdError = "";
 
-$('#uid.signup').on('change',function(e){
+var errors = [];
+$('#username.signup').on('change',function(e){
 	e.preventDefault();
-	var $t = $(this);
-	var v = $(this).val().trim();
-	// Remove invalid tag initially. If anything is invalid, it gets added back on.
-	// If everything is valid, nothing changes.
-	// $t.prop('invalid',false);
+	console.log("inside uid.signup");
+	invalidUnameError = validateUsername();
+	Materialize.toast(invalidUnameError, 4000);
+
+
+});
+
+function validateUsername(){
+	var invalidUnameError = "";
+	var $t = $("#username.signup");
+	var v = $("#username.signup").val().trim();
+
 	$t.removeClass('invalid');
 	$t.removeClass('valid');
-
+	$("#create-act-btn").removeClass("disabled");
 
 	// Check username length
-	if ( (v.length < 4) || (v.length > 32) ) {
-		Materialize.toast('Invalid username. Must be between 4-32 characters.', 4000);
-		// $t.prop('invalid',true);
+	if ( (v.length < 5) || (v.length > 36) ) {
+		invalidUnameError = 'Invalid username. Must be between 5-36 characters.';
 		$t.addClass('invalid');
-		return;
+		return invalidUnameError;
 	}
 	// Check if alphanumeric and underscores only
-	if ( !v.match(/^[a-zA-Z0-9_]*$/g) ){
-		Materialize.toast('Invalid username. Can only contain alphanumeric characters and underscores (a-z,0-9,_)',4000);
-		// $t.prop('invalid',true);
+	if ( !v.match(/^[a-zA-Z0-9]*$/g) ){
+		invalidUnameError = 'Invalid username. Can only contain alphanumeric characters (a-z,0-9)';
 		$t.addClass('invalid');
-		return;
+		return invalidUnameError;
 	}
 
 	//  Check if starts with underscore
 	if (v[0] === '_') {
-		Materialize.toast('Invalid username. Cannot start with _',4000);
-		// $t.prop('invalid',true);
+		invalidUnameError = 'Invalid username. Cannot start with _';
 		$t.addClass('invalid');
-		return;
+		return invalidUnameError;
 	}
 
-	$t.addClass('valid');
+	checkUserExists(function(data){
+		if(data != null){
+			Materialize.toast('Username Already Taken',4000);
+			$t.addClass('invalid');
+			$("#create-act-btn").addClass("disabled");
+			// return "Username Already Taken";	
+		} 
+	}) 	
 
-})
+	$t.addClass('valid');
+	// return invalidUnameError;
+
+}
 
 // Check if passwords match
 $('#confirm-password').on('change', function(e){
 	e.preventDefault();
+	validatePassword();
+
+});
+
+function validatePassword(){
+	invalidPwdError = "";
 	$fields = $('.pw');
 	
 	$fields.removeClass('invalid');
@@ -61,14 +84,37 @@ $('#confirm-password').on('change', function(e){
 
 	if (pw1 === pw2) {
 		$fields.addClass('valid');
+
 	}
 	else {
+		invalidPwdError='Passwords do not match';
 		$fields.addClass('invalid');
-		Materialize.toast('Passwords do not match', 4000);
+		// Materialize.toast(invalidPwdError, 4000);
 	}
 
+	return invalidPwdError;
 
-})
+}
+
+$("#create-act-btn").on("click",function(e){
+	e.preventDefault();
+	invalidUnameError = validateUsername();
+	invalidPwdError = validatePassword();
+
+	if(invalidUnameError == "" && invalidPwdError == "" 
+		|| invalidUnameError == undefined && invalidPwdError == ""){
+		responsiveVoice.speak("Step1 Completed");
+		$("#formValidate").submit();
+	} 
+	else{
+		if(invalidPwdError != "")
+			Materialize.toast(invalidPwdError, 4000);
+		if(validateUsername != "")
+			Materialize.toast(invalidUnameError, 4000);
+
+	}
+});
+
 
 
 // Toggle password visibility
@@ -82,3 +128,12 @@ $('#view-password').on('mouseup',function(e){
 	e.preventDefault();
 	$('.pw').attr('type','password');
 })
+
+function checkUserExists(cb){
+	console.log("inside check user");
+	var username = $("#username.signup").val().trim();
+	var $t = $("#username.signup");
+	$.get("/api/text/find/"+username,function(data,status){
+			return cb(data);
+	})
+}

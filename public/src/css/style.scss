@@ -58,18 +58,22 @@ body {
   // background: linear-gradient(135deg, rgba(255,58,58,1) 0%,rgba(255,126,45,1) 100%);
   // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3a3a', endColorstr='#ff7e2d',GradientType=1 );
 }
-
-
+main {
+	padding-bottom: 4rem;
+}
+p {
+	font-size: 1.2rem;
+}
 // Sticky Footer ////////////////////////////
-  body {
-    display: flex;
-    min-height: 100vh;
-    flex-direction: column;
-  }
+  // body {
+  //   display: flex;
+  //   min-height: 100vh;
+  //   flex-direction: column;
+  // }
 
-  main {
-    flex: 1 0 auto;
-	}
+  // main {
+  //   flex: 1 0 auto;
+	// }
 //===========================================
 .page-title {
   font-size: 3rem;
@@ -159,3 +163,4 @@ section {
 		padding: 4rem 0;
 	}
 }
+

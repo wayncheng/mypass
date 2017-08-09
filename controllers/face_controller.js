@@ -116,8 +116,6 @@
 			                });
 			                res.status(200);
 			                response="Successfully Signed up";
-			                // Run index.js once import complete
-			                // index_mod(user, porty);
 			                return res.end(response);
 			              }
 			            });
