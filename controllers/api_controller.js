@@ -6,7 +6,6 @@
   var db = require("../models");
 	var bcrypt = require("bcryptjs");
 	var saltRounds = 10;
-  var cookie = require('cookie');
 	
 var flow = ['text','face','voice'];
 
