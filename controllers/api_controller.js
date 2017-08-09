@@ -6,6 +6,7 @@
   var db = require("../models");
 	var bcrypt = require("bcryptjs");
 	var saltRounds = 10;
+  var cookie = require('cookie');
 	
 var flow = ['text','face','voice'];
 
@@ -14,7 +15,20 @@ var flow = ['text','face','voice'];
 
     db.User.findAll({}).then(function(data){
         console.log("data", data);
-        res.json(data);
+        return res.json(data);
+    });
+
+  });
+
+  router.get("/api/text/find/:username", function(req, res) {
+
+    db.User.findOne({
+      where:{
+        username:req.params.username
+      }
+    }).then(function(data){
+        console.log("data", data);
+        return res.json(data);
     });
 
   });
@@ -46,6 +60,10 @@ var flow = ['text','face','voice'];
 
       }).then(function(data){
           console.log("res", res);
+          var bs = require('browser-storage')
+ 
+          bs.setItem('email', rb.email)
+          console.log(bs.getItem('email'));
           res.redirect(`/signup/${next_type}/`+rb.username);
       });
 

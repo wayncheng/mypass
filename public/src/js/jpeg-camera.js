@@ -156,7 +156,6 @@ function upload_snapshot() {
     //   $("#upload_status").html("Please provide URL for the upload");
     //   return;
     // }
-
     clear_upload_data();
     $("#loader").show();
     $("#accept").prop("disabled", true);
