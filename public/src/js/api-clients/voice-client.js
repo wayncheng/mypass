@@ -138,7 +138,7 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) == 3){
 					Materialize.toast("Successfully Signed Up",3000);
 					sessionStorage.removeItem("enrollCount");
-					window.location.replace(window.location.url + "/verified");
+					window.location.replace(window.location.url + "/email/"+username);
 					//disable start stop button & create user button
 					//redirect to successful signup/login page & send an email
 				}
