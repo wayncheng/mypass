@@ -12,7 +12,15 @@
 		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}">
 
 		<div class="input-field row">
+
+		{{#if isSignup}}	
+
 			<input id="username" type="text" name="username" autocomplete="off" value="{{username}}" disabled >
+
+		{{else}}
+			<input id="username" type="text" name="username" autocomplete="off" value="{{username}}" >
+
+		{{/if}}	
 			<label for="username">username</label>
 		</div>
 		
