@@ -1,3 +1,6 @@
+{{#if isSignup}}
+<div class="row">
+
 <div class="step-container">
 	<ul class="step-wrap">		
 		<li id="step-1" data-step="1" class="step {{#if text}}active{{/if}}"> <a href="/signup/text">1</a> </li>
@@ -8,3 +11,6 @@
 		<span class="progress target"></span>
 	</div>
 </div>
+</div>
+
+{{/if}}

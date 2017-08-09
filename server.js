@@ -58,7 +58,7 @@
 
 // ERRORS =========================================
   app.use(function(req, res) {
-    res.type("text/html");
+    // res.type("text/html");
     res.status(404);
     res.render("404");
   });
