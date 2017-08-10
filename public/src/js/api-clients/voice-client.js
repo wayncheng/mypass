@@ -250,7 +250,7 @@ function voiceControl(text){
 
 	if(text == "" && apiPhase == "signup" ){
 
-		responsiveVoice.speak("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
+		responsiveVoice.speak("Please Press Mic Button And Say,  Today is a nice day to go for a walk.");
 	} else if(text == "" && apiPhase == "login" ){
 		responsiveVoice.speak("Please enter your username below.");
 	} 

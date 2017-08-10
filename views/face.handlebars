@@ -6,7 +6,8 @@
 
 <div class="row">
 	
-		
+		<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%">
+
 		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}">
 
 
@@ -15,17 +16,18 @@
 			<input id="username" type="hidden" name="username" autocomplete="off" value="{{username}}" disabled >
 
 		{{else}}
-			<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%">
+			
 
 				<div class="input-field row">
 
 					<input id="username" type="text" name="username" autocomplete="off" value="{{username}}" >
 					<label for="username">username</label>
 				</div>
-			</form>
 
 
 		{{/if}}	
+		</form>
+
 		
 		<!-- FOR LOGIN/SIGNUP, THERE IS NO NEED TO UPLOAD A PHOTO, AND PRESS SUBMIT BUTTON -->
 		<!--
