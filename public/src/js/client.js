@@ -104,7 +104,7 @@ $("#create-act-btn").on("click",function(e){
 
 	if(invalidUnameError == "" && invalidPwdError == "" 
 		|| invalidUnameError == undefined && invalidPwdError == ""){
-		responsiveVoice.speak("Step1 Completed");
+		responsiveVoice.speak("Step 1 Completed");
 		$("#formValidate").submit();
 	} 
 	else{
