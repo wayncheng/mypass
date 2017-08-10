@@ -408,3 +408,10 @@ section.alternate {
 	font-weight: 500;
     font-family: monospace;
 }
+.disable_a_href{
+    pointer-events: none;
+    background: #e1e1e1;
+}
+.face-form{
+	border: 0px;
+}
