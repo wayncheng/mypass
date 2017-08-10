@@ -169,10 +169,10 @@ function upload_done(response) {
     $("#accept").prop("disabled", false);
     $("#loader").hide();
     $("#upload_status").html("Upload successful");
-    // $("#upload_result").css("color:green");
+    $("#upload_result").css("color","green");
     console.log("RESPONSE === ", response);
     $("#upload_result").html(response);
-    alert("Image Uploaded");
+    responsiveVoice.speak("Step 2 Completed");
 
     var currentURL = window.location.origin;
     var redirectURL = currentURL + "/signup/voice/" + globalUsername;
@@ -188,9 +188,9 @@ function upload_fail(code, error, response) {
     $("#upload_status").html(
       "Upload failed with status " + code + " (" + error + ")"
     );
-    $("#upload_result").css("color:red");
+    $("#upload_result").css("color","red");
     $("#upload_result").html(response);
-    alert("Image Uploading Failed");
+    // alert("Image Uploading Failed");
 
   }
 

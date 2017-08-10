@@ -138,7 +138,7 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) == 3){
 					Materialize.toast("Successfully Signed Up",3000);
 					sessionStorage.removeItem("enrollCount");
-					window.location.replace(window.location.url + "/email/"+username);
+					window.location.replace(window.location.origin + "/email/"+username);
 					//disable start stop button & create user button
 					//redirect to successful signup/login page & send an email
 				}
@@ -162,6 +162,7 @@ $('#start').on('click',function(e){
 $('#stop').on('click',function(e){
 	e.preventDefault();
 	mediaRecorder.stop();
+
 })
 
 //==================================================
@@ -184,7 +185,9 @@ $('#username').on('change',function(e){
 			Materialize.toast(`${username} does not exist yet in VoiceIt's DB.`, 5000)
 		}
 		else if (code === 'SUC'){
-			Materialize.toast(`${username} already exists.`, 5000)
+			// Materialize.toast(`${username} already exists.`, 5000)
+			voiceControl("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
+
 		}
 		else {
 			Materialize.toast(res,5000);
@@ -194,11 +197,12 @@ $('#username').on('change',function(e){
 })
 
 function voiceControl(text){
-	alert("voiceControl");
-	if(text == null){
+	var apiPhase = $("#apiPhase").text();
+	if(text == null && apiPhase == "signup" ){
 		responsiveVoice.speak("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
 	} else{
 		responsiveVoice.speak(text);
+
 	}
 
 }
