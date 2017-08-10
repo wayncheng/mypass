@@ -1,4 +1,4 @@
-<h5 class="authtype headline">Voice Authentication</h5>
+<h5 class="authtype headline">Voice Enrollment for <span class="username-target">username</span></h5>
 
 
 <div class="row">
@@ -14,7 +14,7 @@
 
 <div class="row" >
 		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m6 offset-m3 l4 offset-l4"> --}}
-		<form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4" >
+		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4" >
 			
 		  {{#if isSignup}}
 			<input id="username" type="text" name="username" placeholder="username" disabled value="{{username}}">
@@ -23,11 +23,11 @@
 		  {{/if}}
 
 			<button class="btn" type="submit">Create User</button>
-		</form>
+		</form> --}}
 
 
 
-			<div class="col s12 m6 offset-m3 l4 offset-l4">
+			{{!-- <div class="col s12 m6 offset-m3 l4 offset-l4"> --}}
 
 				{{!-- <input id="recorder" type="file" accept="audio/*" capture="microphone"> --}}
 				{{!-- <audio id="player" controls></audio> --}}
@@ -41,8 +41,7 @@
 				{{!-- <a href="#!" id="pause" class="btn">pause</a> --}}
 				{{!-- <a href="#!" id="save-dialog" class="btn">save-dialog</a> --}}
 				{{!-- <a href="#!" id="save" class="btn">save</a> --}}
-			</div>
+			{{!-- </div> --}}
 
 
 	</div>
-{{/if}}
