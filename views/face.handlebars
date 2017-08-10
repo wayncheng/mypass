@@ -5,22 +5,27 @@
 <div id="upload_result" class="center-block"></div>
 
 <div class="row">
-	<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%">
+	
 		
 		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}">
 
-		<div class="input-field row">
 
 		{{#if isSignup}}	
 
-			<input id="username" type="text" name="username" autocomplete="off" value="{{username}}" disabled >
+			<input id="username" type="hidden" name="username" autocomplete="off" value="{{username}}" disabled >
 
 		{{else}}
-			<input id="username" type="text" name="username" autocomplete="off" value="{{username}}" >
+			<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%">
+
+				<div class="input-field row">
+
+					<input id="username" type="text" name="username" autocomplete="off" value="{{username}}" >
+					<label for="username">username</label>
+				</div>
+			</form>
+
 
 		{{/if}}	
-			<label for="username">username</label>
-		</div>
 		
 		<!-- FOR LOGIN/SIGNUP, THERE IS NO NEED TO UPLOAD A PHOTO, AND PRESS SUBMIT BUTTON -->
 		<!--
@@ -35,7 +40,6 @@
 		</div>
 		-->
 
-	</form>
 </div>
 
 	<div id="camera-wrap">

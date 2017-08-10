@@ -1,4 +1,4 @@
-voiceControl(null);
+voiceControl("");
 
 var mediaConstraints = {
     audio: true
@@ -7,6 +7,7 @@ var mediaConstraints = {
 sessionStorage.setItem("userCreated","false");
 sessionStorage.removeItem("enrollCount");
 
+var apiPhase = $("#apiPhase").text();
 var enrollCount = 0;
 
 navigator.getUserMedia(mediaConstraints, onMediaSuccess, onMediaError);
@@ -14,21 +15,21 @@ var mediaRecorder;
 function onMediaSuccess(stream) {
 	console.log("inside onMediaSuccess...");
     mediaRecorder = new MediaStreamRecorder(stream);
-		mediaRecorder.mimeType = 'audio/wav'; // check this line for audio/wav
-		mediaRecorder.recorderType = StereoAudioRecorder;
-		mediaRecorder.audioChannels = 1;
+	mediaRecorder.mimeType = 'audio/wav'; // check this line for audio/wav
+	mediaRecorder.recorderType = StereoAudioRecorder;
+	mediaRecorder.audioChannels = 1;
+	//FUNCTION CALLED WHEN RECORDED DATA IS AVAILABLE
     mediaRecorder.ondataavailable = function (blob) {
-				mediaRecorder.stop();
-				$('#record').removeClass('pulse recording');
-				Materialize.toast('Recording finished. Sending to server now.', 3000);
-				voiceControl("Please wait");
-				var username = $('#username').val().trim();
-
-    			var apiPhase = $("#apiPhase").text();
-    			console.log("API PHASE === ",apiPhase);
-    			var fileType = 'audio';
-    			var formData = new FormData();
-				formData.append(fileType, blob, username+'.wav');
+		mediaRecorder.stop();
+		$('#record').removeClass('pulse recording');
+		Materialize.toast('Recording finished. Sending to server now.', 3000);
+		voiceControl("Please wait");
+		var username = $('#username').val().trim();
+		console.log("username === ",username);
+		console.log("API PHASE === ",apiPhase);
+		var fileType = 'audio';
+		var formData = new FormData();
+		formData.append(fileType, blob, username+'.wav');
 		
 
 		
@@ -66,52 +67,8 @@ function onMediaSuccess(stream) {
 
 		}
 
-				// $.ajax({
-				// 	type:"POST",
-				// 	url: "/api/voice/" + voiceItApiPhase + "/" +username,
-				// 	data: formData,
-				// 	// body:formData,
-				// 	processData: false,  // prevent jQuery from converting the data
-    // 				contentType: false
-				// }).done(function(res){
-				// 	console.log('res',res);
 
-				// 	if(voiceItApiPhase === "enroll"){
-						
-				// 		enrollCount++;
-				// 		sessionStorage.setItem("enrollCount",enrollCount);
-
-				// 		if(JSON.parse(res).ResponseCode == "SUC" && enrollCount < 3){
-				// 			Materialize.toast("Please press Start Again for Next Enrollment",3000);
-				// 		}
-				// 		if(JSON.parse(res).ResponseCode == "SUC" && enrollCount == 3){
-				// 			Materialize.toast("Successfully Signed Up",3000);
-				// 		}
-				// 	}
-
-				// });
-			// } else if(apiPhase == "login"){
-
-			// 	$.ajax({
-			// 		type:"POST",
-			// 		url: "/api/voice/authenticate/"+username,
-			// 		data: formData,
-			// 		// {
-			// 		// 	username: username,
-			// 		// 	blobURL: blobURL
-			// 		// },
-			// 		body:formData,
-			// 		processData: false,  // prevent jQuery from converting the data
-   //  				contentType: false
-			// 	}).done(function(res){
-			// 		console.log('res',res);
-			// 	});
-
-			// }
-
-				// document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
-
-		}
+	}
     // mediaRecorder.start(3000);
 }
 
@@ -134,7 +91,7 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 
 				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) < 3){
 					Materialize.toast("Please press Start Again for Next Enrollment",3000);
-					voiceControl(null);
+					voiceControl("");
 				}
 				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) == 3){
 					Materialize.toast("Successfully Signed Up",3000);
@@ -143,8 +100,17 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 					//disable start stop button & create user button
 					//redirect to successful signup/login page & send an email
 				}
-			} else if(voiceItApiPhase === "authenticate" && JSON.parse(res).ResponseCode === "SUC"){
+			} else if(voiceItApiPhase === "authenticate"){
+				if(JSON.parse(res).ResponseCode === "SUC"){
 					Materialize.toast("Welcome "+username+"\nYou have successfully Logged In. ",3000);
+					window.location.replace(window.location.origin + "/loginSuccess/"+username);
+				} else{
+					Materialize.toast("Authentication Failed ",3000);
+					$("#error").text("AUTHENTICATION FAILED.\nPlease Try Again");
+					$("#error").css("color","red");
+					$("#error").css("font-weight","bold");
+				}
+
 
 			}
 
@@ -160,6 +126,7 @@ function onMediaError(e) {
 
 $('#record').on('click',function(e){
 	e.preventDefault();
+	$("#error").text("");
 	var $t = $(this);
 	$t.addClass('pulse recording');
 	mediaRecorder.start(5000);
@@ -178,10 +145,10 @@ $('#stop').on('click',function(e){
 //==================================================
 // check if user exists
 $('#username').on('change',function(e){
-	console.log("inside username on change");
 	e.preventDefault();
 	var username = $(this).val().trim();
 	console.log("username ==== ",username);
+	// voiceControl("Please Wait, while we are checking your username.");
 	$.ajax({
 		type: 'GET',
 		url: '/api/voice/user/'+username
@@ -192,11 +159,20 @@ $('#username').on('change',function(e){
 		console.log('code',code);
 
 		if (code === 'UNF') {
-			Materialize.toast(`${username} does not exist yet in VoiceIt's DB.`, 5000)
+			Materialize.toast(`${username} does not exist yet in VoiceIt's DB.`, 5000);
+			$("#error").text(`${username} does not exist.`);
+			$("#error").css("color","red");
+			$("#error").css("font-weight","bold");
+			$("#record").addClass("disable_a_href");
+			// $("#record").removeAttr("href");
+			// $("#keyboard_voice").addClass("disbaled");
 		}
 		else if (code === 'SUC'){
 			// Materialize.toast(`${username} already exists.`, 5000)
-			voiceControl("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
+			voiceControl("Please Press Mic Button And Say,  Today is a nice day to go for a walk.");
+			$("#record").removeClass("disable_a_href");
+			// $("#keyboard_voice").removeClass("disable_a_href");
+			// $("#record").attr("href","#!");
 
 		}
 		else {
@@ -271,10 +247,14 @@ $('#cancel-btnVoiceAfter').on('click',function(event){
 
 function voiceControl(text){
 	var apiPhase = $("#apiPhase").text();
-	if(text == null && apiPhase == "signup" ){
+
+	if(text == "" && apiPhase == "signup" ){
 
 		responsiveVoice.speak("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
-	} else{
+	} else if(text == "" && apiPhase == "login" ){
+		responsiveVoice.speak("Please enter your username below.");
+	} 
+	else{
 		responsiveVoice.speak(text);
 
 	}
@@ -290,4 +270,49 @@ function voiceControl(text){
 				// console.log("BLOB URL ==== ",blobURL);
 				// console.log('blobURL',blobURL);
 				// document.getElementById('player').src = blobURL;
+				// document.write('<a href="' + blobURL + '">' + blobURL + '</a>');
+
+				// $.ajax({
+				// 	type:"POST",
+				// 	url: "/api/voice/" + voiceItApiPhase + "/" +username,
+				// 	data: formData,
+				// 	// body:formData,
+				// 	processData: false,  // prevent jQuery from converting the data
+    // 				contentType: false
+				// }).done(function(res){
+				// 	console.log('res',res);
+
+				// 	if(voiceItApiPhase === "enroll"){
+						
+				// 		enrollCount++;
+				// 		sessionStorage.setItem("enrollCount",enrollCount);
+
+				// 		if(JSON.parse(res).ResponseCode == "SUC" && enrollCount < 3){
+				// 			Materialize.toast("Please press Start Again for Next Enrollment",3000);
+				// 		}
+				// 		if(JSON.parse(res).ResponseCode == "SUC" && enrollCount == 3){
+				// 			Materialize.toast("Successfully Signed Up",3000);
+				// 		}
+				// 	}
+
+				// });
+			// } else if(apiPhase == "login"){
+
+			// 	$.ajax({
+			// 		type:"POST",
+			// 		url: "/api/voice/authenticate/"+username,
+			// 		data: formData,
+			// 		// {
+			// 		// 	username: username,
+			// 		// 	blobURL: blobURL
+			// 		// },
+			// 		body:formData,
+			// 		processData: false,  // prevent jQuery from converting the data
+   //  				contentType: false
+			// 	}).done(function(res){
+			// 		console.log('res',res);
+			// 	});
+
+			// }
+
 				// document.write('<a href="' + blobURL + '">' + blobURL + '</a>');

@@ -85,7 +85,7 @@ var flow = ['text','face','voice'];
 
             bcrypt.compare(req.body.pw, data.pw, function(err,response){
                 if (response === true){
-                res.redirect('/login/face');
+                res.redirect('/loginSuccess/'+req.body.uid);
               } else {
                 res.redirect('/login/text');
               }
