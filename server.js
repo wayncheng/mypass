@@ -6,7 +6,7 @@
 	var exphbs = require("express-handlebars");
 	var path = require("path");
 	var methodOverride = require("method-override");
-	// require('dotenv').config();
+	require('dotenv').config();
     var multer  = require('multer');
 // CONFIG =========================================
 	var app = express();
@@ -64,7 +64,7 @@
 
 // ERRORS =========================================
   app.use(function(req, res) {
-    res.type("text/html");
+    // res.type("text/html");
     res.status(404);
     res.render("404");
   });

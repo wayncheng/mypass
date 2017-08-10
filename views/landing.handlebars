@@ -1,44 +1,89 @@
 <div id="banner">
-	<h2>MyPass</h2>
-	<h4>Top-Tier Security without the Hostility</h4>
-	<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Error magnam, ad illo minima ab itaque mollitia doloremque minus omnis quia nostrum quaerat.</p>
+	<h2 id="bannerHeading">MyPass</h2>
+	<h4 id="bannerSubHeading">Modern Security without the Hostility</h4>
 </div>
 <section class="row">
 	<div class="section-wrapper container">
 
         <div><h2>{{welcome_message}}</h2></div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m4 section-space">
+        	<div class="card">
+            
+        	<!--
+            <div class="card-image center">
+              <img src="/src/icons/text.png">
+              
+            </div> -->
+            <span class="card-title center">Text</span>
+            <br><br>
+            <div class="card-content">
+              <p>Classic user authentication with bcrypt hashing and input validation. Bcrypt executes an internal encryption/hash function many times in a loop and returns the secured password to store.</p>
+            </div>
+            
+          </div>
+
+<!--
           <div class="icon-block">
             <h2 class="center"><i class="material-icons">text_fields</i></h2>
-            <h5 class="center">Text</h5>
+            <h3 class="center">Text</h3>
 
-            <p class="light">Classic user authentication with bcrypt hashing and input validation.</p>
-          </div>
+            <p class="light">Classic user authentication with bcrypt hashing and input validation. Bcrypt executes an internal encryption/hash function many times in a loop and returns the secured password to store.</p>
+          </div> -->
         </div>
 
-        <div class="col s12 m4">
+        <div class="col s12 m4 section-space">
+        	<div class="card">
+        	<!--
+            <div class="card-image center">
+              <img src="/src/icons/face.jpg" height="150px">
+              
+            </div> -->
+            <span class="card-title center">Face Recognition</span>
+            <div class="card-content">
+              <p>Face Biometric Authentication using Amazon Rekognition APIs (Deep-Learning based image recognition). Amazon Rekognition uses deep neural network models to detect and label thousands of objects and scenes in an image.</p>
+            </div>
+            
+          </div>
+
+          <!--
           <div class="icon-block">
             <h2 class="center"><i class="material-icons">face</i></h2>
             {{!-- <h2 class="center"><i class="material-icons">portrait</i></h2> --}}
-            <h5 class="center">Face Recognition</h5>
+            <h3 class="center">Face Recognition</h3>
 
             <p class="light">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis magnam est voluptatem, consequuntur rerum quae modi asperiores quas odit, natus possimus.
+							Face Biometric Authentication using Amazon Rekognition APIs (Deep-Learning based image recognition). Amazon Rekognition uses deep neural network models to detect and label thousands of objects and scenes in an image.
 						</p>
           </div>
+          -->
         </div>
 
         <div class="col s12 m4">
+        	<div class="card">
+        	<!--
+            <div class="card-image center">
+              <img src="/src/icons/voice.jpg" height="150px">
+              
+            </div> -->
+            <span class="card-title center">Voice Recognition</span>
+            <div class="card-content">
+              <p>Voice Biometric Authentication using VoiceIt APIs. Voice biometric authentication technique uses digital sampling techniques to recognize a  speaker’s voice. VoiceIt provides a cloud-based, pay as you go, voice biometrics platform.</p>
+            </div>
+            
+          </div>
+
+          <!--
           <div class="icon-block">
             <h2 class="center"><i class="material-icons">record_voice_over</i></h2>
             {{!-- <h2 class="center brown-text"><i class="material-icons">mic</i></h2> --}}
-            <h5 class="center">Voice Recognition</h5>
+            <h3 class="center">Voice Recognition</h3>
 
             <p class="light">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit. Incidunt saepe nisi perferendis, itaque officia laborum culpa earum esse praesentium molestiae sapiente.
+							Voice Biometric Authentication using VoiceIt APIs. Voice biometric authentication technique uses digital sampling techniques to recognize a  speaker’s voice. VoiceIt provides a cloud-based, pay as you go, voice biometrics platform.
 						</p>
           </div>
+          -->
         </div>
 
 	</div>
@@ -46,6 +91,47 @@
 
 <section class="row">
 	<div class="section-wrapper container">
-
+		<div class="col s12 m4">
+            <h2 class="center"><i class="material-icons">text_fields</i></h2>
+            <h5 class="center">Text</h5>
+		</div>
+		<div class="col s12 m8">
+			<ul>
+				<li>Bcrypt hashing</li>
+				<li>Actual user passwords never stored</li>
+				<li>Only store password hashes in database</li>
+				<li>Input validation for usernames, emails, passwords</li>
+				</ul>	
+		</div>
+	</div>
+</section>
+<section class="row alternate">
+	<div class="section-wrapper container">
+		<div class="col s12 m4">
+            <h2 class="center"><i class="material-icons">face</i></h2>
+            <h5 class="center">Face Recognition</h5>
+		</div>
+		<div class="col s12 m8">
+			<ul>
+				<li>AWS Rekognition API</li>
+				<li>Face face face face face face face face face face face.</li>
+				<li>Recognition recognition recognition recognition recognition.</li>
+			</ul>
+		</div>
+	</div>
+</section>
+<section class="row">
+	<div class="section-wrapper container">
+		<div class="col s12 m4">
+            <h2 class="center"><i class="material-icons">record_voice_over</i></h2>
+            <h5 class="center">Voice Recognition</h5>
+		</div>
+		<div class="col s12 m8">
+			<ul>
+				<li>VoiceIt API</li>
+				<li>Voice voice voice voice voice voice voice voice voice voice voice.</li>
+				<li>Recognition recognition recognition recognition recognition.</li>
+			</ul>
+		</div>
 	</div>
 </section>

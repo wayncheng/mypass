@@ -13,7 +13,7 @@ $bg-dark: #2c3e50;
 
 
 html {
-  font-size: 12px;
+  font-size: 14px;
   // background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
   // background-image: linear-gradient(135deg, #97abff 10%, #123597 100%);
   // background-image: linear-gradient(135deg, #fccf31 10%, #f55555 100%);
@@ -60,6 +60,7 @@ body {
 }
 main {
 	padding-bottom: 4rem;
+  min-height: 85vh;
 }
 p {
 	font-size: 1.2rem;
@@ -105,7 +106,11 @@ header {
 		box-shadow: none;
 	background-color: $bg-color;
 
-
+		&.transparent {
+			background-color: transparent;
+			box-shadow: none;
+			
+		}
     .nav-wrapper {
 			max-width: 800px;
 			margin: auto;
@@ -164,3 +169,54 @@ section {
 	}
 }
 
+.marquee {
+	font-size: 6rem;
+}
+
+.circle-wrap {
+	border-radius: 50%;
+	background-color: $blue-grey-d1;
+	color: #fff;
+	display: inline-block;
+	padding: 3rem;
+}
+
+.layout-title {
+	// display: inline-block;
+	// float: left;
+	font-size: 1.2rem;
+}
+
+.headline {
+	// display: inline-block;
+	// float: right;
+	font-size: 2rem;
+}
+
+
+// Text Password
+.view-password {
+	position: absolute;
+	right: 0;
+	top: 1rem;
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+
+section {
+	li {
+		text-align: left;
+		font-size: 1.25rem;
+		font-weight: 300;
+
+		&::before {
+			content: "- "
+		}
+	}
+
+	&.alternate {
+		background-color: $blue-grey-d2;
+		color: #fff;
+	}
+}

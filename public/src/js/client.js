@@ -1,5 +1,6 @@
 console.log('client.js loaded');
 
+
 // Basic validation during signup
 //==================================================
 
@@ -103,7 +104,7 @@ $("#create-act-btn").on("click",function(e){
 
 	if(invalidUnameError == "" && invalidPwdError == "" 
 		|| invalidUnameError == undefined && invalidPwdError == ""){
-		responsiveVoice.speak("Step1 Completed");
+		responsiveVoice.speak("Step 1 Completed");
 		$("#formValidate").submit();
 	} 
 	else{
@@ -137,3 +138,4 @@ function checkUserExists(cb){
 			return cb(data);
 	})
 }
+

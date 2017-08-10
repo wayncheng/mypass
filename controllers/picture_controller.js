@@ -128,7 +128,7 @@
 			              } else {
 			                console.log("indexFaces success");
 			                // console.log(data);           // successful response
-			                fs.writeJson(__dirname+"/../uploads/json/"+username + ".json", data, err => {
+			                fs.writeJson(__dirname+"/../uploads/pics/json/"+username + ".json", data, err => {
 			                  if (err) return console.error(err);
 			                });
 			                res.status(200);

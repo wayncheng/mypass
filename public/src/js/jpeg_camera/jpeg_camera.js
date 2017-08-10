@@ -465,7 +465,9 @@
           xhr.onload = handler;
           xhr.onerror = handler;
           xhr.onabort = handler;
-          xhr.send(blob);
+          var formData = new FormData();
+          formData.append("image", blob);
+          xhr.send(formData);
           return snapshot._xhr = xhr;
         }, "image/jpeg");
       };

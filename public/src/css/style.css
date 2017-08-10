@@ -217,7 +217,7 @@
 
 */
 html {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 html.signup, html.login {
@@ -242,6 +242,7 @@ body {
 
 main {
   padding-bottom: 4rem;
+  min-height: 85vh;
 }
 
 p {
@@ -277,6 +278,11 @@ header nav {
   line-height: 4rem;
   box-shadow: none;
   background-color: #2980b9;
+}
+
+header nav.transparent {
+  background-color: transparent;
+  box-shadow: none;
 }
 
 header nav .nav-wrapper {
@@ -325,9 +331,80 @@ footer.page-footer li a {
   background-color: #2980b9;
   color: #fff;
   padding: 2rem 0 6rem;
+  background-image: url("/src/icons/website-security-lock.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 350px;
 }
 
 section .section-wrapper {
   display: inline-block;
-  padding: 4rem 0;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.marquee {
+  font-size: 6rem;
+}
+
+.circle-wrap {
+  border-radius: 50%;
+  background-color: #546e7a;
+  color: #fff;
+  display: inline-block;
+  padding: 3rem;
+}
+
+.layout-title {
+  font-size: 1.2rem;
+}
+
+.headline {
+  font-size: 2rem;
+}
+
+.view-password {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+section li {
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+section li::before {
+  content: "- ";
+}
+
+section.alternate {
+  background-color: #455a64;
+  color: #fff;
+}
+
+#bannerHeading{
+	margin-right: 35%;
+	margin-top: 6%;
+}
+#bannerSubHeading{
+	margin-right: 35%;
+
+}
+.section-space{
+	padding-right: 40px;
+}
+.card-image{
+	width: 400px;
+	height:150px;
+	/*padding:50px;*/
+	/*margin-left: 200%;*/
+}
+.card-title{
+	font-size: 25px;
+	font-weight: 500;
+    font-family: monospace;
 }

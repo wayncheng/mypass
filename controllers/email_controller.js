@@ -10,9 +10,11 @@
 	var nodemailer = require('nodemailer');
 	var smtpTransport = require('nodemailer-smtp-transport');
 	// var testEmail = "aqupriyanka@gmail.com";
-	 
+	router.get("/email",function(req,res){
+		console.log("inside email router......");
+	});	 
 
-	router.post("/email/:username",function(req,res){
+	router.get("/email/:username?",function(req,res){
 
 		console.log("inside email controller");
   		var bs = require('browser-storage');
@@ -42,16 +44,22 @@
 
 
 		transporter.sendMail(mailOptions, function(error, info){
+		    bs.removeItem("email");
 		    if(error){
 		        console.log(error);
-		        // res.json({yo: 'error'});
-		    }else{
-		        console.log('Message sent: ' + info.response);
 		        res.render("landing", {
 				      title: "MyPass - Home",
 				      welcome_message: "Congratulations!! You have Successfully Signed Up!"
 				    });
-		    };
+		        // res.json({yo: 'error'});
+		    }else{
+		        console.log('Message sent: ' + info.response);
+
+		        res.render("landing", {
+				      title: "MyPass - Home",
+				      welcome_message: "Congratulations!! You have Successfully Signed Up!"
+				    });
+		    }
 		});
 
 	});

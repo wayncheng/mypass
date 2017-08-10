@@ -5,7 +5,7 @@
   var bodyParser = require("body-parser");
   var router = express.Router();
   var myVoiceIt = require("VoiceIt");
-	myVoiceIt.initialize('ff699869470046d193b786ba8f1d1d7b')//process.env.VOICEIT_DEV_ID);
+	myVoiceIt.initialize(process.env.VOICEIT_DEV_ID);
 	var placeholder = 'peanutbutter';
 
 
