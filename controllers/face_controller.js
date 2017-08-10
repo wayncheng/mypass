@@ -40,6 +40,7 @@
 				function(err, data) {
 					if (err) {
 						// res.send(err);
+						console.log('err',err);
 						imageFound = false;
 						response = err.message;
 						if(err.code == 'ResourceNotFoundException'){
@@ -48,6 +49,9 @@
         					return res.end(response);
 
 						} //END OF ERROR IF LOOP
+						else {
+							return res.end(response);
+						}
 					} 
           			else {
             			console.log("DATA === ",data);
