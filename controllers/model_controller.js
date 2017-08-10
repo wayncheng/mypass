@@ -64,6 +64,13 @@
     });
   });
 
+  router.get("/loginSuccess/:username", function(req, res) {
+    res.render("landing", {
+      title: "MyPass - Home",
+      welcome_message: "Welcome "+ req.params.username
+    });
+  });
+
 
   router.get("/test", function(req, res) {
     res.render("test");

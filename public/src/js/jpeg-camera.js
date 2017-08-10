@@ -173,12 +173,26 @@ function upload_done(response) {
     $("#upload_result").css("color","green");
     console.log("RESPONSE === ", response);
     $("#upload_result").html(response);
-    responsiveVoice.speak("Step 2 Completed");
 
-    var currentURL = window.location.origin;
-    var redirectURL = currentURL + "/signup/voice/" + globalUsername;
+    var apiPhase = $("#apiPhase").text();
 
-    window.location.replace(redirectURL);
+    if(apiPhase == "signup"){
+
+      responsiveVoice.speak("Step 2 Completed");
+
+      var currentURL = window.location.origin;
+      var redirectURL = currentURL + "/signup/voice/" + globalUsername;
+
+      window.location.replace(redirectURL);
+  } else{
+    //Successfully Logged In Page
+      responsiveVoice.speak("Welcome "+ globalUsername + "To MyPass");
+
+      var currentURL = window.location.origin;
+      var redirectURL = currentURL + "/loginSuccess/" + globalUsername;
+
+      window.location.replace(redirectURL);
+  }
   }
 
 function upload_fail(code, error, response) {
