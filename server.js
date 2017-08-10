@@ -6,7 +6,7 @@
 	var exphbs = require("express-handlebars");
 	var path = require("path");
 	var methodOverride = require("method-override");
-	// require('dotenv').config();
+	require('dotenv').config();
     var multer  = require('multer');
 // CONFIG =========================================
 	var app = express();
