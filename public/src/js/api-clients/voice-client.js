@@ -204,6 +204,7 @@ $('#username').on('change',function(e){
 function voiceControl(text){
 	var apiPhase = $("#apiPhase").text();
 	if(text == null && apiPhase == "signup" ){
+
 		responsiveVoice.speak("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
 	} else{
 		responsiveVoice.speak(text);

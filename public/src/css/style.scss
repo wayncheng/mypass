@@ -202,3 +202,21 @@ section {
 	cursor: pointer;
 	opacity: 0.5;
 }
+
+
+section {
+	li {
+		text-align: left;
+		font-size: 1.25rem;
+		font-weight: 300;
+
+		&::before {
+			content: "- "
+		}
+	}
+
+	&.alternate {
+		background-color: $blue-grey-d2;
+		color: #fff;
+	}
+}
