@@ -331,11 +331,16 @@ footer.page-footer li a {
   background-color: #2980b9;
   color: #fff;
   padding: 2rem 0 6rem;
+  background-image: url("/src/icons/website-security-lock.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 350px;
 }
 
 section .section-wrapper {
   display: inline-block;
-  padding: 4rem 0;
+  padding: 2rem 0;
+  width: 100%;
 }
 
 .marquee {
@@ -379,4 +384,27 @@ section li::before {
 section.alternate {
   background-color: #455a64;
   color: #fff;
+}
+
+#bannerHeading{
+	margin-right: 35%;
+	margin-top: 6%;
+}
+#bannerSubHeading{
+	margin-right: 35%;
+
+}
+.section-space{
+	padding-right: 40px;
+}
+.card-image{
+	width: 400px;
+	height:150px;
+	/*padding:50px;*/
+	/*margin-left: 200%;*/
+}
+.card-title{
+	font-size: 25px;
+	font-weight: 500;
+    font-family: monospace;
 }
