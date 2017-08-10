@@ -145,8 +145,11 @@ function upload_snapshot() {
     var username = $("#username").val();
     globalUsername = username;
     if(username == null || username == undefined || username == "" || username == " "){
-      alert("Please enter the username");
-      $("#upload_status").html("Please enter the username");
+      // alert("Please enter the username");
+      $("#upload_result").html("Please enter the username");
+      $("#upload_result").css("color","red");
+      $("#upload_result").css("font-weight","bold");
+
       return;
     }
     var formAction = $("#main-form").attr("action");  
@@ -169,10 +172,12 @@ function upload_snapshot() {
 function upload_done(response) {
     $("#accept").prop("disabled", false);
     $("#loader").hide();
-    $("#upload_status").html("Upload successful");
-    $("#upload_result").css("color","green");
+    // $("#upload_status").html("Upload successful");
+    // $("#upload_result").css("color","green");
     console.log("RESPONSE === ", response);
     $("#upload_result").html(response);
+    $("#upload_result").css("color","green");
+    $("#upload_result").css("font-weight","bold");
 
     var apiPhase = $("#apiPhase").text();
 
@@ -200,10 +205,11 @@ function upload_fail(code, error, response) {
 
     $("#accept").prop("disabled", false);
     $("#loader").hide();
-    $("#upload_status").html(
-      "Upload failed with status " + code + " (" + error + ")"
-    );
+    // $("#upload_status").html(
+    //   "Upload failed with status " + code + " (" + error + ")"
+    // );
     $("#upload_result").css("color","red");
+    $("#upload_result").css("font-weight","bold");
     $("#upload_result").html(response);
     // alert("Image Uploading Failed");
 
