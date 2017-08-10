@@ -1,5 +1,6 @@
 console.log('client.js loaded');
 
+
 // Basic validation during signup
 //==================================================
 
@@ -137,3 +138,4 @@ function checkUserExists(cb){
 			return cb(data);
 	})
 }
+

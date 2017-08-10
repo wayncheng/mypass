@@ -1,11 +1,20 @@
-<h5>Voice Authentication</h5>
+<h5 class="authtype headline">Voice Enrollment for <span class="username-target">username</span></h5>
+
+
+<div class="row">
+	<a id="record" href="#!" class="circle-wrap">
+		<i class="material-icons marquee">keyboard_voice</i>
+	</a>
+</div>
 
 <div class="row">
 	<h3 id="enrollment-phrase">Today is a nice day to go for a walk.</h3>
 </div>
+
+
 <div class="row" >
 		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m6 offset-m3 l4 offset-l4"> --}}
-		<form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4" >
+		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4" >
 			
 		  {{#if isSignup}}
 			<input id="username" type="text" name="username" placeholder="username" disabled value="{{username}}">
@@ -14,26 +23,25 @@
 		  {{/if}}
 
 			<button class="btn" type="submit">Create User</button>
-		</form>
+		</form> --}}
 
 
 
-		<div class="col s12 m6 offset-m3 l4 offset-l4">
+			{{!-- <div class="col s12 m6 offset-m3 l4 offset-l4"> --}}
 
-			{{!-- <input id="recorder" type="file" accept="audio/*" capture="microphone"> --}}
-			{{!-- <audio id="player" controls></audio> --}}
-
-
-			{{!-- <a id="download">Download</a> --}}
-			{{!-- <button id="stop">Stop</button> --}}
-
-			<a href="#!" id="start" class="btn">start</a>
-			<a href="#!" id="stop" class="btn">stop</a>
-			{{!-- <a href="#!" id="pause" class="btn">pause</a> --}}
-			{{!-- <a href="#!" id="save-dialog" class="btn">save-dialog</a> --}}
-			{{!-- <a href="#!" id="save" class="btn">save</a> --}}
-		</div>
+				{{!-- <input id="recorder" type="file" accept="audio/*" capture="microphone"> --}}
+				{{!-- <audio id="player" controls></audio> --}}
 
 
-		<div id="apiPhase" class="hide">{{api_phase}}</div>
-</div>
+				{{!-- <a id="download">Download</a> --}}
+				{{!-- <button id="stop">Stop</button> --}}
+
+				{{!-- <a href="#!" id="start" class="btn">start</a> --}}
+				{{!-- <a href="#!" id="stop" class="btn">stop</a> --}}
+				{{!-- <a href="#!" id="pause" class="btn">pause</a> --}}
+				{{!-- <a href="#!" id="save-dialog" class="btn">save-dialog</a> --}}
+				{{!-- <a href="#!" id="save" class="btn">save</a> --}}
+			{{!-- </div> --}}
+
+
+	</div>
