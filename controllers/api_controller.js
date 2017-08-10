@@ -14,7 +14,20 @@ var flow = ['text','face','voice'];
 
     db.User.findAll({}).then(function(data){
         console.log("data", data);
-        res.json(data);
+        return res.json(data);
+    });
+
+  });
+
+  router.get("/api/text/find/:username", function(req, res) {
+
+    db.User.findOne({
+      where:{
+        username:req.params.username
+      }
+    }).then(function(data){
+        console.log("data", data);
+        return res.json(data);
     });
 
   });
@@ -46,7 +59,11 @@ var flow = ['text','face','voice'];
 
       }).then(function(data){
           console.log("res", res);
-          res.redirect(`/signup/${next_type}`);
+          var bs = require('browser-storage')
+ 
+          bs.setItem('email', rb.email)
+          console.log(bs.getItem('email'));
+          res.redirect(`/signup/${next_type}/`+rb.username);
       });
 
     });

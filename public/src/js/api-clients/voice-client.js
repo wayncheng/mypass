@@ -1,3 +1,5 @@
+voiceControl(null);
+
 var mediaConstraints = {
     audio: true
 };
@@ -19,6 +21,7 @@ function onMediaSuccess(stream) {
 				mediaRecorder.stop();
 				$('#record').removeClass('pulse recording');
 				Materialize.toast('Recording finished. Sending to server now.', 3000);
+				voiceControl("Please wait");
 				var username = $('#username').val().trim();
 
     			var apiPhase = $("#apiPhase").text();
@@ -39,7 +42,7 @@ function onMediaSuccess(stream) {
 			console.log("sessionStorage.getItem(userCreated)",sessionStorage.getItem("userCreated"));
 			if(sessionStorage.getItem("userCreated") === "false"){
 				$.post("/api/voice/user/"+username,function(res,status){
-					Materialize.toast("User created in VoiceIt DB",3000);
+					console.log("********User created in VoiceIt DB with username***********",username);
 					if(JSON.parse(res).ResponseCode === "SUC"){
 						sessionStorage.setItem("userCreated","true");
 						sessionStorage.setItem("enrollCount","0");
@@ -131,13 +134,14 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 
 				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) < 3){
 					Materialize.toast("Please press Start Again for Next Enrollment",3000);
+					voiceControl(null);
 				}
 				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) == 3){
 					Materialize.toast("Successfully Signed Up",3000);
 					sessionStorage.removeItem("enrollCount");
-
+					window.location.replace(window.location.url + "/email/"+username);
 					//disable start stop button & create user button
-					//redirect to successful signup/login page
+					//redirect to successful signup/login page & send an email
 				}
 			} else if(voiceItApiPhase === "authenticate" && JSON.parse(res).ResponseCode === "SUC"){
 					Materialize.toast("Welcome "+username+"\nYou have successfully Logged In. ",3000);
@@ -193,6 +197,16 @@ $('#username').on('change',function(e){
 	})
 
 })
+
+function voiceControl(text){
+	alert("voiceControl");
+	if(text == null){
+		responsiveVoice.speak("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
+	} else{
+		responsiveVoice.speak(text);
+	}
+
+}
 
 
 

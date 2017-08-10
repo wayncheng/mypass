@@ -34,6 +34,8 @@ function shutter() {
     images.push(snapshot);
 
     snapshot.get_canvas(updateView);
+
+
   }
 
 function setCanvasMeasures(canvas) {
@@ -135,11 +137,12 @@ function select_snapshot() {
 function clear_upload_data() {
     $("#upload_status, #upload_result").html("");
   }
-
+var globalUsername = "";
 function upload_snapshot() {
     // var api_url = $("#api_url").val();
     hide_snapshot_controls();
     var username = $("#username").val();
+    globalUsername = username;
     if(username == null || username == undefined || username == "" || username == " "){
       alert("Please enter the username");
       $("#upload_status").html("Please enter the username");
@@ -153,7 +156,6 @@ function upload_snapshot() {
     //   $("#upload_status").html("Please provide URL for the upload");
     //   return;
     // }
-
     clear_upload_data();
     $("#loader").show();
     $("#accept").prop("disabled", true);
@@ -171,6 +173,11 @@ function upload_done(response) {
     console.log("RESPONSE === ", response);
     $("#upload_result").html(response);
     alert("Image Uploaded");
+
+    var currentURL = window.location.origin;
+    var redirectURL = currentURL + "/signup/voice/" + globalUsername;
+
+    window.location.replace(redirectURL);
   }
 
 function upload_fail(code, error, response) {
@@ -215,7 +222,7 @@ function hide_snapshot_controls() {
   }
 
 $("#shutter").click(function() {
-  shutter();
+  // shutter();
   shutter_test();
 });
 $("#camera-wrap").on("click", ".item", select_snapshot);

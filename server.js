@@ -56,6 +56,12 @@
 	var voiceRoutes = require("./controllers/voice_controller.js");
 	app.use("/", voiceRoutes);
 
+	var email = require("./controllers/email_controller.js");
+	app.use("/", email);
+
+	// var speech = require("./controllers/polly_controller.js");
+	// app.use("/", speech);
+
 // ERRORS =========================================
   app.use(function(req, res) {
     // res.type("text/html");
