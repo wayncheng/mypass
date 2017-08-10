@@ -65,17 +65,18 @@
 					if (err) {
 						// res.send(err);
 						console.log("searchFacesByImage err Response == ",err);
+
 						imageFound = false;
 						response = err.message;
 						if(err.code == 'ResourceNotFoundException'){
 							// res.status(404);
 							res.status(400);
         					return res.end(response);
-
 						} else{
 							return res.end(response);
 						}
 						//END OF ERROR IF LOOP
+
 					} 
           			else {
             			console.log("searchFacesByImage Sucess Response === ",data);

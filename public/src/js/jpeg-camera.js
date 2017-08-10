@@ -1,6 +1,6 @@
 if (window.JpegCamera) {
   var camera; // Initialized at the end
-  hide_snapshot_controls();
+	hide_snapshot_controls();
   // $("#confirmation-wrap").hide();
 
   function update_stream_stats(stats) {
@@ -17,7 +17,7 @@ if (window.JpegCamera) {
   function shutter_test() {
     var snapshot = camera.capture();
     if (JpegCamera.canvas_supported()) {
-      discard_snapshot();
+			discard_snapshot();
       snapshot.get_canvas(add_snapshot);
     } else { // <canvas> is not supported in this browser. We'll use anonymous graphic instead.
       var image = document.createElement("img");
