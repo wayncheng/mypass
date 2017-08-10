@@ -19,6 +19,7 @@ function onMediaSuccess(stream) {
 		mediaRecorder.audioChannels = 1;
     mediaRecorder.ondataavailable = function (blob) {
 				mediaRecorder.stop();
+				$('#record').removeClass('pulse recording');
 				Materialize.toast('Recording finished. Sending to server now.', 3000);
 				voiceControl("Please wait");
 				var username = $('#username').val().trim();
@@ -154,8 +155,12 @@ function onMediaError(e) {
     console.error('media error', e);
 }
 	
-$('#start').on('click',function(e){
+
+
+$('#record').on('click',function(e){
 	e.preventDefault();
+	var $t = $(this);
+	$t.addClass('pulse recording');
 	mediaRecorder.start(5000);
 	Materialize.toast('Recording audio...',5000);
 })

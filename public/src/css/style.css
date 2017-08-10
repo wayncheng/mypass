@@ -217,7 +217,7 @@
 
 */
 html {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 html.signup, html.login {
@@ -242,6 +242,7 @@ body {
 
 main {
   padding-bottom: 4rem;
+  min-height: 85vh;
 }
 
 p {
@@ -277,6 +278,11 @@ header nav {
   line-height: 4rem;
   box-shadow: none;
   background-color: #2980b9;
+}
+
+header nav.transparent {
+  background-color: transparent;
+  box-shadow: none;
 }
 
 header nav .nav-wrapper {
@@ -330,4 +336,32 @@ footer.page-footer li a {
 section .section-wrapper {
   display: inline-block;
   padding: 4rem 0;
+}
+
+.marquee {
+  font-size: 6rem;
+}
+
+.circle-wrap {
+  border-radius: 50%;
+  background-color: #546e7a;
+  color: #fff;
+  display: inline-block;
+  padding: 3rem;
+}
+
+.layout-title {
+  font-size: 1.2rem;
+}
+
+.headline {
+  font-size: 2rem;
+}
+
+.view-password {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  cursor: pointer;
+  opacity: 0.5;
 }
