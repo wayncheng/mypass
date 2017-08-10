@@ -10,9 +10,10 @@
     AWS.config.region = 'us-west-2';
     var rekognition = new AWS.Rekognition({region: AWS.config.region});
 	var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
-
+	var db = require("../models");
 	  
 	var fs = require('fs-extra');
+
     var multer  = require('multer');
 	var setupUpload = multer({ 
       dest: 'uploads/face/',
@@ -111,7 +112,6 @@
 		var username = req.params.username;
 		var response = "";
         // Index a dir of faces
-
         if(req.file){
         	console.log("Request  File :: ",req.file);
 			var bitmap = fs.readFileSync(req.file.path);
@@ -166,6 +166,49 @@
 
 		// return res.end();
 	});
+
+	//Delete user from DB/AWS/Voice
+  router.delete("/api/delete/db/:username", function(req, res) {
+      console.log("inside route");
+      var username = req.params.username;
+      
+
+      db.User.destroy({
+            where: {
+              username: username
+            }
+        })
+      .then(function(data) {
+          console.log(username + " successfully deleted from DB");
+
+         rekognition.deleteCollection({CollectionId: username}, function(err, data){
+                  if(err){
+                    console.log(err.message);
+                } else {  
+                    console.log("username: " +username+ " DeleteCollection from AWS success");
+                    //Checks if file exists
+                    fs.stat(__dirname+"/../uploads/face/json/"+username + ".json", function (err, stats) {
+
+                    if (err) {
+                        return console.error(err);
+                    }
+                      //Deletes JSON file
+                     fs.unlink(__dirname+"/../uploads/face/json/"+username + ".json",function(err){
+                          if(err) return console.log(err);
+                          console.log(username+ '.json file deleted successfully');
+                     });  
+                  });
+              
+            }
+
+          });//endRekognition deleteCollection
+            
+      });//end db delete request
+      
+    });//end route
+
+	
+
 
 	module.exports=router;
 

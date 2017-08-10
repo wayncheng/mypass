@@ -109,3 +109,11 @@ $('.view-password').on('mouseup',function(e){
 	$(this).siblings('.pw').attr('type','password');
 	// $('.pw').attr('type','password');
 })
+
+$('#cancel-btnText').on('click',function(event){
+	event.preventDefault();
+	console.log(event);
+	window.location.href = "#/";
+	console.log("after window");
+	
+	});

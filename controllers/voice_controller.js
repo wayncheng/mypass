@@ -70,8 +70,8 @@ var setupUpload = multer({ storage: storage });
 		});
 	});
 	//==================================================
-	router.delete('/api/voice/user', function(req,res){
-		var username = req.body.username;
+	router.delete('/api/voice/user/:username', function(req,res){
+		var username = req.params.username;
 		console.log('deleting voiceit user:',username);
 
 		myVoiceIt.deleteUser({
@@ -81,6 +81,7 @@ var setupUpload = multer({ storage: storage });
 				//ADD CUSTOM CODE HERE TO USE
 				//DATA RECEIVED IN THE response VARIABLE
 				console.log("The Server Responded with the JSON: ", response);
+				
 			}
 		});
 	});
