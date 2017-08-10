@@ -2,30 +2,21 @@ console.log('face-client.js loaded');
 
 $('#cancel-btnFace').on('click',function(event){
 	event.preventDefault();	
-	console.log(event);
-	
-	
 	var username = $('#username').val().trim();
-	console.log(username)
+	window.location.href = "#/";
+	
 
 	$.ajax({
 		method: 'DELETE',
-		url: '/api/face/signup/delete/' + username
+		url: '/api/delete/db/' + username
 	}).done(function(res){
-		console.log("DB delete: success")
-		//CALL AJAX CALL TO DELETE FRO REKOGNITION COLLECTION
-		$.ajax({
-		  method: 'POST',
-		  url: '/api/delete/'+ username
-		}).done(function(res){
-			console.log("REKOGNITION delete: success")
-		})
-
-		
-		
+		console.log("DB delete at face step: success")
+			
 	})
 
 });
+
+
 
 
 // VOICE HANDLEBAR THERE WILL 1 MORE CANCEL BUTTON -- NAME IT DIFF

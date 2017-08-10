@@ -4,16 +4,19 @@
 	var express = require("express");
   	var router = express.Router();
   	var AWS = require('aws-sdk');
-    var credentials = {accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-                        secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY};
+    var credentials = {accessKeyId: "AKIAI7X52L24ZQ6LDBFQ",//process.env.AWS_ACCESS_KEY_ID,
+                        secretAccessKey : "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"};//process.env.AWS_SECRET_ACCESS_KEY};
     AWS.config.credentials = credentials;
     AWS.config.region = 'us-west-2';
     var rekognition = new AWS.Rekognition({region: AWS.config.region});
-	var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
+	var s3 = new AWS.S3({ params: { Bucket: "testingimageproject2"}});//process.env.S3_BUCKET }});
 	var db = require("../models");
 	  
 	var fs = require('fs-extra');
 
+	
+
+	
 
 
 //POST END POINT WHEN USER TRIES TO LOGIN
@@ -96,6 +99,8 @@
 		      	req.on("data",function(reqData){
 					console.log("DATA on DATA ----",reqData);
 			        console.log("indexFaces...");
+
+			    
 			        rekognition.indexFaces(
 			            {
 			              CollectionId: username,
@@ -123,65 +128,55 @@
 
       	}
         });
-        
+
 
 
 		// return res.end();
 	});
 
-	router.delete("/api/face/signup/delete/:username", function(req, res) {
-     	console.log("inside route");
-     	var username = req.params.username;
+	//Delete user from DB/AWS/Voice
+  router.delete("/api/delete/db/:username", function(req, res) {
+      console.log("inside route");
+      var username = req.params.username;
+      
 
-     	db.User.destroy({
-	      		where: {
-	        		username: username
-	      		}
-	    	}).then(function(db) {
-	    		console.log("user successfully deleted from DB");
-					 };
-					});
+      db.User.destroy({
+            where: {
+              username: username
+            }
+        })
+      .then(function(data) {
+          console.log(username + " successfully deleted from DB");
 
+         rekognition.deleteCollection({CollectionId: username}, function(err, data){
+                  if(err){
+                    console.log(err.message);
+                } else {  
+                    console.log("username: " +username+ " DeleteCollection from AWS success");
+                    //Checks if file exists
+                    fs.stat(__dirname+"/../uploads/"+username + ".json", function (err, stats) {
 
-     	
-     	// 1. On Voice SignUp Cancel - Delete user from voiceIt apis
-     	//2. Delete from rekognition apis
-     	//3. Delete from db
+                    if (err) {
+                        return console.error(err);
+                    }
+                      //Deletes JSON file
+                     fs.unlink(__dirname+"/../uploads/"+username + ".json",function(err){
+                          if(err) return console.log(err);
+                          console.log(username+ '.json file deleted successfully');
+                     });  
+                  });
+              
+            }
 
+          });//endRekognition deleteCollection
+            
+      });//end db delete request
+      
+    });//end route
 
+	
 
-     	//For deleting from rekognition APIS
-     	//1. CREATE A ROUTE TO DELETE FROM REKOGNITION
-    router.post("/api/delete/:username", function(req, res) {
-     	rekognition.ListCollections({ CollectionId: username }, function(err, data) {
-		          if (err) {
-		            console.log("ListCollection error", err.message);
-		            if(err.code == "ResourceNotFoundException"){
-		            	res.status(400);
-		            	return res.end(err.message);
-		            }
-		          } 
-		          else { // successful response
-		            console.log("ListCollection username exists");
-		            
-					        rekognition.deleteCollection({CollectionId: username}, function(err, data) {
-					              if (err) {
-					                console.log("deleteCollection error", err.message);
-					              } else {
-					                console.log("deleteCollection success");
-					  
-					              }
-					        });
-					    //END OF REQUEST ON DATA
-					 };
-					}
-
-
-	   		
-	    	
-	    
-  	
 
 	module.exports=router;
 
-}();
+})();

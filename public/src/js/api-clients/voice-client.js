@@ -155,9 +155,14 @@ function onMediaError(e) {
 }
 	
 $('#start').on('click',function(e){
-	e.preventDefault();
+	e.preventDefault();	
+	console.log(event)
 	mediaRecorder.start(5000);
 	Materialize.toast('Recording audio...',5000);
+	$('#cancel-btnVoiceBefore').hide();
+	$('#cancel-btnVoiceAfter').css('visibility','visible');
+	
+
 })
 $('#stop').on('click',function(e){
 	e.preventDefault();
@@ -192,6 +197,69 @@ $('#username').on('change',function(e){
 	})
 
 })
+
+///Delete before VoiceIt user is created
+$('#cancel-btnVoiceBefore').on('click',function(event){
+	event.preventDefault();	
+	console.log(event)
+	var username = $('#username').val().trim();
+	window.location.href = "#/";
+	
+	$.ajax({
+		method: 'DELETE',
+		url: '/api/delete/db/' + username
+		}).success(function(res){
+			console.log("DB / Rekog deleted");
+			
+
+		})
+			
+});
+
+$('#cancel-btnVoiceAfter').on('click',function(event){
+	event.preventDefault();	
+	console.log(event)
+	var username = $('#username').val().trim();
+	window.location.href = "#/";
+	
+	
+		$.ajax({
+				method: 'DELETE',
+				headers: { "UserId" : username }, 
+				url: '/api/voice/user/'+ username
+				
+				}).done(function(res){
+					console.log("VoiceIt User: "+username+" deleted");
+					
+				})
+			
+});
+
+
+/////Not in use	(Testing nested ajax calls)	
+// function deleteDBandAWS(){ 
+//     return $.ajax({
+//         url: '/api/delete/db/'  + username,
+//         method: 'DELETE'
+        
+//     });   
+// }
+
+// function deleteVoice(){ 
+//     return $.ajax({
+//         url: '/api/voice/user',
+//         method: 'DELETE',
+//     });   
+// }
+
+// function deleteAll() {
+// 	window.location.href = "#/";
+//     return deleteDBandAWS().then(deleteVoice);
+// }
+
+
+
+
 
 function voiceControl(text){
 	alert("voiceControl");
