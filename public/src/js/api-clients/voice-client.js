@@ -199,7 +199,7 @@ $('#username').on('change',function(e){
 })
 
 function voiceControl(text){
-	alert("voiceControl");
+	// alert("voiceControl");
 	if(text == null){
 		responsiveVoice.speak("Please Press Start Button And Say,  Today is a nice day to go for a walk.");
 	} else{
