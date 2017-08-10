@@ -112,8 +112,7 @@ $('.view-password').on('mouseup',function(e){
 
 $('#cancel-btnText').on('click',function(event){
 	event.preventDefault();
-	console.log(event);
 	window.location.href = "#/";
-	console.log("after window");
+	console.log("user cancel at text signup");
 	
 	});

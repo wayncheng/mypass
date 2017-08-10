@@ -219,8 +219,8 @@ $('#cancel-btnVoiceBefore').on('click',function(event){
 		}).success(function(res){
 			console.log("DB / Rekog deleted");
 			
-
 		})
+	console.log("user cancel at face signup before recording");
 			
 });
 
@@ -240,6 +240,7 @@ $('#cancel-btnVoiceAfter').on('click',function(event){
 					console.log("VoiceIt User: "+username+" deleted");
 					
 				})
+		console.log("user cancel at face signup after recording");
 			
 });
 

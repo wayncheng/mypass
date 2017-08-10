@@ -13,7 +13,7 @@ $('#cancel-btnFace').on('click',function(event){
 		console.log("DB delete at face step: success")
 			
 	})
-
+	console.log("user cancel at face signup");
 });
 
 
