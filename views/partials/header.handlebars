@@ -5,14 +5,22 @@
 			<li><a href="/">Home</a></li>
 		</ul>
 		<ul class="right">
-			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">
+			<li><a class="" href="/signup/text">
 			  Sign Up
 			  {{!-- <i class="material-icons right">arrow_drop_down</i> --}}
 			</a> </li>
-			<li><a class="dropdown-button" href="#!" data-activates="dropdown2">
-			  Login
-			  {{!-- <i class="material-icons right">arrow_drop_down</i> --}}
-			  </a></li>
+			{{#if userLoggedIn}}
+
+				<li><a href="/">Sign Out</a></li>
+
+			{{else}}
+
+				<li><a class="dropdown-button" href="#!" data-activates="dropdown2">
+				  Login
+				  {{!-- <i class="material-icons right">arrow_drop_down</i> --}}
+				  </a></li>
+
+			  {{/if}}
 		</ul>
 	</div>
 </nav>

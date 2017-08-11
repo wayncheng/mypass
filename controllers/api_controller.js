@@ -81,16 +81,26 @@ var flow = ['text','face','voice'];
             username:req.body.uid
           }
         }).then(function(data){
+          if(data){
             console.log("access granted?", data.pw);
 
             bcrypt.compare(req.body.pw, data.pw, function(err,response){
                 if (response === true){
-                res.redirect('/login/face');
+                res.redirect('/loginSuccess/'+req.body.uid);
               } else {
                 res.redirect('/login/text');
               }
             });  
-
+          } else{
+            console.log("Authentication Failed. Username is wrong.");
+            const url = require('url'); 
+            res.redirect(url.format({
+                             pathname:"/login/text/"+req.body.uid,
+                             query: {
+                                "error":"Authentication Failed. Username is wrong"
+                              }
+                           }));
+          }
 
             
         });

@@ -4,16 +4,21 @@ $('#cancel-btnFace').on('click',function(event){
 	event.preventDefault();	
 	var username = $('#username').val().trim();
 	window.location.href = "#/";
-	
+	var apiPhase = $("#apiPhase").text();
 
-	$.ajax({
-		method: 'DELETE',
-		url: '/api/delete/db/' + username
-	}).done(function(res){
-		console.log("DB delete at face step: success")
-			
-	})
-	console.log("user cancel at face signup");
+	if(apiPhase == "signup"){
+		$.ajax({
+			method: 'DELETE',
+			url: '/api/delete/db/' + username
+		}).done(function(res){
+			console.log("DB delete at face step: success")
+				
+		});
+	} else if(apiPhase == "login"){
+		window.location.replace(window.location.origin+"/login/face/"+username);
+	}
+
+
 });
 
 
