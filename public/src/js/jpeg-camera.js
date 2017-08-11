@@ -211,6 +211,12 @@ function upload_fail(code, error, response) {
     $("#upload_result").css("color","red");
     $("#upload_result").css("font-weight","bold");
     $("#upload_result").html(response);
+    var element = $(".item.selected").removeClass("item selected");
+    element.data("snapshot").discard();
+    element.hide("slow", function() {
+      $(this).remove();
+    });
+
     // alert("Image Uploading Failed");
 
   }
