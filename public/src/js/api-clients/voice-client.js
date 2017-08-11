@@ -189,6 +189,7 @@ $('#cancel-btnVoiceBefore').on('click',function(event){
 	var username = $('#username').val().trim();
 	window.location.href = "#/";
 	
+	if(apiPhase == "signup"){
 	$.ajax({
 		method: 'DELETE',
 		url: '/api/delete/db/' + username
@@ -197,6 +198,9 @@ $('#cancel-btnVoiceBefore').on('click',function(event){
 			
 
 		})
+	}else if(apiPhase == "login"){
+		window.location.replace(window.location.origin+"/");
+	}
 			
 });
 
@@ -206,6 +210,7 @@ $('#cancel-btnVoiceAfter').on('click',function(event){
 	var username = $('#username').val().trim();
 	window.location.href = "#/";
 	
+	if(apiPhase == "signup"){
 	
 		$.ajax({
 				method: 'DELETE',
@@ -216,7 +221,9 @@ $('#cancel-btnVoiceAfter').on('click',function(event){
 					console.log("VoiceIt User: "+username+" deleted");
 					
 				})
-			
+	}else if(apiPhase == "login"){
+		window.location.replace(window.location.origin+"/");
+	}
 });
 
 
