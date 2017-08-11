@@ -131,8 +131,8 @@ $('#record').on('click',function(e){
 	$t.addClass('pulse recording');
 	mediaRecorder.start(5000);
 	Materialize.toast('Recording audio...',5000);
-	$('#cancel-btnVoiceBefore').hide();
-	$('#cancel-btnVoiceAfter').css('visibility','visible');
+// 	$('#cancel-btnVoiceBefore').hide();
+// 	$('#cancel-btnVoiceAfter').css('visibility','visible');
 	
 
 })
@@ -182,8 +182,8 @@ $('#username').on('change',function(e){
 
 })
 
-///Delete before VoiceIt user is created
-$('#cancel-btnVoiceBefore').on('click',function(event){
+///Delete VoiceIt user & DB & AWS
+$('#cancel-btnVoice').on('click',function(event){
 	event.preventDefault();	
 	console.log(event)
 	var username = $('#username').val().trim();
@@ -195,35 +195,23 @@ $('#cancel-btnVoiceBefore').on('click',function(event){
 			method: 'DELETE',
 			url: '/api/delete/db/' + username
 			}).done(function(res){
-				console.log("DB / AWS Collection deleted");	
+				console.log("DB / AWS Collection deleted");
 			});
-
-	}else if(apiPhase == "login"){	
-		window.location.replace(window.location.origin+"/login/voice/"+username);
-	}
-});
-
-$('#cancel-btnVoiceAfter').on('click',function(event){
-	event.preventDefault();	
-	console.log(event)
-	var username = $('#username').val().trim();
-	window.location.href = "#/";
-	var apiPhase = $("#apiPhase").text();
-	
-	if(apiPhase == "signup"){
 		$.ajax({
+			url: '/api/voice/user/'+ username,
+			dataType: "JSON",
 			method: 'DELETE',
-			headers: { "UserId" : username }, 
-			url: '/api/voice/user/'+ username
-			}).done(function(res){
-				console.log("VoiceIt User: "+username+" deleted");
-			});
+			async: false
+      		}).success(function(data){
+      			console.log("VoiceIt User: "+username+" deleted");
+    
+		});
 
 	}else if(apiPhase == "login"){	
 		window.location.replace(window.location.origin+"/login/voice/"+username);
 	}
-					
 });
+
 
 
 /////Not in use	(Testing nested ajax calls)	
