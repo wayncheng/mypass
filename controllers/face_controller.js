@@ -4,12 +4,12 @@
 	var express = require("express");
   	var router = express.Router();
   	var AWS = require('aws-sdk');
-    var credentials = {accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+    var credentials = {accessKeyId:process.env.AWS_ACCESS_KEY_ID,
                         secretAccessKey : process.env.AWS_SECRET_ACCESS_KEY};
     AWS.config.credentials = credentials;
     AWS.config.region = 'us-west-2';
     var rekognition = new AWS.Rekognition({region: AWS.config.region});
-	var s3 = new AWS.S3({ params: { Bucket: process.env.S3_BUCKET }});
+	var s3 = new AWS.S3({ params: { Bucket:process.env.S3_BUCKET }});
 	var db = require("../models");
 	  
 	var fs = require('fs-extra');
