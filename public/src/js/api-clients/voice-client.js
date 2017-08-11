@@ -188,16 +188,19 @@ $('#cancel-btnVoiceBefore').on('click',function(event){
 	console.log(event)
 	var username = $('#username').val().trim();
 	window.location.href = "#/";
-	
-	$.ajax({
-		method: 'DELETE',
-		url: '/api/delete/db/' + username
-		}).success(function(res){
-			console.log("DB / Rekog deleted");
-			
-		})
-	console.log("user cancel at face signup before recording");
-			
+	var apiPhase = $("#apiPhase").text();
+
+	if(apiPhase == "signup"){
+		$.ajax({
+			method: 'DELETE',
+			url: '/api/delete/db/' + username
+			}).done(function(res){
+				console.log("DB / AWS Collection deleted");	
+			});
+
+	}else if(apiPhase == "login"){	
+		window.location.replace(window.location.origin+"/login/voice/"+username);
+	}
 });
 
 $('#cancel-btnVoiceAfter').on('click',function(event){
@@ -205,19 +208,21 @@ $('#cancel-btnVoiceAfter').on('click',function(event){
 	console.log(event)
 	var username = $('#username').val().trim();
 	window.location.href = "#/";
+	var apiPhase = $("#apiPhase").text();
 	
-	
+	if(apiPhase == "signup"){
 		$.ajax({
-				method: 'DELETE',
-				headers: { "UserId" : username }, 
-				url: '/api/voice/user/'+ username
-				
-				}).done(function(res){
-					console.log("VoiceIt User: "+username+" deleted");
+			method: 'DELETE',
+			headers: { "UserId" : username }, 
+			url: '/api/voice/user/'+ username
+			}).done(function(res){
+				console.log("VoiceIt User: "+username+" deleted");
+			});
+
+	}else if(apiPhase == "login"){	
+		window.location.replace(window.location.origin+"/login/voice/"+username);
+	}
 					
-				})
-		console.log("user cancel at face signup after recording");
-			
 });
 
 
