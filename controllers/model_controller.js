@@ -29,9 +29,13 @@
 
     res.render(authtype, hbsParams);
   });
-  router.get("/login/:authtype", function(req, res) {
-
+  router.get("/login/:authtype/:username?", function(req, res) {
 		var authtype = req.params.authtype;
+    var username = req.body.username;
+    if(req.params.username){
+      username = req.params.username;
+    }
+    console.log("Username On Login Page == ",username);
 		
 		var hbsParams = {
       title: "login " + authtype,
@@ -39,11 +43,14 @@
       api_phase: "login",
       layout: "login",
       isSignup: false,
-      username:req.body.username
+      username:username
 		}
 		hbsParams[authtype] = true;
-		
-    res.render(authtype, hbsParams);
+		if(req.query.error){
+      res.render(authtype, {hbsParams:hbsParams,error:req.query.error});
+    } else{
+      res.render(authtype, hbsParams);
+    }
   });
 
   //==================================================
@@ -67,7 +74,8 @@
   router.get("/loginSuccess/:username", function(req, res) {
     res.render("landing", {
       title: "MyPass - Home",
-      welcome_message: "Welcome "+ req.params.username
+      welcome_message: "Welcome "+ req.params.username,
+      userLoggedIn: true
     });
   });
 

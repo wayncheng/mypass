@@ -70,7 +70,8 @@
 							response = "Welcome "+ username;
 							imageFound = true;
 							res.status(200);
-        					return res.end(response);
+			                return res.redirect("/loginSuccess/"+username);
+        					// return res.end(response);
 
               			} else{
               				response = "Access Denied. Face Similarity : "+similarity;
@@ -135,7 +136,11 @@
 			                response="Successfully Signed up";
 			                // Run index.js once import complete
 			                // index_mod(user, porty);
-			                return res.end(response);
+			                res.render("landing", {
+						      title: "MyPass - Home",
+						      welcome_message: "Congratulations!! You have Successfully Signed Up!"
+						    });
+
 			              }
 			            });
 			    }//END OF REQUEST ON DATA

@@ -415,3 +415,7 @@ section.alternate {
 .face-form{
 	border: 0px;
 }
+#error{
+	color:red;
+	font-weight: bold;
+}
