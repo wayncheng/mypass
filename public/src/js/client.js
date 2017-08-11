@@ -90,7 +90,7 @@ function validatePassword(){
 	else {
 		invalidPwdError='Passwords do not match';
 		$fields.addClass('invalid');
-		// Materialize.toast(invalidPwdError, 4000);
+		Materialize.toast(invalidPwdError, 4000);
 	}
 
 	return invalidPwdError;
@@ -101,6 +101,7 @@ $("#create-act-btn").on("click",function(e){
 	e.preventDefault();
 	invalidUnameError = validateUsername();
 	invalidPwdError = validatePassword();
+
 
 	if(invalidUnameError == "" && invalidPwdError == "" 
 		|| invalidUnameError == undefined && invalidPwdError == ""){
