@@ -15,7 +15,7 @@ $('#cancel-btnFace').on('click',function(event){
 				
 		});
 	} else if(apiPhase == "login"){
-		window.location.replace(window.location.origin+"/login/face/"+username);
+		window.location.replace(window.location.origin+"/");
 	}
 
 

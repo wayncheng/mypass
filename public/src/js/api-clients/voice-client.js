@@ -207,7 +207,7 @@ $('#cancel-btnVoice').on('click',function(event){
 		});
 
 	}else if(apiPhase == "login"){	
-		window.location.replace(window.location.origin+"/login/voice/"+username);
+		window.location.replace(window.location.origin+"/");
 	}
 });
 
