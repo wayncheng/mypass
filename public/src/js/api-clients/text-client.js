@@ -112,8 +112,12 @@ $('#email').on('change',function(e){
 
 $('#cancel-btnText').on('click',function(event){
 	event.preventDefault();
-	console.log(event);
-	window.location.href = "#/";
-	console.log("after window");
+	var apiPhase = $("#apiPhase").text();
 	
-	});
+	if(apiPhase == "signup"){
+		window.location.href = "#/";
+	}else if(apiPhase == "login"){	
+		window.location.replace(window.location.origin+"/login/text/"+username);
+	}
+	
+});
