@@ -200,9 +200,8 @@ $('#cancel-btnVoice').on('click',function(event){
 		$.ajax({
 			url: '/api/voice/user/'+ username,
 			dataType: "JSON",
-			method: 'DELETE',
-			async: false
-      		}).success(function(data){
+			method: 'DELETE'
+      		}).done(function(data){
       			console.log("VoiceIt User: "+username+" deleted");
     
 		});
