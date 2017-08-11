@@ -18,6 +18,7 @@ $('#cancel-btnFace').on('click',function(event){
 		window.location.replace(window.location.origin+"/");
 	}
 
+
 });
 
 
