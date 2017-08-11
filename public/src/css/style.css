@@ -331,10 +331,10 @@ footer.page-footer li a {
   background-color: #2980b9;
   color: #fff;
   padding: 2rem 0 6rem;
-  background-image: url("/src/icons/website-security-lock.jpg");
+  background-image: url("/src/icons/home_page.jpg");
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  height: 350px;
+  height: 400px;
 }
 
 section .section-wrapper {
@@ -388,10 +388,14 @@ section.alternate {
 
 #bannerHeading{
 	margin-right: 35%;
-	margin-top: 6%;
+	margin-top: 8%;
+	font-family: 'Cinzel', serif;
+	font-size: 75px;
+	z-index: 100;
 }
 #bannerSubHeading{
 	margin-right: 35%;
+	font-family: 'Pacifico', cursive;
 
 }
 .section-space{
@@ -419,3 +423,6 @@ section.alternate {
 	color:red;
 	font-weight: bold;
 }
+.parallax-container {
+      height: "150px";
+    }
