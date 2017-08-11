@@ -112,7 +112,12 @@ $('.view-password').on('mouseup',function(e){
 
 $('#cancel-btnText').on('click',function(event){
 	event.preventDefault();
-	window.location.href = "#/";
-	console.log("user cancel at text signup");
+	var apiPhase = $("#apiPhase").text();
 	
-	});
+	if(apiPhase == "signup"){
+		window.location.href = "#/";
+	}else if(apiPhase == "login"){	
+		window.location.replace(window.location.origin+"/login/text/"+username);
+	}
+	
+});
