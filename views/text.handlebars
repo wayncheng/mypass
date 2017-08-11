@@ -1,5 +1,6 @@
 <h5 class="authtype headline">Text</h5>
 
+<div id="error">{{error}}</div>
 
 <div class="row">
 	<form action="/api/text/{{api_phase}}" class="text-form" method="POST" id="formValidate">
@@ -29,8 +30,8 @@
 		{{else}}
 		<div class="row">
 			<div class="input-field">
-				 <input id="uid" name="uid" type="text" class="signup" required="" aria-required="true"> 
-				<label for="uid">username or email</label>
+				 <input id="uid" name="uid" type="text" class="signup" required="" aria-required="true" value="{{username}}"> 
+				<label for="uid">username</label>
 			</div>
 		</div>
 	{{/if}}
