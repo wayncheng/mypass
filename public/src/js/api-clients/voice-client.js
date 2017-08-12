@@ -120,6 +120,7 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 			} else if(voiceItApiPhase === "authenticate"){
 				if(JSON.parse(res).ResponseCode === "SUC"){
 					Materialize.toast("Welcome "+username+"\nYou have successfully Logged In. ",3000);
+					voiceControl("Welcome "+username);
 					window.location.replace(window.location.origin + "/loginSuccess/"+username);
 				} else{
 					Materialize.toast("Authentication Failed ",3000);
