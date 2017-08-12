@@ -85,20 +85,37 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 			// return res;
 
 			if(voiceItApiPhase === "enroll"){
-				
-				enrollCount++;
-				sessionStorage.setItem("enrollCount",enrollCount);
+				console.log("inside 1st if of enroll");
+				if(JSON.parse(res).ResponseCode === "SUC"){
+					console.log("inside if response code == success");
 
-				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) < 3){
-					Materialize.toast("Please press Start Again for Next Enrollment",3000);
+					enrollCount++;
+					sessionStorage.setItem("enrollCount",enrollCount);
+
+					if(parseInt(enrollCount) < 3){
+						console.log("inside if enrollCount <3");
+
+						Materialize.toast("Please press Start Again for Next Enrollment",3000);
+						voiceControl("");
+					}
+					if(parseInt(enrollCount) == 3){
+						console.log("inside if enrollCount ==3");
+
+						Materialize.toast("Successfully Signed Up",3000);
+						sessionStorage.removeItem("enrollCount");
+						window.location.replace(window.location.origin + "/email/"+username);
+					}
+				} else{
+					console.log("inside if response code != success");
+					console.log(JSON.parse(res).Result)
+					$("#error").text(JSON.parse(res).Result);
+					$("#error").append("Please try again");
+					voiceControl("Please try again");
 					voiceControl("");
-				}
-				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) == 3){
-					Materialize.toast("Successfully Signed Up",3000);
-					sessionStorage.removeItem("enrollCount");
-					window.location.replace(window.location.origin + "/email/"+username);
-					//disable start stop button & create user button
-					//redirect to successful signup/login page & send an email
+					$("#error").css("color","red");
+					$("#error").css("font-weight","bold");
+					$("#error").css("font-size","bold");
+
 				}
 			} else if(voiceItApiPhase === "authenticate"){
 				if(JSON.parse(res).ResponseCode === "SUC"){
