@@ -117,7 +117,7 @@ $('#cancel-btnText').on('click',function(event){
 	if(apiPhase == "signup"){
 		window.location.href = "#/";
 	}else if(apiPhase == "login"){	
-		window.location.replace(window.location.origin+"/login/text/"+username);
+		window.location.replace(window.location.origin+"/login/text/");
 	}
 	
 });

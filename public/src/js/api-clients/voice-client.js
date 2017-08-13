@@ -85,24 +85,42 @@ function enrollOrAuthenticateUser(formData, voiceItApiPhase, username){
 			// return res;
 
 			if(voiceItApiPhase === "enroll"){
-				
-				enrollCount++;
-				sessionStorage.setItem("enrollCount",enrollCount);
+				console.log("inside 1st if of enroll");
+				if(JSON.parse(res).ResponseCode === "SUC"){
+					console.log("inside if response code == success");
 
-				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) < 3){
-					Materialize.toast("Please press Start Again for Next Enrollment",3000);
+					enrollCount++;
+					sessionStorage.setItem("enrollCount",enrollCount);
+
+					if(parseInt(enrollCount) < 3){
+						console.log("inside if enrollCount <3");
+
+						Materialize.toast("Please press Start Again for Next Enrollment",3000);
+						voiceControl("");
+					}
+					if(parseInt(enrollCount) == 3){
+						console.log("inside if enrollCount ==3");
+
+						Materialize.toast("Successfully Signed Up",3000);
+						sessionStorage.removeItem("enrollCount");
+						window.location.replace(window.location.origin + "/email/"+username);
+					}
+				} else{
+					console.log("inside if response code != success");
+					console.log(JSON.parse(res).Result)
+					$("#error").text(JSON.parse(res).Result);
+					$("#error").append("Please try again");
+					voiceControl("Please try again");
 					voiceControl("");
-				}
-				if(JSON.parse(res).ResponseCode === "SUC" && parseInt(enrollCount) == 3){
-					Materialize.toast("Successfully Signed Up",3000);
-					sessionStorage.removeItem("enrollCount");
-					window.location.replace(window.location.origin + "/email/"+username);
-					//disable start stop button & create user button
-					//redirect to successful signup/login page & send an email
+					$("#error").css("color","red");
+					$("#error").css("font-weight","bold");
+					$("#error").css("font-size","bold");
+
 				}
 			} else if(voiceItApiPhase === "authenticate"){
 				if(JSON.parse(res).ResponseCode === "SUC"){
 					Materialize.toast("Welcome "+username+"\nYou have successfully Logged In. ",3000);
+					voiceControl("Welcome "+username);
 					window.location.replace(window.location.origin + "/loginSuccess/"+username);
 				} else{
 					Materialize.toast("Authentication Failed ",3000);
@@ -131,8 +149,8 @@ $('#record').on('click',function(e){
 	$t.addClass('pulse recording');
 	mediaRecorder.start(5000);
 	Materialize.toast('Recording audio...',5000);
-	$('#cancel-btnVoiceBefore').hide();
-	$('#cancel-btnVoiceAfter').css('visibility','visible');
+// 	$('#cancel-btnVoiceBefore').hide();
+// 	$('#cancel-btnVoiceAfter').css('visibility','visible');
 	
 
 })
@@ -182,8 +200,8 @@ $('#username').on('change',function(e){
 
 })
 
-///Delete before VoiceIt user is created
-$('#cancel-btnVoiceBefore').on('click',function(event){
+///Delete VoiceIt user & DB & AWS
+$('#cancel-btnVoice').on('click',function(event){
 	event.preventDefault();	
 	console.log(event)
 	var username = $('#username').val().trim();
@@ -195,35 +213,22 @@ $('#cancel-btnVoiceBefore').on('click',function(event){
 			method: 'DELETE',
 			url: '/api/delete/db/' + username
 			}).done(function(res){
-				console.log("DB / AWS Collection deleted");	
+				console.log("DB / AWS Collection deleted");
 			});
-
-	}else if(apiPhase == "login"){	
-		window.location.replace(window.location.origin+"/login/voice/"+username);
-	}
-});
-
-$('#cancel-btnVoiceAfter').on('click',function(event){
-	event.preventDefault();	
-	console.log(event)
-	var username = $('#username').val().trim();
-	window.location.href = "#/";
-	var apiPhase = $("#apiPhase").text();
-	
-	if(apiPhase == "signup"){
 		$.ajax({
-			method: 'DELETE',
-			headers: { "UserId" : username }, 
-			url: '/api/voice/user/'+ username
-			}).done(function(res){
-				console.log("VoiceIt User: "+username+" deleted");
-			});
+			url: '/api/voice/user/'+ username,
+			dataType: "JSON",
+			method: 'DELETE'
+      		}).done(function(data){
+      			console.log("VoiceIt User: "+username+" deleted");
+    
+		});
 
 	}else if(apiPhase == "login"){	
-		window.location.replace(window.location.origin+"/login/voice/"+username);
+		window.location.replace(window.location.origin+"/");
 	}
-					
 });
+
 
 
 /////Not in use	(Testing nested ajax calls)	
