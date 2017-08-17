@@ -59,3 +59,9 @@ typings/
 
 # dotenv environment variables file
 .env
+
+# SSL
+server.csr
+server.key
+server.pass.key
+server.key.copy
