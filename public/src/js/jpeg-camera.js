@@ -1,6 +1,6 @@
 if (window.JpegCamera) {
   var camera; // Initialized at the end
-  hide_snapshot_controls();
+	hide_snapshot_controls();
   // $("#confirmation-wrap").hide();
 
   function update_stream_stats(stats) {
@@ -17,6 +17,7 @@ if (window.JpegCamera) {
   function shutter_test() {
     var snapshot = camera.capture();
     if (JpegCamera.canvas_supported()) {
+			discard_snapshot();
       snapshot.get_canvas(add_snapshot);
     } else { // <canvas> is not supported in this browser. We'll use anonymous graphic instead.
       var image = document.createElement("img");
@@ -34,6 +35,8 @@ function shutter() {
     images.push(snapshot);
 
     snapshot.get_canvas(updateView);
+
+
   }
 
 function setCanvasMeasures(canvas) {
@@ -135,14 +138,18 @@ function select_snapshot() {
 function clear_upload_data() {
     $("#upload_status, #upload_result").html("");
   }
-
+var globalUsername = "";
 function upload_snapshot() {
     // var api_url = $("#api_url").val();
     hide_snapshot_controls();
     var username = $("#username").val();
+    globalUsername = username;
     if(username == null || username == undefined || username == "" || username == " "){
-      alert("Please enter the username");
-      $("#upload_status").html("Please enter the username");
+      // alert("Please enter the username");
+      $("#upload_result").html("Please enter the username");
+      $("#upload_result").css("color","red");
+      $("#upload_result").css("font-weight","bold");
+
       return;
     }
     var formAction = $("#main-form").attr("action");  
@@ -153,7 +160,6 @@ function upload_snapshot() {
     //   $("#upload_status").html("Please provide URL for the upload");
     //   return;
     // }
-
     clear_upload_data();
     $("#loader").show();
     $("#accept").prop("disabled", true);
@@ -166,11 +172,32 @@ function upload_snapshot() {
 function upload_done(response) {
     $("#accept").prop("disabled", false);
     $("#loader").hide();
-    $("#upload_status").html("Upload successful");
-    // $("#upload_result").css("color:green");
+    // $("#upload_status").html("Upload successful");
+    // $("#upload_result").css("color","green");
     console.log("RESPONSE === ", response);
     $("#upload_result").html(response);
-    alert("Image Uploaded");
+    $("#upload_result").css("color","green");
+    $("#upload_result").css("font-weight","bold");
+
+    var apiPhase = $("#apiPhase").text();
+
+    if(apiPhase == "signup"){
+
+      responsiveVoice.speak("Step 2 Completed");
+
+      var currentURL = window.location.origin;
+      var redirectURL = currentURL + "/signup/voice/" + globalUsername;
+
+      window.location.replace(redirectURL);
+  } else{
+    //Successfully Logged In Page
+      responsiveVoice.speak("Welcome "+ globalUsername + "To MyPass");
+
+      var currentURL = window.location.origin;
+      var redirectURL = currentURL + "/loginSuccess/" + globalUsername;
+
+      window.location.replace(redirectURL);
+  }
   }
 
 function upload_fail(code, error, response) {
@@ -178,12 +205,19 @@ function upload_fail(code, error, response) {
 
     $("#accept").prop("disabled", false);
     $("#loader").hide();
-    $("#upload_status").html(
-      "Upload failed with status " + code + " (" + error + ")"
-    );
-    $("#upload_result").css("color:red");
+    // $("#upload_status").html(
+    //   "Upload failed with status " + code + " (" + error + ")"
+    // );
+    $("#upload_result").css("color","red");
+    $("#upload_result").css("font-weight","bold");
     $("#upload_result").html(response);
-    alert("Image Uploading Failed");
+    var element = $(".item.selected").removeClass("item selected");
+    element.data("snapshot").discard();
+    element.hide("slow", function() {
+      $(this).remove();
+    });
+
+    // alert("Image Uploading Failed");
 
   }
 
@@ -215,7 +249,7 @@ function hide_snapshot_controls() {
   }
 
 $("#shutter").click(function() {
-  shutter();
+  // shutter();
   shutter_test();
 });
 $("#camera-wrap").on("click", ".item", select_snapshot);

@@ -6,8 +6,7 @@
 	var exphbs = require("express-handlebars");
 	var path = require("path");
 	var methodOverride = require("method-override");
-	// require('dotenv').config();
-	// var db = require('./models');
+	require('dotenv').config();
     var multer  = require('multer');
 // CONFIG =========================================
 	var app = express();
@@ -40,6 +39,11 @@
 	});
 
 // ROUTES =========================================
+	// Temporary route to confirm ownership with LetsEncrypt. Will be removed after confirmation
+	app.get('/.well-known/acme-challenge/ffilB30ecS6Z3LRkkcTWeBbL6Yu_RlyyVOjt8C3hoOs',function(req,res){
+		// res.sendFile('public/ssl-cert-file');
+		res.sendFile('ssl-cert-file', { root: path.join(__dirname, '/public') });
+	})
 	// api has to be before routes or else everything would
 	// would hit routes (including api routes)
 	var api = require('./controllers/api_controller.js');
@@ -51,12 +55,27 @@
 	var faceRoutes = require("./controllers/face_controller.js");
 	app.use("/", faceRoutes);
 
+<<<<<<< HEAD
 	var voiceRoutes = require("./controllers/voice_controller.js");
 	app.use("/", voiceRoutes);
 
+=======
+	var picRoutes = require("./controllers/picture_controller.js");
+	app.use("/", picRoutes);
+	
+	var voiceRoutes = require("./controllers/voice_controller.js");
+	app.use("/", voiceRoutes);
+
+	var email = require("./controllers/email_controller.js");
+	app.use("/", email);
+
+	// var speech = require("./controllers/polly_controller.js");
+	// app.use("/", speech);
+
+>>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
 // ERRORS =========================================
   app.use(function(req, res) {
-    res.type("text/html");
+    // res.type("text/html");
     res.status(404);
     res.render("404");
   });
@@ -68,13 +87,20 @@
   });
 
 
+//SEQUELIZE INITIALIZATION FOR DATABASE
+var db = require("./models");
+
+db.sequelize.sync({ force: true }).then(function() {
+  app.listen(port, function() {
+    console.log("App listening on PORT " + port);
+     console.log(`-------------------------------------------------------
+                                          ready @ ${port}`);
+  });
+});
 
 // START SERVER ===================================
 // db.sequelize.sync({force: true}) .then(function(){
-  app.listen(port, function() {
-    console.log(`-------------------------------------------------------
-                                          ready @ ${port}`);
-  });
+  
 // })
 //==================================================	
 })();

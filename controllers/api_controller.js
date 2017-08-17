@@ -1,11 +1,9 @@
 "use strict";
 (function() {
   var express = require("express");
-	var api = require("../models/api.js");
-	var authenticator = require('../models/authenticator.js');
   var bodyParser = require("body-parser");
   var router = express.Router();
-  // var db = require("../models");
+  var db = require("../models");
 	var bcrypt = require("bcryptjs");
 	var saltRounds = 10;
 	
@@ -13,21 +11,36 @@ var flow = ['text','face','voice'];
 
   /////////////////////////////////////////////////////
   router.get("/api/all", function(req, res) {
-    api.all(function(data) {
-      console.log("data", data);
-      res.json(data);
+
+    db.User.findAll({}).then(function(data){
+        console.log("data", data);
+        return res.json(data);
     });
+
+  });
+
+  router.get("/api/text/find/:username", function(req, res) {
+
+    db.User.findOne({
+      where:{
+        username:req.params.username
+      }
+    }).then(function(data){
+        console.log("data", data);
+        return res.json(data);
+    });
+
   });
 
 	
 
 
   //==================================================
-  router.post("/api/:authtype/signup", function(req, res) {
-    var authtype = req.params.authtype;
+  router.post("/api/text/signup", function(req, res) {
+    var authtype = "text";
     var phase = "signup";
     var rb = req.body;
-    console.log(`POST /api/${authtype}/${phase}`);
+    // console.log(`POST /api/${authtype}/${phase}`);
 		// Set next auth type. 
 		var next_guide = {
 			'text': 'face',
@@ -40,17 +53,26 @@ var flow = ['text','face','voice'];
 			bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
 				console.log("hash", hash);
 
-				api.create(
-					["username", "email", "pw", "firstname", "lastname"],
-					[rb.username, rb.email, hash, rb.firstname, rb.lastname],
-					function() {
-						// console.log("res", res);
-						res.redirect(`/signup/${next_type}`);
-					}
-				);
-			});
-		}
-	
+    bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
+      console.log("hash", hash);
+
+      db.User.create({
+        username: rb.username,
+        email: rb.email,
+        pw: hash,
+        firstname: rb.firstname,
+        lastname: rb.lastname
+
+      }).then(function(data){
+          console.log("res", res);
+          var bs = require('browser-storage')
+ 
+          bs.setItem('email', rb.email)
+          console.log(bs.getItem('email'));
+          res.redirect(`/signup/${next_type}/`+rb.username);
+      });
+
+    });
   });
 
   //Changing this route only for Text Login, because creating same route for face Login also
@@ -58,23 +80,44 @@ var flow = ['text','face','voice'];
   router.post("/api/text/login", function(req, res) {
     // var authtype = req.params.authtype;
     var phase = "login";
-    console.log(`POST /api/${authtype}/${phase}`);
-		console.log('req.body.pw',req.body.pw);
+    // console.log(`POST /api/${authtype}/${phase}`);
 
+        db.User.findOne({
+          where: {
+            username:req.body.uid
+          }
+        }).then(function(data){
+          if(data){
+            console.log("access granted?", data.pw);
 
-		// bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
-      api.get_pw(req.body.username, req.body.pw, function(response) {
-        // console.log("res", res);
-				console.log("access granted?", response);
-				if (response === true){
-					res.redirect('/login/face')
-				}
-				else {
-					res.redirect('/login/text')
-				}
-      });
+            bcrypt.compare(req.body.pw, data.pw, function(err,response){
+                if (response === true){
+                res.redirect('/loginSuccess/'+req.body.uid);
+              } else {
+                res.redirect('/login/text');
+              }
+            });  
+          } else{
+            console.log("Authentication Failed. Username is wrong.");
+            const url = require('url'); 
+            res.redirect(url.format({
+                             pathname:"/login/text/"+req.body.uid,
+                             query: {
+                                "error":"Authentication Failed. Username is wrong"
+                              }
+                           }));
+          }
+
+            
+        });
+
     // });
   });
+  //////////////////////////////////////////////////////////
+  ///Delete Users at different stages of Sign Up
+
+  
+  
 
 
 	router.get('/api/authenticator', function(req,res){

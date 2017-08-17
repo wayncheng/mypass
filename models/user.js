@@ -5,24 +5,24 @@
 			username: {
 				type: DataTypes.STRING,
 				allowNull: false,
-				validate: {
-					len: [1]
-				}
+				// validate: {
+				// 	len: [1]
+				// }
 			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
-				validate: {
-					len: [1],
-					isEmail: true
-				}
+				// validate: {
+				// 	len: [1],
+				// 	isEmail: true
+				// }
 			},
 			pw: {
 				type: DataTypes.STRING,
 				allowNull: false,
-				validate: {
-					len: [1]
-				}
+				// validate: {
+				// 	len: [1]
+				// }
 			},
 			firstname: {
 				type: DataTypes.STRING,
@@ -32,7 +32,10 @@
 				type: DataTypes.STRING,
 				allowNull: true
 			}
-		});
+		}, 
+		{
+			timestamps: true
+	});
 		return User;
 	};
 })();

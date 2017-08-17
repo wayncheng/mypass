@@ -1,14 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	<base href="../../">
 	{{>head}}
 </head>
 <body>
-
 	{{>header}}
+<main>
+
 	{{{body}}}
+</main>
 	{{>footer}}
 	{{>scripts}}
-	
+	<script>
+	$(document).ready(function(){
+      $('.parallax').parallax();
+    });
+	</script>
 </body>
 </html>

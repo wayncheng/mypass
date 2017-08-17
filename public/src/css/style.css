@@ -217,7 +217,7 @@
 
 */
 html {
-  font-size: 12px;
+  font-size: 14px;
 }
 
 html.signup, html.login {
@@ -232,12 +232,21 @@ html.signup header nav, html.login header nav {
 body {
   margin: 0;
   padding: 0;
+  padding-top: 4rem;
   background-color: #fff;
   text-align: center;
   color: #333;
   background-color: transparent;
-  padding: 4rem 0 2rem;
   min-height: 100vh;
+}
+
+main {
+  padding-bottom: 4rem;
+  min-height: 85vh;
+}
+
+p {
+  font-size: 1.2rem;
 }
 
 .page-title {
@@ -267,6 +276,18 @@ header {
 header nav {
   height: 4rem;
   line-height: 4rem;
+  box-shadow: none;
+  background-color: #2980b9;
+}
+
+header nav.transparent {
+  background-color: transparent;
+  box-shadow: none;
+}
+
+header nav .nav-wrapper {
+  max-width: 800px;
+  margin: auto;
 }
 
 header nav .nav-wrapper ul {
@@ -292,3 +313,116 @@ header nav .nav-wrapper ul.dropdown-content {
   opacity: 0;
   display: none;
 }
+
+footer.page-footer {
+  background-color: #2c3e50;
+}
+
+footer.page-footer li:first-child {
+  font-weight: 600;
+}
+
+footer.page-footer li a {
+  color: #fff;
+}
+
+#banner {
+  width: 100%;
+  background-color: #2980b9;
+  color: #fff;
+  padding: 2rem 0 6rem;
+  background-image: url("/src/icons/home_page.jpg");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  height: 400px;
+}
+
+section .section-wrapper {
+  display: inline-block;
+  padding: 2rem 0;
+  width: 100%;
+}
+
+.marquee {
+  font-size: 6rem;
+}
+
+.circle-wrap {
+  border-radius: 50%;
+  background-color: #546e7a;
+  color: #fff;
+  display: inline-block;
+  padding: 3rem;
+}
+
+.layout-title {
+  font-size: 1.2rem;
+}
+
+.headline {
+  font-size: 2rem;
+}
+
+.view-password {
+  position: absolute;
+  right: 0;
+  top: 1rem;
+  cursor: pointer;
+  opacity: 0.5;
+}
+
+section li {
+  text-align: left;
+  font-size: 1.25rem;
+  font-weight: 300;
+}
+
+section li::before {
+  content: "- ";
+}
+
+section.alternate {
+  background-color: #455a64;
+  color: #fff;
+}
+
+#bannerHeading{
+	margin-right: 35%;
+	margin-top: 8%;
+	font-family: 'Cinzel', serif;
+	font-size: 75px;
+	z-index: 100;
+}
+#bannerSubHeading{
+	margin-right: 35%;
+	font-family: 'Pacifico', cursive;
+
+}
+.section-space{
+	padding-right: 40px;
+}
+.card-image{
+	width: 400px;
+	height:150px;
+	/*padding:50px;*/
+	/*margin-left: 200%;*/
+}
+.card-title{
+	font-size: 25px;
+	font-weight: 500;
+    font-family: monospace;
+}
+.disable_a_href{
+    pointer-events: none;
+    background: #e1e1e1;
+}
+.face-form{
+	border: 0px;
+}
+#error{
+	color:red;
+	font-weight: bold;
+}
+.parallax-container {
+      height: "150px";
+    }

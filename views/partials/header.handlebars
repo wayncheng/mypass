@@ -1,17 +1,27 @@
 <header>
 <nav>
 	<div class="nav-wrapper">
-		<ul class="">
+		<ul class="left">
 			<li><a href="/">Home</a></li>
-			<!-- Dropdown Trigger -->
-			<li><a class="dropdown-button" href="#!" data-activates="dropdown1">
-			  Sign Up
-			  <i class="material-icons right">arrow_drop_down</i>
-			</a> </li>
-			<li><a class="dropdown-button" href="#!" data-activates="dropdown2">
-			  Login
-			  <i class="material-icons right">arrow_drop_down</i>
-			  </a></li>
+		</ul>
+		<ul class="right">
+			
+			{{#if userLoggedIn}}
+
+				<li><a href="/">Sign Out</a></li>
+
+			{{else}}
+			
+				<li><a class="" href="/signup/text">
+				  Sign Up
+				  {{!-- <i class="material-icons right">arrow_drop_down</i> --}}
+				</a> </li>
+				<li><a class="dropdown-button" href="#!" data-activates="dropdown2">
+				  Login
+				  {{!-- <i class="material-icons right">arrow_drop_down</i> --}}
+				  </a></li>
+
+			  {{/if}}
 		</ul>
 	</div>
 </nav>
@@ -22,10 +32,12 @@
 	<li><a href="/signup/text">text</a></li>
 	<li><a href="/signup/face">face</a></li>
 	<li><a href="/signup/voice">voice</a></li>
+	<li><a href="/signup/picture">picture</a></li>
 </ul>
 <ul id="dropdown2" class="dropdown-content">
-	<li><a href="/login/text">text</a></li>
-	<li><a href="/login/face">face</a></li>
-	<li><a href="/login/voice">voice</a></li>
+	<li><a href="/login/text">Plain Text</a></li>
+	<li><a href="/login/face">Face</a></li>
+	<li><a href="/login/voice">Voice</a></li>
+	<!-- <li><a href="/login/picture">Picture</a></li> -->
 </ul>
 

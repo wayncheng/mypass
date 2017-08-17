@@ -61,7 +61,8 @@ typings/
 .env
 
 # SSL
-server.csr
 server.key
-server.pass.key
+server.csr
+server.crt
 server.key.copy
+server.pass.copy

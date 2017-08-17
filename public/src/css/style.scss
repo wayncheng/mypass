@@ -3,11 +3,17 @@
 @import "_mixins-lib";
 @import "_mixins";
 // @import "_functions";
-
 // @import url("forms");
 
+
+$bg-color: #2980b9;
+$bg-dark: $blue-grey-d3;
+$bg-dark: #34495e;
+$bg-dark: #2c3e50;
+
+
 html {
-  font-size: 12px;
+  font-size: 14px;
   // background-image: linear-gradient(135deg, #abdcff 10%, #0396ff 100%);
   // background-image: linear-gradient(135deg, #97abff 10%, #123597 100%);
   // background-image: linear-gradient(135deg, #fccf31 10%, #f55555 100%);
@@ -40,11 +46,11 @@ html {
 body {
   margin: 0;
   padding: 0;
+  padding-top: 4rem;
   background-color: #fff;
   text-align: center;
   color: #333;
   background-color: transparent;
-  padding: 4rem 0 2rem;
   min-height: 100vh;
   // background: rgb(255,58,58);
   // background: -moz-linear-gradient(-45deg, rgba(255,58,58,1) 0%, rgba(255,126,45,1) 100%);
@@ -52,8 +58,24 @@ body {
   // background: linear-gradient(135deg, rgba(255,58,58,1) 0%,rgba(255,126,45,1) 100%);
   // filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ff3a3a', endColorstr='#ff7e2d',GradientType=1 );
 }
-// @import "materialize-overrides";
+main {
+	padding-bottom: 4rem;
+  min-height: 85vh;
+}
+p {
+	font-size: 1.2rem;
+}
+// Sticky Footer ////////////////////////////
+  // body {
+  //   display: flex;
+  //   min-height: 100vh;
+  //   flex-direction: column;
+  // }
 
+  // main {
+  //   flex: 1 0 auto;
+	// }
+//===========================================
 .page-title {
   font-size: 3rem;
   text-align: right;
@@ -76,12 +98,23 @@ body {
 header {
   position: absolute;
   top: 0;
-  width: 100%;
+	width: 100%;
+	
   nav {
     height: 4rem;
     line-height: 4rem;
+		box-shadow: none;
+	background-color: $bg-color;
 
+		&.transparent {
+			background-color: transparent;
+			box-shadow: none;
+			
+		}
     .nav-wrapper {
+			max-width: 800px;
+			margin: auto;
+
       ul {
         display: inline-block;
         margin: auto;
@@ -108,3 +141,82 @@ header {
   }
 }
 
+footer.page-footer {
+	background-color: $bg-dark;
+	
+	li {
+		&:first-child {
+			font-weight: 600;
+		}
+		a {
+			color: #fff;
+		}
+	}
+}
+
+#banner {
+	width: 100%;
+	background-color: $bg-color;
+	color: #fff;
+	padding: 2rem 0 6rem;
+	
+}
+
+section {
+	.section-wrapper {
+		display: inline-block;
+		padding: 4rem 0;
+	}
+}
+
+.marquee {
+	font-size: 6rem;
+}
+
+.circle-wrap {
+	border-radius: 50%;
+	background-color: $blue-grey-d1;
+	color: #fff;
+	display: inline-block;
+	padding: 3rem;
+}
+
+.layout-title {
+	// display: inline-block;
+	// float: left;
+	font-size: 1.2rem;
+}
+
+.headline {
+	// display: inline-block;
+	// float: right;
+	font-size: 2rem;
+}
+
+
+// Text Password
+.view-password {
+	position: absolute;
+	right: 0;
+	top: 1rem;
+	cursor: pointer;
+	opacity: 0.5;
+}
+
+
+section {
+	li {
+		text-align: left;
+		font-size: 1.25rem;
+		font-weight: 300;
+
+		&::before {
+			content: "- "
+		}
+	}
+
+	&.alternate {
+		background-color: $blue-grey-d2;
+		color: #fff;
+	}
+}
