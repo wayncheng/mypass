@@ -39,6 +39,11 @@
 	});
 
 // ROUTES =========================================
+	// Temporary route to confirm ownership with LetsEncrypt. Will be removed after confirmation
+	app.get('/.well-known/acme-challenge/ffilB30ecS6Z3LRkkcTWeBbL6Yu_RlyyVOjt8C3hoOs',function(req,res){
+		// res.sendFile('public/ssl-cert-file');
+		res.sendFile('ssl-cert-file', { root: path.join(__dirname, '/public') });
+	})
 	// api has to be before routes or else everything would
 	// would hit routes (including api routes)
 	var api = require('./controllers/api_controller.js');
