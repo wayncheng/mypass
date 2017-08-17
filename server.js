@@ -55,6 +55,11 @@
 	var faceRoutes = require("./controllers/face_controller.js");
 	app.use("/", faceRoutes);
 
+<<<<<<< HEAD
+	var voiceRoutes = require("./controllers/voice_controller.js");
+	app.use("/", voiceRoutes);
+
+=======
 	var picRoutes = require("./controllers/picture_controller.js");
 	app.use("/", picRoutes);
 	
@@ -67,6 +72,7 @@
 	// var speech = require("./controllers/polly_controller.js");
 	// app.use("/", speech);
 
+>>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
 // ERRORS =========================================
   app.use(function(req, res) {
     // res.type("text/html");

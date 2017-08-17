@@ -32,6 +32,9 @@ var flow = ['text','face','voice'];
 
   });
 
+	
+
+
   //==================================================
   router.post("/api/text/signup", function(req, res) {
     var authtype = "text";
@@ -46,6 +49,9 @@ var flow = ['text','face','voice'];
 		}
 		var next_type = next_guide[authtype];
 		
+		if (authtype === 'text'){
+			bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
+				console.log("hash", hash);
 
     bcrypt.hash(req.body.pw, saltRounds, function(err, hash) {
       console.log("hash", hash);
@@ -112,6 +118,16 @@ var flow = ['text','face','voice'];
 
   
   
+
+
+	router.get('/api/authenticator', function(req,res){
+
+	})
+	router.post('/api/authenticator', function(req,res){
+
+	})
+	
+
 
   /////////////////////////////////////////////////////
   //  Add New User

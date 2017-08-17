@@ -192,5 +192,3 @@ var setupUpload = multer({ storage: storage });
   module.exports = router;
 })();
 
-
-
