@@ -51,7 +51,6 @@
 			</div>
 		</div>
 		<button type="submit" class="submit-btn btn" id="create-act-btn">Create Account</button>
-	    <button type='submit' id='cancel-btnText' class='cancel-btnText btn' value="Delete">Cancel</button>
 	   
 
 		{{else}}
@@ -61,3 +60,10 @@
 	</form>
 	
 </div>
+
+{{!-- Cancel Button --}}
+	<a id='cancel-btnText' href="#!" class='cancel-btnText cancel-btn' value="Delete">
+		{{!-- <i class="material-icons">close</i> --}}
+		{{!-- <i class="material-icons">cancel</i> --}}
+		<i class="material-icons">highlight_off</i>
+	</a>

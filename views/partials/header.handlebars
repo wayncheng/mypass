@@ -1,10 +1,9 @@
 <header class="">
-<nav class="transparent light-bg">
+<nav class="light-bg">
 	<div class="nav-wrapper">
-		<a id="navbar-trigger" href="#" data-activates="main-sidenav" class="button-collapse"><i class="material-icons">menu</i></a>
-		
+
+		<a class="site-name left" href="/"><strong>MY</strong>PASS</a>
 		<ul class="left hide-on-med-and-down">
-			<li><a class="site-name" href="/">MyPass</a></li>
 			<li><a href="/how-it-works">How it Works</a></li>
 			<li><a href="/future-plans">Future Plans</a></li>
 			<li><a href="/about-us">About Us</a></li>
@@ -14,22 +13,28 @@
 				{{#if userLoggedIn}}
 					<li><a href="/" class="btn outline">Sign Out</a></li>
 				{{else}}
-					<li><a class="btn outline" href="/signup/text"> Sign Up </a> </li>
-					<li><a class="dropdown-button btn filled" href="#!" data-activates="dropdown2"> Login </a></li>
+					<li><a class="btn outline" href="/signup/text">Join</a> </li>
+					<li><a class="dropdown-button btn filled" href="#!" data-activates="dropdown2">Login</a></li>
 				{{/if}}
 		</ul>
+
+				
+			<a id="navbar-trigger" href="#" data-activates="main-sidenav" class="button-collapse right"><i class="material-icons">menu</i></a>
 		
     <ul class="side-nav" id="main-sidenav">
-				<li><a href="/">Home</a></li>
-				<li><a href="/how-it-works">How It Works</a></li>
-				
-				{{#if userLoggedIn}}
-					<li><a href="/" class="btn outline">Sign Out</a></li>
-				{{else}}
-					<li><a class="btn outline" href="/signup/text"> Sign Up </a> </li>
-					<li><a class="dropdown-button btn filled" href="#!" data-activates="dropdown2"> Login </a></li>
-				{{/if}}
-      </ul>
+			{{#if userLoggedIn}}
+				<li><a href="/" class="btn outline">Sign Out</a></li>
+			{{else}}
+				<li><a class="dropdown-button btn filled" href="#!" data-activates="dropdown2"> Login </a></li>
+				<li><a class="btn outline" href="/signup/text">Join</a> </li>
+			{{/if}}
+			
+			<li><a href="/">Home</a></li>
+			<li><a href="/how-it-works">How It Works</a></li>
+			
+		</ul>
+
+		
 	</div>
 </nav>
 </header>

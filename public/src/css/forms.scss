@@ -2,20 +2,23 @@
 @import "_materialize-colors";
 @import "_mixins-lib";
 @import "_mixins";
+@import "_variables";
 
 form {
   background-color: #fff;
   // background-color: rgba(255,255,255,0.9);
-  padding: 3rem;
+  padding: 2rem 3rem;
   color: #333;
   border: 1px solid $blue-grey-l4;
   // border-radius: 1rem;
   @include border-radius(8px);
+	// margin-bottom: 4rem;
+	margin: 4rem auto;
 
   &.text-form {
     max-width: 300px;
-    // max-width: 400px;
-    margin: auto;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .headline {
@@ -44,6 +47,24 @@ form {
     &:hover {
       color: #333;
     }
-  }
+	}
+	
+
+
+
 }
 
+.signup, .login {
+
+	.cancel-btn {
+		display: inline-block;
+		padding: 4rem;
+
+		i {
+			font-size: 2.5rem;
+			color: $red;
+			color: $mono-dark;
+			color: $mono;
+		}
+	}
+}
