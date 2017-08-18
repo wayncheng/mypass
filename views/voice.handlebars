@@ -1,23 +1,9 @@
 <h5 class="authtype headline">Voice Enrollment for <span class="username-target">username</span></h5>
 
-<<<<<<< HEAD
-<div class="row">
-		<form id="main-form" role="form" action="/api/voice/{{api_phase}}" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m8 offset-m2 l6 offset-l3">
-			
-			{{!-- <input id="recorder" type="file" accept="audio/*" capture="microphone"> --}}
-			<audio id="player" controls></audio>
-=======
 <div id="error"></div>
->>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
 
 
 
-<<<<<<< HEAD
-			<a href="#!" id="start" class="btn">start</a>
-			<a href="#!" id="stop" class="btn">stop</a>
-			{{!-- <a href="#!" id="save-dialog" class="btn">save-dialog</a> --}}
-			{{!-- <a href="#!" id="save" class="btn">save</a> --}}
-=======
 <div class="row" >
 		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m6 offset-m3 l4 offset-l4"> --}}
 		<form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4" >
@@ -27,30 +13,9 @@
 		  {{else}}	
 		  	<input id="username" type="text" name="username" placeholder="username" value="{{username}}">
 		  {{/if}}
->>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
 
 			<!-- <button class="btn" type="submit">Create User</button> -->
 		</form>
-
-
-
-			{{!-- <div class="col s12 m6 offset-m3 l4 offset-l4"> --}}
-
-				{{!-- <input id="recorder" type="file" accept="audio/*" capture="microphone"> --}}
-				{{!-- <audio id="player" controls></audio> --}}
-
-
-				{{!-- <a id="download">Download</a> --}}
-				{{!-- <button id="stop">Stop</button> --}}
-
-
-				{{!-- <a href="#!" id="start" class="btn">start</a> --}}
-				{{!-- <a href="#!" id="stop" class="btn">stop</a> --}}
-				{{!-- <a href="#!" id="pause" class="btn">pause</a> --}}
-				{{!-- <a href="#!" id="save-dialog" class="btn">save-dialog</a> --}}
-				{{!-- <a href="#!" id="save" class="btn">save</a> --}}
-				
-			{{!-- </div> --}}
 
 
 	</div>
@@ -65,5 +30,8 @@
 	<h3 id="enrollment-phrase">Today is a nice day to go for a walk.</h3>
 </div>
 
-<button type="cancel" id="cancel-btnVoice" class="cancel-btnVoice btn center">Cancel</button>
+<a href="#!" id="cancel-btnVoice" class="cancel-btnVoice cancel-btn">
+		<i class="material-icons">highlight_off</i>
+</a>
+
 			

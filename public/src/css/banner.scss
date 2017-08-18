@@ -9,8 +9,8 @@
 //===========================================
 #banner {
   width: 100%;	
-	height: 80vh;
-	min-height: 600px;
+	height: 100vh;
+	min-height: 500px;
 	max-height: 900px;
 	position: relative;
   background-color: $bg-color;
@@ -35,18 +35,19 @@
 	}
 	.content-wrap {
 		z-index: 100;
+		margin-bottom: 6rem;
 	}
 	.banner-graphic {
 		height: 35vh;
-		max-height: 400px;
-		min-height: 200px;
+		max-height: 240px;
+		min-height: 120px;
 		width: initial;
-		max-width: 500px;
+		// max-width: 500px;
 		// min-width: 240px;
 
-		position: absolute;
-		left: 0;
-		bottom: 0;
+		// position: absolute;
+		// left: 0;
+		// bottom: 0;
 	}
 	.btn {
 		&.call-to-action {
@@ -73,8 +74,8 @@
 			// background-color: $blue;
 			// background-color: $teal;
 			// background-color: $yellow-orange;
-			background-color: $green;
-			border-color: $green;
+			background-color: $teal;
+			border-color: $teal;
 		}
 	}
 

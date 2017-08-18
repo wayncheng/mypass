@@ -6,7 +6,9 @@
 // @import "_functions";
 // @import url("forms");
 
-
+$height: 64px;
+$line-height: $height;
+$btn-height: 36px;
 
 header {
   position: absolute;
@@ -16,16 +18,14 @@ header {
 	z-index: 1000;
 
   nav {
-    height: 4rem;
-    line-height: 4rem;
+    height: $height;
+    line-height: $height;
     box-shadow: none;
-    background-color: $blue;
-		// background-color: transparent;
 		font-weight: 400;
-		// color: $faded-white;
-		// border-color: $faded-white;
 		color: $faded-black;
 		border-color: $faded-black;
+		padding: 0 3rem;;
+		background-color: transparent;
 
     &.transparent {
       background-color: transparent;
@@ -61,6 +61,7 @@ header {
 				font-size: 1rem;
 				transition: color 400ms;
 				color: inherit;
+				line-height: inherit;
 
 				&:hover {
 					background-color: initial;
@@ -73,8 +74,12 @@ header {
 				
 				&.site-name {
 					font-size: 1.1rem;
-					font-weight: 900;
+					font-weight: 300;
 					text-transform: uppercase;
+
+					strong {
+						font-weight: 900;
+					}
 				}
 			}
 			
@@ -95,11 +100,11 @@ header {
 						font-weight: 500;
 					}
 					&.outline {
-						border-color: $green;
-						color: $green-d; 
+						border-color: $blue;
+						color: $blue; 
 					}
 					&.filled {
-						background-color: $green;
+						background-color: $blue;
 						color: #fff;
 					}
 				}
@@ -109,6 +114,46 @@ header {
         opacity: 0;
         display: none;
       }
-    }
+		}
+		
+
+	// Buttons =================================\
+		.btn {
+			padding: 0 1.3rem;
+
+		// Outlined Buttons
+			&.outline {
+				background-color: transparent;
+				box-shadow: none;
+				line-height: $btn-height - 4; //adjusted to compensate for border
+				font-weight: 500;
+				border-radius: 4px;
+				border: 2px solid $faded-black;
+				border-color: inherit;
+				color: $faded-black;
+
+				&:hover {
+					border-color: $pure-black;
+					color: $pure-black;
+				}
+			}
+		// Filled buttons
+			&.filled {
+				$filled-color: rgba(0, 0, 0, 0.6);
+				background-color: $filled-color;
+				transition: background-color 400ms;
+				color: $pure-white;
+				box-shadow: none;
+				border-radius: 4px;
+				line-height: $btn-height;
+
+				&:hover {
+					// background-color: $filled-color;
+					background-color: rgba(0, 0, 0, .81);
+					color: $pure-white;
+					// font-weight: 300;
+				}
+			}
+		}
   }
 }

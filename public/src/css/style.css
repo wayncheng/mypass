@@ -222,10 +222,23 @@ html {
 
 html.signup, html.login {
   color: #fff;
+  background-color: #fbfbfb;
 }
 
 html.signup main, html.login main {
-  padding: 4rem 0;
+  padding: 6rem 0 4rem;
+}
+
+html.signup nav, html.login nav {
+  background-color: #fff;
+}
+
+html.signup .button-collapse, html.login .button-collapse {
+  display: initial;
+}
+
+html.signup ul.left, html.signup ul.right, html.login ul.left, html.login ul.right {
+  display: none;
 }
 
 body {
@@ -335,41 +348,6 @@ section li::before {
 section.alternate {
   background-color: #455a64;
   color: #fff;
-}
-
-.btn.outline {
-  background-color: transparent;
-  box-shadow: none;
-  line-height: 34px;
-  font-weight: 500;
-  border-radius: 4px;
-  border: 2px solid rgba(0, 0, 0, 0.9);
-  border-color: inherit;
-  color: rgba(0, 0, 0, 0.9);
-}
-
-.btn.outline:hover {
-  border-color: #000000;
-  color: #000000;
-}
-
-.btn.filled {
-  background-color: #9b59b6;
-  background-color: #f39c12;
-  background-color: #e67e22;
-  background-color: #1abc9c;
-  background-color: #2980b9;
-  background-color: #2ecc71;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: background-color 400ms;
-  color: #ffffff;
-  box-shadow: none;
-  border-radius: 4px;
-}
-
-.btn.filled:hover {
-  background-color: rgba(0, 0, 0, 0.81);
-  color: #ffffff;
 }
 
 section .section-wrapper {

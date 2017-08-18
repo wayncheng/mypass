@@ -218,18 +218,20 @@
 */
 form {
   background-color: #fff;
-  padding: 3rem;
+  padding: 2rem 3rem;
   color: #333;
   border: 1px solid #cfd8dc;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
   -ms-border-radius: 8px;
   border-radius: 8px;
+  margin: 4rem auto;
 }
 
 form.text-form {
   max-width: 300px;
-  margin: auto;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 form .headline {
@@ -259,4 +261,16 @@ form i.suffix {
 
 form i.suffix:hover {
   color: #333;
+}
+
+.signup .cancel-btn, .login .cancel-btn {
+  display: inline-block;
+  padding: 4rem;
+}
+
+.signup .cancel-btn i, .login .cancel-btn i {
+  font-size: 2.5rem;
+  color: #e74c3c;
+  color: #7f8c8d;
+  color: #95a5a6;
 }
