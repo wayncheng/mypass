@@ -216,191 +216,80 @@
 
 
 */
-html {
-  font-size: 14px;
-}
-
-html.signup, html.login {
-  color: #fff;
-}
-
-html.signup main, html.login main {
-  padding: 4rem 0;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  background-color: #fff;
-  text-align: center;
-  color: #333;
-  background-color: transparent;
-  min-height: 100vh;
-}
-
-main {
-  padding-bottom: 4rem;
-  margin: 0;
-  min-height: 85vh;
-}
-
-p {
-  font-size: 1.2rem;
-}
-
-.bounds {
+#banner {
   width: 100%;
-  max-width: 1200px;
-  padding: 3rem;
-  height: 100%;
-  line-height: 100%;
-  margin: auto;
+  height: 80vh;
+  min-height: 600px;
+  max-height: 900px;
   position: relative;
-}
-
-.page-title {
-  font-size: 3rem;
-  text-align: right;
-  padding-right: 2rem;
-  font-weight: 700;
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-}
-
-.page-title span {
-  display: block;
-  font-size: 14px;
-  font-weight: 300;
-  line-height: 1.5em;
-  color: rgba(0, 0, 0, 0.5);
-}
-
-footer.page-footer {
-  background-color: #2c3e50;
-  text-align: center;
-}
-
-footer.page-footer .content-wrap {
-  display: inline-block;
-  margin: auto;
-}
-
-footer.page-footer .content-wrap ul {
-  text-align: left;
-  display: inline-block;
-  float: left;
-  margin: 2rem 3rem;
-  font-size: 1rem;
-  font-weight: 300;
-}
-
-footer.page-footer .content-wrap li {
-  margin: .5rem 0;
-}
-
-footer.page-footer .content-wrap li:first-child {
-  font-weight: 600;
-  font-size: 1.05rem;
-}
-
-footer.page-footer .content-wrap li a {
-  color: #fff;
-}
-
-footer.page-footer .subrow {
-  background-color: #233342;
-  text-align: center;
-  margin: 0;
-}
-
-footer.page-footer .site-name {
-  font-size: 1.2rem;
-  font-weight: 900;
-  text-transform: uppercase;
-  line-height: 100%;
-  margin-right: 2rem;
-}
-
-section li {
-  text-align: left;
-  font-size: 1.25rem;
-  font-weight: 300;
-}
-
-section li::before {
-  content: "- ";
-}
-
-section.alternate {
-  background-color: #455a64;
-  color: #fff;
-}
-
-.btn.outline {
-  background-color: transparent;
-  box-shadow: none;
-  line-height: 34px;
-  font-weight: 500;
-  border-radius: 4px;
-  border: 2px solid rgba(0, 0, 0, 0.9);
-  border-color: inherit;
-  color: rgba(0, 0, 0, 0.9);
-}
-
-.btn.outline:hover {
-  border-color: #000000;
-  color: #000000;
-}
-
-.btn.filled {
-  background-color: #9b59b6;
-  background-color: #f39c12;
-  background-color: #e67e22;
-  background-color: #1abc9c;
   background-color: #2980b9;
-  background-color: #2ecc71;
-  background-color: rgba(0, 0, 0, 0.6);
-  transition: background-color 400ms;
-  color: #ffffff;
-  box-shadow: none;
-  border-radius: 4px;
-}
-
-.btn.filled:hover {
-  background-color: rgba(0, 0, 0, 0.81);
-  color: #ffffff;
-}
-
-section .section-wrapper {
-  display: inline-block;
-  padding: 4rem 0;
-}
-
-.marquee {
-  font-size: 6rem;
-}
-
-.circle-wrap {
-  border-radius: 50%;
-  background-color: #546e7a;
   color: #fff;
-  display: inline-block;
-  padding: 3rem;
+  padding: 0;
+  padding-top: 4rem;
 }
 
-.layout-title {
-  font-size: 1.2rem;
+#banner .headline {
+  font-size: 3.5rem;
+  font-weight: 600;
 }
 
-.headline {
+#banner .subheadline {
   font-size: 2rem;
+  font-weight: 400;
 }
 
-.view-password {
+#banner .bounds {
+  padding-bottom: 6rem;
+  padding-top: 6rem;
+}
+
+#banner .content-wrap {
+  z-index: 100;
+}
+
+#banner .banner-graphic {
+  height: 35vh;
+  max-height: 400px;
+  min-height: 200px;
+  width: initial;
+  max-width: 500px;
   position: absolute;
-  right: 0;
-  top: 1rem;
-  cursor: pointer;
-  opacity: 0.5;
+  left: 0;
+  bottom: 0;
+}
+
+#banner .btn.call-to-action {
+  font-size: 1.5rem;
+  height: 4rem;
+  line-height: 4rem;
+  padding: 0 2rem;
+  font-weight: 600;
+}
+
+#banner .btn.under-headline {
+  margin-top: 4rem;
+}
+
+#banner.has-money-lock-gif {
+  background-color: #FFE6C1;
+}
+
+#banner.has-maintenance-gif {
+  background-color: #fff;
+}
+
+#banner.light-bg {
+  color: #111;
+  border-color: #111;
+}
+
+#banner.light-bg .btn {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+#banner #maintenance-gif {
+  left: 0rem;
+  max-height: 300px;
+  max-width: 550px;
 }

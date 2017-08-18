@@ -1,0 +1,103 @@
+@import url("color-overrides.css");
+@import "_materialize-colors";
+@import "_mixins-lib";
+@import "_mixins";
+@import "_variables";
+// @import "_functions";
+// @import url("forms");
+
+//===========================================
+#banner {
+  width: 100%;	
+	height: 80vh;
+	min-height: 600px;
+	max-height: 900px;
+	position: relative;
+  background-color: $bg-color;
+  color: #fff;
+	// padding: 10rem 0 6rem;
+	padding: 0;
+	padding-top: 4rem;
+	// z-index: -1;
+	
+	.headline {
+		font-size: 3.5rem;
+		font-weight: 600;
+	}
+	.subheadline {
+		font-size: 2rem;
+		font-weight: 400;
+	}
+	.bounds {
+		// padding: 6rem auto;
+		padding-bottom: 6rem;
+		padding-top: 6rem;
+	}
+	.content-wrap {
+		z-index: 100;
+	}
+	.banner-graphic {
+		height: 35vh;
+		max-height: 400px;
+		min-height: 200px;
+		width: initial;
+		max-width: 500px;
+		// min-width: 240px;
+
+		position: absolute;
+		left: 0;
+		bottom: 0;
+	}
+	.btn {
+		&.call-to-action {
+			font-size: 1.5rem;
+			height: 4rem;
+			line-height: 4rem;
+			padding: 0 2rem;
+			font-weight: 600;
+		}
+		&.under-headline {
+			margin-top: 4rem;
+		}
+	}
+	&.has-money-lock-gif { background-color: #FFE6C1; }
+	&.has-maintenance-gif { 
+		background-color: #fff;
+	}
+
+	&.light-bg {
+		color: #111;
+		border-color: #111;
+
+		.btn {
+			// background-color: $blue;
+			// background-color: $teal;
+			// background-color: $yellow-orange;
+			background-color: $green;
+			border-color: $green;
+		}
+	}
+
+// Gif-specific Styling
+	#maintenance-gif {
+		left: 0rem;
+		max-height: 300px;
+		max-width: 550px;
+	}
+
+
+
+
+  // &.carousel {
+  //   .carousel-item {
+	// 		height: inherit;
+	// 		height: 100%;
+	// 		padding: 6rem 0;
+
+  //     &#carousel-panel-1 { background-color: $blue; }
+  //     &#carousel-panel-2 { background-color: $yellow-orange; }
+  //     &#carousel-panel-3 { background-color: $teal; }
+  //     &#carousel-panel-4 { background-color: $purple; }
+  //   }
+  // }
+}
