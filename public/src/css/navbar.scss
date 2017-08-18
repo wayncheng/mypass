@@ -1,0 +1,114 @@
+@import url("color-overrides.css");
+@import "_materialize-colors";
+@import "_mixins-lib";
+@import "_mixins";
+@import "_variables";
+// @import "_functions";
+// @import url("forms");
+
+
+
+header {
+  position: absolute;
+  top: 0;
+  width: 100%;
+	// z-index: 1000;
+	z-index: 1000;
+
+  nav {
+    height: 4rem;
+    line-height: 4rem;
+    box-shadow: none;
+    background-color: $blue;
+		// background-color: transparent;
+		font-weight: 400;
+		// color: $faded-white;
+		// border-color: $faded-white;
+		color: $faded-black;
+		border-color: $faded-black;
+
+    &.transparent {
+      background-color: transparent;
+		}
+		&.light-bg {
+			color: $faded-black;
+			border-color: $faded-black;
+
+			a {
+				&:hover {
+					border-color: $pure-black;
+					color: $pure-black;
+				}
+			}
+		}
+
+    .nav-wrapper {
+			// max-width: 800px;
+			max-width: $max-width;
+      margin: auto;
+
+      ul {
+        display: inline-block;
+        margin: auto;
+      }
+      ul li,
+      a i {
+        height: inherit;
+        line-height: inherit;
+      }
+
+      a {
+				font-size: 1rem;
+				transition: color 400ms;
+				color: inherit;
+
+				&:hover {
+					background-color: initial;
+					color: $pure-black;
+				}
+
+        i {
+          margin-left: .5rem;
+				}
+				
+				&.site-name {
+					font-size: 1.1rem;
+					font-weight: 900;
+					text-transform: uppercase;
+				}
+			}
+			
+			ul.side-nav {
+				li, a i {
+					height: 48px;
+					line-height: 48px;
+				}
+				a {
+					color: #333;
+					line-height: inherit;
+
+					&:hover {
+						background-color: transparent;
+						color: $pure-black;
+					}
+					&.btn {
+						font-weight: 500;
+					}
+					&.outline {
+						border-color: $green;
+						color: $green-d; 
+					}
+					&.filled {
+						background-color: $green;
+						color: #fff;
+					}
+				}
+			}
+
+      ul.dropdown-content {
+        opacity: 0;
+        display: none;
+      }
+    }
+  }
+}

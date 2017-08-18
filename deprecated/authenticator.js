@@ -34,7 +34,7 @@ var authenticator = {
 			// { delta: 0 }
 		},
 		generateQR: function(){
-			generateTotpUri(formattedKey, accountName, issuer, algorithm, digits, period){ }
+			generateTotpUri(formattedKey, accountName, issuer, algorithm, digits, period);
 		}
 	}
 })();

@@ -59,18 +59,13 @@
       title: "Verified Area"
     });
   });
+	//==================================================
   router.get("/sitemap", function(req, res) {
     res.render("sitemap", {
       title: "Site Map"
     });
   });
   //==================================================
-  router.get("/", function(req, res) {
-    res.render("landing", {
-      title: "MyPass - Home"
-    });
-  });
-
   router.get("/loginSuccess/:username", function(req, res) {
     res.render("landing", {
       title: "MyPass - Home",
@@ -78,13 +73,34 @@
       userLoggedIn: true
     });
   });
-
-
+	//==================================================
   router.get("/test", function(req, res) {
     res.render("test");
   });
-
-
+	//==================================================
+  router.get("/how-it-works", function(req, res) {
+    res.render("tech-overview", {
+      title: "MyPass - How It Works"
+    });
+  });
+	//==================================================
+  router.get("/future-plans", function(req, res) {
+    res.render("future-plans", {
+      title: "MyPass - Future Plans"
+    });
+  });
+	//==================================================
+  router.get("/about-us", function(req, res) {
+    res.render("about-us", {
+      title: "MyPass - About the Team"
+    });
+  });
+	//==================================================
+  router.get("/", function(req, res) {
+    res.render("landing", {
+      title: "MyPass - Home"
+    });
+  });
 
   //==================================================
   module.exports = router; // Export routes for server.js to use.

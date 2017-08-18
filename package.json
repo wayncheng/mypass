@@ -10,20 +10,13 @@
   "author": "wayne cheng",
   "license": "ISC",
   "dependencies": {
-<<<<<<< HEAD
-    "authenticator": "^1.1.2",
-=======
     "VoiceIt": "^1.2.9",
->>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
+    "authenticator": "^1.1.2",
     "aws-sdk": "^2.93.0",
     "azure-arm-cognitiveservices": "^1.0.0-preview",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
-<<<<<<< HEAD
-    "brfs": "^1.4.3",
-=======
     "browser-storage": "0.0.2",
->>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
     "cookie-parser": "^1.4.3",
     "dotenv": "^4.0.0",
     "express": "^4.15.3",
@@ -39,18 +32,9 @@
     "nodemailer": "^4.0.1",
     "nodemailer-smtp-transport": "^2.7.4",
     "path": "^0.12.7",
-<<<<<<< HEAD
-    "request": "^2.81.0",
-    "sequelize": "^4.4.2",
-    "speaker": "^0.3.0",
-    "uuid": "^3.1.0",
-    "wav": "^1.0.1",
-    "xmlbuilder": "^9.0.1"
-=======
     "sequelize": "^3.24.5",
     "sequelize-cli": "^2.8.0",
     "uuid": "^3.1.0"
->>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
   },
   "devDependencies": {
     "browserify": "^14.4.0",

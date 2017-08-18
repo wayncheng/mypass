@@ -1,28 +1,35 @@
-<header>
-<nav>
+<header class="">
+<nav class="transparent light-bg">
 	<div class="nav-wrapper">
-		<ul class="left">
-			<li><a href="/">Home</a></li>
+		<a id="navbar-trigger" href="#" data-activates="main-sidenav" class="button-collapse"><i class="material-icons">menu</i></a>
+		
+		<ul class="left hide-on-med-and-down">
+			<li><a class="site-name" href="/">MyPass</a></li>
+			<li><a href="/how-it-works">How it Works</a></li>
+			<li><a href="/future-plans">Future Plans</a></li>
+			<li><a href="/about-us">About Us</a></li>
+			<li><a href="https://github.com/wayncheng/mypass">Github</a></li>
 		</ul>
-		<ul class="right">
-			
-			{{#if userLoggedIn}}
-
-				<li><a href="/">Sign Out</a></li>
-
-			{{else}}
-			
-				<li><a class="" href="/signup/text">
-				  Sign Up
-				  {{!-- <i class="material-icons right">arrow_drop_down</i> --}}
-				</a> </li>
-				<li><a class="dropdown-button" href="#!" data-activates="dropdown2">
-				  Login
-				  {{!-- <i class="material-icons right">arrow_drop_down</i> --}}
-				  </a></li>
-
-			  {{/if}}
+		<ul class="right hide-on-med-and-down">
+				{{#if userLoggedIn}}
+					<li><a href="/" class="btn outline">Sign Out</a></li>
+				{{else}}
+					<li><a class="btn outline" href="/signup/text"> Sign Up </a> </li>
+					<li><a class="dropdown-button btn filled" href="#!" data-activates="dropdown2"> Login </a></li>
+				{{/if}}
 		</ul>
+		
+    <ul class="side-nav" id="main-sidenav">
+				<li><a href="/">Home</a></li>
+				<li><a href="/how-it-works">How It Works</a></li>
+				
+				{{#if userLoggedIn}}
+					<li><a href="/" class="btn outline">Sign Out</a></li>
+				{{else}}
+					<li><a class="btn outline" href="/signup/text"> Sign Up </a> </li>
+					<li><a class="dropdown-button btn filled" href="#!" data-activates="dropdown2"> Login </a></li>
+				{{/if}}
+      </ul>
 	</div>
 </nav>
 </header>

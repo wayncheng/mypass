@@ -1,206 +1,47 @@
+{{!--
 <div id="banner">
 	<h2 id="bannerHeading">MyPass</h2>
 	<h4 id="bannerSubHeading">Modern Security without the Hostility</h4>
+</div> --}}
+
+<div id="banner" class="has-maintenance-gif light-bg">
+	<div class="bounds">
+
+	{{!-- <div id="carousel-panel-1" class="carousel-item white-text" href="#one!">
+		<h2>MyPass Biometric Authentication</h2>
+		<p class="white-text">Modern Security without the Hostility</p>
+		<a class="btn waves-effect white grey-text darken-text-2" href="/signup/text">Try it Out!</a>
+		<img class="banner-graphic animation" src="src/graphics/lock-money-animation.gif">
+	</div>
+
+	<div id="carousel-panel-2" class="carousel-item white-text" href="#two!">
+		<h2>Explore the Tech</h2>
+		<p class="white-text">MyPass uses cutting edge technology to provide an enhanced user authentication experience without sacrificing security.</p>
+		<a class="btn waves-effect white grey-text darken-text-2" href="/how-it-works">Learn More</a>
+	</div>
+
+	<div id="carousel-panel-3" class="carousel-item white-text" href="#three!">
+		<h2>Third Panel</h2>
+		<p class="white-text">This is your third panel</p>
+	</div> --}}
+		<div class="content-wrap">
+			<h2 class="headline">MyPass Biometric Authentication</h2>
+			<h5 class="subheadline">Modern Security without the Hostility</h5>
+			<a class="btn under-headline call-to-action waves-effect" href="/signup/text">Try it Out!</a>
+		</div>
+				
+			<img id="maintenance-gif" class="banner-graphic animation" src="src/graphics/maintenance-animation-trim.gif">
+	</div>
+			{{!-- <img id="lock-money-gif" class="banner-graphic animation" src="src/graphics/lock-money-animation.gif"> --}}
 </div>
+
+
 <section class="row">
 	<div class="section-wrapper container">
 
-        <div><h2>{{welcome_message}}</h2></div>
-
-        <div class="col s12 m4 section-space">
-        	<div class="card">
-            
-        	<!--
-            <div class="card-image center">
-              <img src="/src/icons/text.png">
-              
-            </div> -->
-            <span class="card-title center">Text</span>
-            <br><br>
-            <div class="card-content">
-              <p>Classic user authentication with bcrypt hashing and input validation. Bcrypt executes an internal encryption/hash function many times in a loop and returns the secured password to store.</p>
-            </div>
-            
-          </div>
-
-<!--
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">text_fields</i></h2>
-            <h3 class="center">Text</h3>
-
-            <p class="light">Classic user authentication with bcrypt hashing and input validation. Bcrypt executes an internal encryption/hash function many times in a loop and returns the secured password to store.</p>
-          </div> -->
-        </div>
-
-        <div class="col s12 m4 section-space">
-        	<div class="card">
-        	<!--
-            <div class="card-image center">
-              <img src="/src/icons/face.jpg" height="150px">
-              
-            </div> -->
-            <span class="card-title center">Face Recognition</span>
-            <div class="card-content">
-              <p>Face Biometric Authentication using Amazon Rekognition APIs (Deep-Learning based image recognition). Amazon Rekognition uses deep neural network models to detect and label thousands of objects and scenes in an image.</p>
-            </div>
-            
-          </div>
-
-          <!--
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">face</i></h2>
-            {{!-- <h2 class="center"><i class="material-icons">portrait</i></h2> --}}
-            <h3 class="center">Face Recognition</h3>
-
-            <p class="light">
-							Face Biometric Authentication using Amazon Rekognition APIs (Deep-Learning based image recognition). Amazon Rekognition uses deep neural network models to detect and label thousands of objects and scenes in an image.
-						</p>
-          </div>
-          -->
-        </div>
-
-        <div class="col s12 m4">
-        	<div class="card">
-        	<!--
-            <div class="card-image center">
-              <img src="/src/icons/voice.jpg" height="150px">
-              
-            </div> -->
-            <span class="card-title center">Voice Recognition</span>
-            <div class="card-content">
-              <p>Voice Biometric Authentication using VoiceIt APIs. Voice biometric authentication technique uses digital sampling techniques to recognize a  speaker’s voice. VoiceIt provides a cloud-based, pay as you go, voice biometrics platform.</p>
-            </div>
-            
-          </div>
-
-          <!--
-          <div class="icon-block">
-            <h2 class="center"><i class="material-icons">record_voice_over</i></h2>
-            {{!-- <h2 class="center brown-text"><i class="material-icons">mic</i></h2> --}}
-            <h3 class="center">Voice Recognition</h3>
-
-            <p class="light">
-							Voice Biometric Authentication using VoiceIt APIs. Voice biometric authentication technique uses digital sampling techniques to recognize a  speaker’s voice. VoiceIt provides a cloud-based, pay as you go, voice biometrics platform.
-						</p>
-          </div>
-          -->
-        </div>
+		<div>
+			<h2>{{welcome_message}}</h2>
+		</div>
 
 	</div>
 </section>
-
-
-
-<div class="parallax-container" style="height:350px">
-    <div class="parallax"><img src="/src/icons/Password2.jpg" height=""></div>
-</div>
-  <div class="section white" style="height:400px;">
-    <div class="row ">
-      <h2 class="header">Text Password Authentication</h2>
-
-      <p class="grey-text text-darken-3 lighten-3">
-
-        <div class="row" style="width:90%">
-
-            <div class="col s4 ">
-              <ul class="browser-default" style="text-align: justify;text-justify: inter-word;padding-top:20px;padding-right:20px;"><u>
-              <li style="margin-bottom:5px"><b>Bcrypt hashing<b></li>
-              <li style="margin-bottom:5px"><b>Strongest hashing Technique<b></li>
-              <li style="margin-bottom:5px"><b>Actual user passwords never stored</b></li>
-              <li style="margin-bottom:5px"><b>Only store password hashes in database</b></li>
-              <li style="margin-bottom:5px"><b>Input validation for usernames, emails, passwords</b></li>
-              </u></ul>
-            </div>
-
-            <div class="col s8" style="text-align: justify;text-justify: inter-word; font-size:12px;font-weight:normal;padding:10px">
-            <p><i>
-              Bcrypt is a password hashing function which aims at being slow but most secured.BCrypt is from 1999 and is GPU-ASIC resilient by design as it’s also a memory hardening function: it’s not just CPU intensive, but also RAM-intensive to execute a bcrypt hash.Bcrypt algorithm's use a technique called Key Stretching.Bcrypt is an adaptive hash function based on the Blowfish symmetric block cipher cryptographic algorithm and introduces a work factor (also known as security factor), which allows you to determine how expensive the hash function will be.</i>
-              </p>
-            </div>
-
-        </div>
-
-
-        
-      </p>
-    </div>
-  </div>
-  <div class="parallax-container" style="height:350px">
-    <div class="parallax"><img src="/src/icons/face-rec.jpg"></div>
-  </div>
-  <div class="section white" style="height:400px;">
-    <div class="row ">
-      <h2 class="header">Face Biometric Authentication</h2>
-
-      <p class="grey-text text-darken-3 lighten-3">
-
-        <div class="row" style="width:90%">
-
-            <div class="col s4 ">
-            
-              <ul class="browser-default" style="text-align: justify;text-justify: inter-word;padding-top:20px;padding-right:20px;">
-              <u>Face recognition is accomplished as follows:
-              <li style="margin-bottom:5px"><b>Digital camera acquires an image of the face<b></li>
-              <li style="margin-bottom:5px"><b>Software locates the face in the image<b></li>
-              <li style="margin-bottom:5px"><b>When a face has been selected in the image, the software analyzes the spatial geometry</b></li>
-              <li style="margin-bottom:5px"><b>The generated template is then compared with a set of known templates in a database</b></li>
-              <li style="margin-bottom:5px"><b>The software generates a score which indicates how well two templates match</b></li></u>
-              </ul>
-
-            </div>
-
-            <div class="col s8" style="text-align: justify;text-justify: inter-word; font-size:12px;font-weight:normal;padding:10px">
-            <p><i>
-              Like all biometrics solutions, face recognition technology measures and matches the unique characteristics for the purposes of identification or authentication. Often leveraging a digital or connected camera, facial recognition software can detect faces in images, quantify their features, and then match them against stored templates in a database. There are some important constraints for using face recognition like Ageing, Long hair etc. Different vendors are working on resolving these issues. 3D face recognition solves some of the above issues. Using 3D images the actual 3-dimensional form of the face is evaluated, this is not affected by lighting and does not change with ageing. Also different viewing angles can be better compared when using 3D images.Amazon Rekognition is a cloud based service that makes it easy to add image analysis to our application.<i>
-              </p>
-            </div>
-
-        </div>
-
-
-        
-      </p>
-    </div>
-  </div>
-
-  <div class="parallax-container" style="height:350px">
-    <div class="parallax"><img src="/src/icons/voice.jpg"></div>
-  </div>
-  <div class="section white" style="height:400px;">
-    <div class="row ">
-      <h2 class="header">Voice Biometric Authentication</h2>
-
-      <p class="grey-text text-darken-3 lighten-3">
-
-        <div class="row" style="width:90%">
-
-            <div class="col s4 ">
-              <ul class="browser-default" style="text-align: justify;text-justify: inter-word;padding-top:20px;padding-right:20px;"><u>
-              <li style="margin-bottom:5px"><b>Used VoiceIt APIs<b></li>
-              <li style="margin-bottom:5px"><b>Voice Biometrics to secure customer data<b></li>
-              <li style="margin-bottom:5px"><b>VoiceIt provides cloud based storage</b></li>
-              <li style="margin-bottom:5px"><b>No need of storing audios in database or servers</b></li>
-              <li style="margin-bottom:5px"><b>Banks are deploying Voice Biometrics For Security</b></li>
-              <li style="margin-bottom:5px"><b>Voice biometrics can be used alone or as two-factor authentication</b></li>
-              </u>
-              </ul>
-            </div>
-
-            <div class="col s8" style="text-align: justify;text-justify: inter-word; font-size:12px;font-weight:normal;padding:10px">
-            <p><i>
-              With the continued rise of identity theft and also the desire by companies to securely help customers access information as rapidly as possible, “voice biometrics” has emerged as a way to answer these challenges and secure customer data. Voice biometrics can be used alone to provide a convenient method of authentication via “voiceprints”, or as part of a two-factor authentication process, combined with something the customer “knows” (like a password or PIN) or “has” (like a cell phone with a caller ID, or a credit card) to provide an extra layer of security for sensitive information and financial transactions.
-              Historically, voice biometrics has been difficult to install and configure within an application.But VOICEIT, made it possible, by providinf cloude based voice biometrics platform that empowers you to rapidly build and deploy security solutions.</i>
-              </p>
-            </div>
-
-        </div>
-
-
-        
-      </p>
-    </div>
-  </div>
-
-
-
-

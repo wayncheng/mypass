@@ -40,10 +40,10 @@
 
 // ROUTES =========================================
 	// Temporary route to confirm ownership with LetsEncrypt. Will be removed after confirmation
-	app.get('/.well-known/acme-challenge/ffilB30ecS6Z3LRkkcTWeBbL6Yu_RlyyVOjt8C3hoOs',function(req,res){
-		// res.sendFile('public/ssl-cert-file');
-		res.sendFile('ssl-cert-file', { root: path.join(__dirname, '/public') });
-	})
+	// app.get('/.well-known/acme-challenge/ffilB30ecS6Z3LRkkcTWeBbL6Yu_RlyyVOjt8C3hoOs',function(req,res){
+	// 	// res.sendFile('public/ssl-cert-file');
+	// 	res.sendFile('ssl-cert-file', { root: path.join(__dirname, '/public') });
+	// })
 	// api has to be before routes or else everything would
 	// would hit routes (including api routes)
 	var api = require('./controllers/api_controller.js');
@@ -55,11 +55,6 @@
 	var faceRoutes = require("./controllers/face_controller.js");
 	app.use("/", faceRoutes);
 
-<<<<<<< HEAD
-	var voiceRoutes = require("./controllers/voice_controller.js");
-	app.use("/", voiceRoutes);
-
-=======
 	var picRoutes = require("./controllers/picture_controller.js");
 	app.use("/", picRoutes);
 	
@@ -72,7 +67,6 @@
 	// var speech = require("./controllers/polly_controller.js");
 	// app.use("/", speech);
 
->>>>>>> 807439641e0101cd503ebf80a0090e766d2013ec
 // ERRORS =========================================
   app.use(function(req, res) {
     // res.type("text/html");
