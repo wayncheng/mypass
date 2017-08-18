@@ -34,7 +34,8 @@
     "path": "^0.12.7",
     "sequelize": "^3.24.5",
     "sequelize-cli": "^2.8.0",
-    "uuid": "^3.1.0"
+    "uuid": "^3.1.0",
+    "xmlbuilder": "^9.0.4"
   },
   "devDependencies": {
     "browserify": "^14.4.0",
