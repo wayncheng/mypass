@@ -231,13 +231,16 @@ html.signup main, html.login main {
 
 html.signup nav, html.login nav {
   background-color: #fff;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.08);
 }
 
 html.signup .button-collapse, html.login .button-collapse {
   display: initial;
 }
 
-html.signup ul.left, html.signup ul.right, html.login ul.left, html.login ul.right {
+html.signup ul.left,
+html.signup ul.right, html.login ul.left,
+html.login ul.right {
   display: none;
 }
 

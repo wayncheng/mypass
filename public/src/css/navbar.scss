@@ -21,26 +21,11 @@ header {
     height: $height;
     line-height: $height;
     box-shadow: none;
-		font-weight: 400;
-		color: $faded-black;
-		border-color: $faded-black;
-		padding: 0 3rem;;
-		background-color: transparent;
-
-    &.transparent {
-      background-color: transparent;
-		}
-		&.light-bg {
-			color: $faded-black;
-			border-color: $faded-black;
-
-			a {
-				&:hover {
-					border-color: $pure-black;
-					color: $pure-black;
-				}
-			}
-		}
+	font-weight: 400;
+	color: $faded-black;
+	border-color: $faded-black;
+	padding: 0 3rem;;
+	background-color: transparent;
 
     .nav-wrapper {
 			// max-width: 800px;
@@ -65,6 +50,7 @@ header {
 
 				&:hover {
 					background-color: initial;
+					border-color: $pure-black;
 					color: $pure-black;
 				}
 
