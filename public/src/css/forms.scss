@@ -4,67 +4,171 @@
 @import "_mixins";
 @import "_variables";
 
-form {
-  background-color: #fff;
-  // background-color: rgba(255,255,255,0.9);
-  padding: 2rem 3rem;
-  color: #333;
-  border: 1px solid $blue-grey-l4;
-  // border-radius: 1rem;
-  @include border-radius(8px);
-	// margin-bottom: 4rem;
-	margin: 4rem auto;
+// form {
+//   background-color: #fff;
+//   // background-color: rgba(255,255,255,0.9);
+//   padding: 2rem 3rem;
+//   color: #333;
+//   border: 1px solid $blue-grey-l4;
+//   // border-radius: 1rem;
+//   @include border-radius(8px);
+//   // margin-bottom: 4rem;
+//   margin: 4rem auto;
 
-  &.text-form {
-    max-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
-  }
+//   &.text-form {
+//     max-width: 300px;
+//     margin-left: auto;
+//     margin-right: auto;
+//   }
 
-  .headline {
-    font-size: 2rem;
-    margin-top: 0;
-    line-height: 1em;
-    margin-bottom: 3rem;
-  }
-  .row {
-    margin-bottom: 0;
-  }
+//   .headline {
+//     font-size: 2rem;
+//     margin-top: 0;
+//     line-height: 1em;
+//     margin-bottom: 3rem;
+//   }
+//   .row {
+//     margin-bottom: 0;
+//   }
 
-  .submit-btn {
-    margin-top: 3rem;
-  }
+//   .submit-btn {
+//     margin-top: 3rem;
+//   }
 
-  i.suffix {
-    float: right;
-    font-size: 1.5rem;
-    position: absolute;
-    right: 0;
-    bottom: 2.5rem;
-    color: #999;
-    cursor: pointer;
+//   i.suffix {
+//     float: right;
+//     font-size: 1.5rem;
+//     position: absolute;
+//     right: 0;
+//     bottom: 2.5rem;
+//     color: #999;
+//     cursor: pointer;
 
-    &:hover {
-      color: #333;
+//     &:hover {
+//       color: #333;
+//     }
+//   }
+// }
+
+// Cancel Button ===============================
+.signup,
+.login {
+  .cancel-btn {
+    display: inline-block;
+	padding: 4rem;
+
+    i {
+      font-size: 2.5rem;
+      color: $red;
+      color: $darken-81-24;
     }
-	}
-	
 
-
-
+    &.cancel-top-right {
+      position: absolute;
+      top: 2rem;
+      right: 0;
+    }
+  }
 }
 
-.signup, .login {
 
-	.cancel-btn {
-		display: inline-block;
-		padding: 4rem;
+// Headliner ==============================
+.headline-wrap {
+	padding: 2rem 0;
 
-		i {
-			font-size: 2.5rem;
-			color: $red;
-			color: $mono-dark;
-			color: $mono;
+	.headline {
+		font-size: 3rem;
+		font-weight: 100;
+		margin: .5rem 0;
+	}
+	.eyebrow {
+		font-size: 1.3rem;
+		font-weight: 500;
+		margin: .5rem 0;
+	}
+}
+
+// Input Fields =======================
+form {
+	background-color: transparent;
+	width: 90%;
+	max-width: 400px;
+	margin: auto;
+	padding: 2rem;
+
+	input.text-input {
+		// outline: 1px solid green;
+		background-color: #fff;
+		border: 2px solid rgba(0,0,0,0.08);
+		padding: 0;
+		font-size: 1.2rem;
+		height: 4rem;
+		line-height: 4rem;
+		text-indent: 1rem;
+
+		&:focus {
+			border-bottom: 2px solid rgba(0,0,0,0.08);
+			box-shadow: none;
 		}
 	}
+
+	.submit-btn {
+		height: 4.5rem;
+		line-height: 4.5rem;
+		text-transform: uppercase;
+		color: #fff;
+		background-color: $mono-light;
+		font-size: 1.3rem;
+		border: none;
+		outline: none;
+		width: 100%;
+		text-align: center;
+		margin: 0;
+		@include border-radius(7px);
+
+	}
+
+// STYLING BASED ON VALIDATION STATUS ======================================
+	// Add class "validated" to form tag, when all the inputs are validated
+	&.validated {
+		.submit-btn {
+			background-color: $teal;
+		}
+	}
+
 }
+// input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
+//     border-bottom: none;
+// }
+
+
+// .chips.focus, 
+// input:not([type]):focus:not([readonly]), 
+// input[type=text]:focus:not([readonly]), 
+// input[type=password]:focus:not([readonly]), 
+// input[type=email]:focus:not([readonly]), 
+// input[type=url]:focus:not([readonly]), 
+// input[type=time]:focus:not([readonly]), 
+// input[type=date]:focus:not([readonly]), 
+// input[type=datetime]:focus:not([readonly]), 
+// input[type=datetime-local]:focus:not([readonly]), 
+// input[type=tel]:focus:not([readonly]), 
+// input[type=number]:focus:not([readonly]), 
+// input[type=search]:focus:not([readonly]), 
+// textarea.materialize-textarea:focus:not([readonly]), 
+// input:not([type]):focus:not([readonly]), 
+// input[type=text]:not(.browser-default):focus:not([readonly]), 
+// input[type=password]:not(.browser-default):focus:not([readonly]), 
+// input[type=email]:not(.browser-default):focus:not([readonly]), 
+// input[type=url]:not(.browser-default):focus:not([readonly]), 
+// input[type=time]:not(.browser-default):focus:not([readonly]), 
+// input[type=date]:not(.browser-default):focus:not([readonly]), 
+// input[type=datetime]:not(.browser-default):focus:not([readonly]), 
+// input[type=datetime-local]:not(.browser-default):focus:not([readonly]), 
+// input[type=tel]:not(.browser-default):focus:not([readonly]), 
+// input[type=number]:not(.browser-default):focus:not([readonly]), 
+// input[type=search]:not(.browser-default):focus:not([readonly]), 
+// textarea.materialize-textarea:focus:not([readonly]) {
+// 	border-bottom: 2px solid pink;
+// 	box-shadow: none;
+// }

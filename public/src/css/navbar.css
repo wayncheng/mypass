@@ -234,20 +234,6 @@ header nav {
   background-color: transparent;
 }
 
-header nav.transparent {
-  background-color: transparent;
-}
-
-header nav.light-bg {
-  color: rgba(0, 0, 0, 0.9);
-  border-color: rgba(0, 0, 0, 0.9);
-}
-
-header nav.light-bg a:hover {
-  border-color: #000000;
-  color: #000000;
-}
-
 header nav .nav-wrapper {
   max-width: 1200px;
   margin: auto;
@@ -273,6 +259,7 @@ header nav .nav-wrapper a {
 
 header nav .nav-wrapper a:hover {
   background-color: initial;
+  border-color: #000000;
   color: #000000;
 }
 

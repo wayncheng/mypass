@@ -7,22 +7,17 @@
 <body>
 
 	{{>header}}
-
+	
 	<main>
-
-	{{>steps}}
-	<div id="apiPhase" class="hide">{{api_phase}}</div>
-	
-	<h4 class="layout-title">Sign Up</h4>
-
-	{{{body}}}
-	
+		{{!-- <h4 class="layout-title">Sign Up</h4> --}}
+		{{{body}}}
+		{{>steps}}
 	</main>
-
 
 	{{>footer}}
 	{{>scripts}}
 	
 
+	<div id="apiPhase" class="hide">{{api_phase}}</div>
 </body>
 </html>
