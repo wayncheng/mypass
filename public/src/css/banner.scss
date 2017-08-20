@@ -9,9 +9,9 @@
 //===========================================
 #banner {
   width: 100%;	
-	height: 100vh;
+	height: initial;
 	min-height: 500px;
-	max-height: 900px;
+	// max-height: 900px;
 	position: relative;
   background-color: $bg-color;
   color: #fff;
@@ -23,31 +23,32 @@
 	.headline {
 		font-size: 3.5rem;
 		font-weight: 600;
+		color: $text-d;
+		@media all and (max-width: 700px){ font-size: 3rem; }
+		@media all and (max-width: 550px){ font-size: 2.5rem; }
+		@media all and (max-width: 360px){ font-size: 2.2rem; }
 	}
 	.subheadline {
 		font-size: 2rem;
 		font-weight: 400;
+		color: $teal;
+		color: $mono-dark;
+
 	}
 	.bounds {
 		// padding: 6rem auto;
 		padding-bottom: 6rem;
-		padding-top: 6rem;
+		padding-top: 2rem;
 	}
 	.content-wrap {
 		z-index: 100;
-		margin-bottom: 6rem;
+		margin-bottom: 4rem;
 	}
 	.banner-graphic {
-		height: 35vh;
-		max-height: 240px;
-		min-height: 120px;
+		height: initial;
 		width: initial;
-		// max-width: 500px;
-		// min-width: 240px;
-
-		// position: absolute;
-		// left: 0;
-		// bottom: 0;
+		max-height: 240px;
+		max-width: 360px;
 	}
 	.btn {
 		&.call-to-action {
@@ -81,9 +82,7 @@
 
 // Gif-specific Styling
 	#maintenance-gif {
-		left: 0rem;
 		max-height: 300px;
-		max-width: 550px;
 	}
 
 
