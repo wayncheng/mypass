@@ -242,6 +242,7 @@ header nav .nav-wrapper {
 header nav .nav-wrapper ul {
   display: inline-block;
   margin: auto;
+  margin-left: 1rem;
 }
 
 header nav .nav-wrapper ul li,
@@ -251,7 +252,7 @@ header nav .nav-wrapper a i {
 }
 
 header nav .nav-wrapper a {
-  font-size: 1rem;
+  font-size: 1.1rem;
   transition: color 400ms;
   color: inherit;
   line-height: inherit;
@@ -263,12 +264,16 @@ header nav .nav-wrapper a:hover {
   color: #000000;
 }
 
+header nav .nav-wrapper a.btn {
+  font-size: 1rem;
+}
+
 header nav .nav-wrapper a i {
   margin-left: .5rem;
 }
 
 header nav .nav-wrapper a.site-name {
-  font-size: 1.1rem;
+  font-size: 1.5rem;
   font-weight: 300;
   text-transform: uppercase;
 }
@@ -277,7 +282,8 @@ header nav .nav-wrapper a.site-name strong {
   font-weight: 900;
 }
 
-header nav .nav-wrapper ul.side-nav li, header nav .nav-wrapper ul.side-nav a i {
+header nav .nav-wrapper ul.side-nav li,
+header nav .nav-wrapper ul.side-nav a i {
   height: 48px;
   line-height: 48px;
 }
@@ -294,6 +300,7 @@ header nav .nav-wrapper ul.side-nav a:hover {
 
 header nav .nav-wrapper ul.side-nav a.btn {
   font-weight: 500;
+  font-size: 1.2rem;
 }
 
 header nav .nav-wrapper ul.side-nav a.outline {

@@ -14,27 +14,28 @@ header {
   position: absolute;
   top: 0;
   width: 100%;
-	// z-index: 1000;
-	z-index: 1000;
+  // z-index: 1000;
+  z-index: 1000;
 
   nav {
     height: $height;
     line-height: $height;
     box-shadow: none;
-	font-weight: 400;
-	color: $faded-black;
-	border-color: $faded-black;
-	padding: 0 3rem;;
-	background-color: transparent;
+    font-weight: 400;
+    color: $faded-black;
+    border-color: $faded-black;
+    padding: 0 3rem;
+    background-color: transparent;
 
     .nav-wrapper {
-			// max-width: 800px;
-			max-width: $max-width;
+      // max-width: 800px;
+      max-width: $max-width;
       margin: auto;
 
       ul {
         display: inline-block;
         margin: auto;
+        margin-left: 1rem;
       }
       ul li,
       a i {
@@ -43,103 +44,103 @@ header {
       }
 
       a {
-				font-size: 1rem;
-				transition: color 400ms;
-				color: inherit;
-				line-height: inherit;
-
-				&:hover {
-					background-color: initial;
-					border-color: $pure-black;
-					color: $pure-black;
-				}
-
+        font-size: 1.1rem;
+        transition: color 400ms;
+        color: inherit;
+        line-height: inherit;
+        &:hover {
+          background-color: initial;
+          border-color: $pure-black;
+          color: $pure-black;
+		}
+		&.btn {
+			font-size: 1rem;
+		}
         i {
           margin-left: .5rem;
-				}
-				
-				&.site-name {
-					font-size: 1.1rem;
-					font-weight: 300;
-					text-transform: uppercase;
+        }
+        &.site-name {
+          font-size: 1.5rem;
+          font-weight: 300;
+          text-transform: uppercase;
+          strong {
+            font-weight: 900;
+          }
+        }
+      }
 
-					strong {
-						font-weight: 900;
-					}
-				}
-			}
-			
-			ul.side-nav {
-				li, a i {
-					height: 48px;
-					line-height: 48px;
-				}
-				a {
-					color: #333;
-					line-height: inherit;
+      ul.side-nav {
+        li,
+        a i {
+          height: 48px;
+          line-height: 48px;
+        }
+        a {
+          color: #333;
+          line-height: inherit;
 
-					&:hover {
-						background-color: transparent;
-						color: $pure-black;
-					}
-					&.btn {
-						font-weight: 500;
-					}
-					&.outline {
-						border-color: $blue;
-						color: $blue; 
-					}
-					&.filled {
-						background-color: $blue;
-						color: #fff;
-					}
-				}
-			}
+          &:hover {
+            background-color: transparent;
+            color: $pure-black;
+          }
+          &.btn {
+            font-weight: 500;
+            font-size: 1.2rem;
+          }
+          &.outline {
+            border-color: $blue;
+            color: $blue;
+          }
+          &.filled {
+            background-color: $blue;
+            color: #fff;
+          }
+        }
+      }
 
       ul.dropdown-content {
         opacity: 0;
         display: none;
       }
-		}
-		
+    }
 
-	// Buttons =================================\
-		.btn {
-			padding: 0 1.3rem;
+    // Buttons =================================\
+    .btn {
+      padding: 0 1.3rem;
 
-		// Outlined Buttons
-			&.outline {
-				background-color: transparent;
-				box-shadow: none;
-				line-height: $btn-height - 4; //adjusted to compensate for border
-				font-weight: 500;
-				border-radius: 4px;
-				border: 2px solid $faded-black;
-				border-color: inherit;
-				color: $faded-black;
+      // Outlined Buttons
+      &.outline {
+        background-color: transparent;
+        box-shadow: none;
+        line-height: $btn-height - 4; //adjusted to compensate for border
+        font-weight: 500;
+        border-radius: 4px;
+        border: 2px solid $faded-black;
+        border-color: inherit;
+        color: $faded-black;
 
-				&:hover {
-					border-color: $pure-black;
-					color: $pure-black;
-				}
-			}
-		// Filled buttons
-			&.filled {
-				$filled-color: rgba(0, 0, 0, 0.6);
-				background-color: $filled-color;
-				transition: background-color 400ms;
-				color: $pure-white;
-				box-shadow: none;
-				border-radius: 4px;
-				line-height: $btn-height;
+        &:hover {
+          border-color: $pure-black;
+          color: $pure-black;
+        }
+      }
+      // Filled buttons
+      &.filled {
+        $filled-color: rgba(0, 0, 0, 0.6);
+        background-color: $filled-color;
+        transition: background-color 400ms;
+        color: $pure-white;
+        box-shadow: none;
+        border-radius: 4px;
+        line-height: $btn-height;
 
-				&:hover {
-					// background-color: $filled-color;
-					background-color: rgba(0, 0, 0, .81);
-					color: $pure-white;
-					// font-weight: 300;
-				}
-			}
-		}
+        &:hover {
+          // background-color: $filled-color;
+          background-color: rgba(0, 0, 0, .81);
+          color: $pure-white;
+          // font-weight: 300;
+        }
+      }
+    }
   }
 }

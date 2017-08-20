@@ -218,9 +218,8 @@
 */
 #banner {
   width: 100%;
-  height: 100vh;
+  height: initial;
   min-height: 500px;
-  max-height: 900px;
   position: relative;
   background-color: #2980b9;
   color: #fff;
@@ -231,28 +230,49 @@
 #banner .headline {
   font-size: 3.5rem;
   font-weight: 600;
+  color: #505e5f;
+}
+
+@media all and (max-width: 700px) {
+  #banner .headline {
+    font-size: 3rem;
+  }
+}
+
+@media all and (max-width: 550px) {
+  #banner .headline {
+    font-size: 2.5rem;
+  }
+}
+
+@media all and (max-width: 360px) {
+  #banner .headline {
+    font-size: 2.2rem;
+  }
 }
 
 #banner .subheadline {
   font-size: 2rem;
   font-weight: 400;
+  color: #1abc9c;
+  color: #7f8c8d;
 }
 
 #banner .bounds {
   padding-bottom: 6rem;
-  padding-top: 6rem;
+  padding-top: 2rem;
 }
 
 #banner .content-wrap {
   z-index: 100;
-  margin-bottom: 6rem;
+  margin-bottom: 4rem;
 }
 
 #banner .banner-graphic {
-  height: 35vh;
-  max-height: 240px;
-  min-height: 120px;
+  height: initial;
   width: initial;
+  max-height: 240px;
+  max-width: 360px;
 }
 
 #banner .btn.call-to-action {
@@ -286,7 +306,5 @@
 }
 
 #banner #maintenance-gif {
-  left: 0rem;
   max-height: 300px;
-  max-width: 550px;
 }
