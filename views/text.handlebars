@@ -1,6 +1,13 @@
 <div class="headline-wrap">
-	<p class="eyebrow">Step 1: Text Authentication</p>
-	<h2 class="authtype headline">Let's start with the basics</h2>
+	{{#if isSignup}}
+		<p class="eyebrow">Step 1: Text Authentication</p>
+		<h2 class="authtype headline">Let's start with the basics</h2>
+	{{else}} 
+		<h2 class="headline">Login to MyPass</h2>
+		<p class="fineprint">Don't have an account? 
+			<a href="/signup/text"> Sign up here. </a>
+		</p>
+	{{/if}}
 </div>
 
 <div id="error">{{error}}</div>
@@ -17,60 +24,45 @@
 				<label for="lastname">Last Name</label>
 			</div>
 		</div> -->
-	{{#if isSignup}}
-		{{!-- <div class="row"> --}}
-			{{!-- <div class="input-field">
+		{{#if isSignup}} {{!--
+		<div class="row"> --}} {{!--
+			<div class="input-field">
 				<input id="email" name="email" type="email" class="validate signup" required="" aria-required="true">
 				<label for="email">email</label>
 			</div> --}}
-			
-				<input id="email" name="email" type="email" placeholder="email" class="text-input validate signup" required="" aria-required="true">
-			
-		{{!-- </div> --}}
-		{{!-- <div class="row"> --}}
-			{{!-- <div class="input-field"> --}}
-				 <input id="username" name="username" type="text" placeholder="username" class="text-input signup" required="" aria-required="true"> 
-				{{!-- <label for="username">username</label>
-			</div> --}}
-		{{!-- </div> --}}
-		{{else}}
-		{{!-- <div class="row"> --}}
-			{{!-- <div class="input-field"> --}}
-				 <input id="uid" name="uid" type="text" placeholder="username" class="text-input signup" required="" aria-required="true" value="{{username}}"> 
-				{{!-- <label for="uid">username</label>
-			</div> --}}
-		{{!-- </div> --}}
-	{{/if}}
-		{{!-- <div class="row"> --}}
-			{{!-- <div class="input-field"> --}}
-				<input id="password" name="pw" type="password" placeholder="password" class="text-input signup pw" required="" aria-required="true">
-				{{!-- <label for="password">password</label>
+
+			<input id="email" name="email" type="email" placeholder="email" class="text-input validate signup" required="" aria-required="true">			{{!-- </div> --}} {{!--
+		<div class="row"> --}} {{!--
+			<div class="input-field"> --}}
+				<input id="username" name="username" type="text" placeholder="username" class="text-input signup" required="" aria-required="true">				{{!-- <label for="username">username</label>
+			</div> --}} {{!-- </div> --}} {{else}} {{!--
+		<div class="row"> --}} {{!--
+			<div class="input-field"> --}}
+				<input id="uid" name="uid" type="text" placeholder="username" class="text-input signup" required="" aria-required="true"
+				 value="{{username}}"> {{!-- <label for="uid">username</label>
+			</div> --}} {{!-- </div> --}} {{/if}} {{!--
+		<div class="row"> --}} {{!--
+			<div class="input-field"> --}}
+				<input id="password" name="pw" type="password" placeholder="password" class="text-input signup pw" required="" aria-required="true">				{{!-- <label for="password">password</label>
 				<i class="view-password material-icons">visibility</i>
-			</div> --}}
-		{{!-- </div> --}}
-
-
-	{{#if isSignup}}
-		{{!-- <div class="row"> --}}
-			{{!-- <div class="input-field"> --}}
-				<input id="confirm-password" type="password" placeholder="confirm password" class="text-input signup pw" required="" aria-required="true">
-				{{!-- <label for="confirm-password">confirm password</label>
+			</div> --}} {{!-- </div> --}} {{#if isSignup}} {{!--
+		<div class="row"> --}} {{!--
+			<div class="input-field"> --}}
+				<input id="confirm-password" type="password" placeholder="confirm password" class="text-input signup pw" required="" aria-required="true">				{{!-- <label for="confirm-password">confirm password</label>
 				<i class="view-password material-icons">visibility</i>
-			</div> --}}
-		{{!-- </div> --}}
+			</div> --}} {{!-- </div> --}}
 
-		<button type="submit" class="submit-btn" id="create-act-btn">Create Account</button>   
-	{{else}}
-			<button type="submit" class="submit-btn btn">Login</button>
-	{{/if}}
+		<button type="submit" class="submit-btn" id="create-act-btn">Create Account</button> {{else}}
+		<button type="submit" class="submit-btn btn">Login</button> {{/if}}
 	</form>
-	
+
 </div>
 
-{{!-- Cancel Button --}}
-	{{!-- <a id='cancel-btnText' href="#!" class='cancel-btnText cancel-btn' value="Delete"> --}}
+{{!-- Cancel Button --}} 
+{{#if isSignup}}
 	<a id='cancel-btnText' href="#!" class='cancel-btnText cancel-btn cancel-top-right' value="Delete">
 		<i class="material-icons">close</i>
 		{{!-- <i class="material-icons">cancel</i> --}}
 		{{!-- <i class="material-icons">highlight_off</i> --}}
 	</a>
+{{/if}}

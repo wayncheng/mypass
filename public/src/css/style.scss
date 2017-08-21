@@ -233,3 +233,42 @@ section {
   cursor: pointer;
   opacity: 0.5;
 }
+
+.fineprint {
+	font-size: 1.1rem;
+	font-weight: 300;
+	color: $secondary-text;
+	margin: 0.5rem 0;
+	a {
+		text-decoration: underline;
+		font-weight: 400;
+		color: $link-text;
+	}
+}
+
+.instructions {
+	text-align: left;
+	font-size: 1.5rem;
+	// text-indent: .5rem;
+	font-weight: 300;
+	display: inline-block;
+	list-style-type: disc;
+	margin: 0;
+	max-width: 600px;
+
+	ol,ul {
+		margin: 0;
+		padding-left: 2rem;
+		li {
+			margin: 4px 0;
+		}
+	}
+	&.browser-default {
+		li {
+
+		}
+	}
+}
+
+.inline-red { color: $red; }
+.inline-green { color: $green; }

@@ -39,6 +39,25 @@ $bg-dark: #2c3e50;
 	$mono-dark: #7f8c8d;
 	$mono-d2: #505e5f;
 
+// OPTIMAL READABILITY (according to Google Material) ==============================
+
+	// Black
+	$black-text-primary:   rgba(0,0,0,0.87);
+	$black-text-secondary: rgba(0,0,0,0.87);
+	$black-text-disabled:  rgba(0,0,0,0.87);
+	$black-divider:        rgba(0,0,0,0.87);
+	$black-icon-active:    rgba(0,0,0,0.54);
+	$black-icon-inactive:  rgba(0,0,0,0.38);
+
+	// White
+	$white-text-primary:   rgba(255,255,255,1);
+	$white-text-secondary: rgba(255,255,255,0.7);
+	$white-text-disabled:  rgba(255,255,255,1);
+	$white-divider:        rgba(255,255,255,1);
+	$white-icon-active:    rgba(255,255,255,1);
+	$white-icon-inactive:  rgba(255,255,255,0.5);
+
+
 // CUSTOM COLOR VARIABLES =========================
 
 	$faded-white: rgba(255,255,255,0.9);
@@ -80,10 +99,12 @@ $bg-dark: #2c3e50;
 
 // SELECTED COLORS ================================================
 	
-	$text-l: $mono;
-	$text: $mono-dark;
-	$text-d: $mono-d2;
+	$primary-text: #242424;
+	$secondary-text: #818181;
+	$disabled-text: #bbbbbb;
 
+	$link-text: #29B6F6;
+	
 	$color-mono: $mono-dark;
 	$c-primary: $teal;
 	$bg-dark: $darkblue-d;

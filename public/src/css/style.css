@@ -405,3 +405,43 @@ section .section-wrapper {
   cursor: pointer;
   opacity: 0.5;
 }
+
+.fineprint {
+  font-size: 1.1rem;
+  font-weight: 300;
+  color: #818181;
+  margin: 0.5rem 0;
+}
+
+.fineprint a {
+  text-decoration: underline;
+  font-weight: 400;
+  color: #29B6F6;
+}
+
+.instructions {
+  text-align: left;
+  font-size: 1.5rem;
+  font-weight: 300;
+  display: inline-block;
+  list-style-type: disc;
+  margin: 0;
+  max-width: 600px;
+}
+
+.instructions ol, .instructions ul {
+  margin: 0;
+  padding-left: 2rem;
+}
+
+.instructions ol li, .instructions ul li {
+  margin: 4px 0;
+}
+
+.inline-red {
+  color: #e74c3c;
+}
+
+.inline-green {
+  color: #2ecc71;
+}

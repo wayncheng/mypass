@@ -228,10 +228,10 @@ header nav {
   line-height: 64px;
   box-shadow: none;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.9);
-  border-color: rgba(0, 0, 0, 0.9);
+  color: #242424;
   padding: 0 3rem;
   background-color: transparent;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 }
 
 header nav .nav-wrapper {
@@ -268,22 +268,45 @@ header nav .nav-wrapper a.btn {
   font-size: 1rem;
 }
 
-header nav .nav-wrapper a i {
-  margin-left: .5rem;
-}
-
 header nav .nav-wrapper a.site-name {
   font-size: 1.5rem;
-  font-weight: 300;
-  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: -0.02rem;
+  float: left;
 }
 
-header nav .nav-wrapper a.site-name strong {
-  font-weight: 900;
+header nav .nav-wrapper a#navbar-trigger {
+  font-size: 2.4rem;
+  margin: 0;
+  display: none;
+  margin-right: 1rem;
 }
 
-header nav .nav-wrapper ul.side-nav li,
-header nav .nav-wrapper ul.side-nav a i {
+header nav .nav-wrapper i {
+  font-size: inherit;
+}
+
+@media all and (max-width: 850px) {
+  header nav .nav-wrapper ul.nav-links-wrap {
+    display: none;
+  }
+  header nav .nav-wrapper a#navbar-trigger {
+    float: left;
+    display: inline-block;
+  }
+}
+
+@media all and (max-width: 500px) {
+  header nav .nav-wrapper ul.login-links {
+    display: none;
+  }
+  header nav .nav-wrapper a#navbar-trigger {
+    float: right;
+    margin: 0;
+  }
+}
+
+header nav .nav-wrapper ul.side-nav li, header nav .nav-wrapper ul.side-nav a i {
   height: 48px;
   line-height: 48px;
 }
