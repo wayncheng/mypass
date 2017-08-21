@@ -230,7 +230,7 @@
 #banner .headline {
   font-size: 3.5rem;
   font-weight: 600;
-  color: #505e5f;
+  color: #242424;
 }
 
 @media all and (max-width: 700px) {
@@ -255,12 +255,13 @@
   font-size: 2rem;
   font-weight: 400;
   color: #1abc9c;
-  color: #7f8c8d;
+  color: #818181;
 }
 
 #banner .bounds {
   padding-bottom: 6rem;
   padding-top: 2rem;
+  margin-bottom: -4rem;
 }
 
 #banner .content-wrap {

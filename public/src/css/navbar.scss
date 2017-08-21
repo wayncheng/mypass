@@ -11,136 +11,161 @@ $line-height: $height;
 $btn-height: 36px;
 
 header {
-  position: absolute;
-  top: 0;
-  width: 100%;
-  // z-index: 1000;
-  z-index: 1000;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	// z-index: 1000;
+	z-index: 1000;
 
-  nav {
-    height: $height;
-    line-height: $height;
-    box-shadow: none;
-    font-weight: 400;
-    color: $faded-black;
-    border-color: $faded-black;
-    padding: 0 3rem;
-    background-color: transparent;
+	nav {
+		height: $height;
+		line-height: $height;
+		box-shadow: none;
+		font-weight: 400;
+		color: $primary-text;
+		padding: 0 3rem;
+		background-color: transparent;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.16);
 
-    .nav-wrapper {
-      // max-width: 800px;
-      max-width: $max-width;
-      margin: auto;
+		.nav-wrapper {
+			// max-width: 800px;
+			max-width: $max-width;
+			margin: auto;
 
-      ul {
-        display: inline-block;
-        margin: auto;
-        margin-left: 1rem;
-      }
-      ul li,
-      a i {
-        height: inherit;
-        line-height: inherit;
-      }
+			ul {
+				display: inline-block;
+				margin: auto;
+				margin-left: 1rem;
+			}
+			ul li,
+			a i {
+				height: inherit;
+				line-height: inherit;
+			}
 
-      a {
-        font-size: 1.1rem;
-        transition: color 400ms;
-        color: inherit;
-        line-height: inherit;
-        &:hover {
-          background-color: initial;
-          border-color: $pure-black;
-          color: $pure-black;
+			a {
+				font-size: 1.1rem;
+				transition: color 400ms;
+				color: inherit;
+				line-height: inherit;
+				&:hover {
+					background-color: initial;
+					border-color: $pure-black;
+					color: $pure-black;
+				}
+				&.btn {
+					font-size: 1rem;
+				}
+				&.site-name {
+					font-size: 1.5rem;
+					font-weight: 700;
+					//   text-transform: uppercase;
+					letter-spacing: -0.02rem;
+					float: left;
+				}
+				&#navbar-trigger {
+					font-size: 2.4rem;
+					margin: 0;
+					// float: right;
+					display: none;
+					// margin: -0.25rem;
+					margin-right: 1rem;
+				}
+			}
+			i {
+				font-size: inherit;
+				// margin-left: .5rem;
+			}
+			@media all and (max-width: 850px){
+				ul.nav-links-wrap {
+					display: none;
+				}
+				a#navbar-trigger {
+					float: left;
+					display: inline-block;
+				}
+			}
+			@media all and (max-width: 500px){
+				ul.login-links {
+					display: none;
+				}
+				a#navbar-trigger {
+					float: right;
+					margin: 0;
+				}
+			}
+			ul.side-nav {
+				li, a i {
+					height: 48px;
+					line-height: 48px;
+				}
+				a {
+					color: #333;
+					line-height: inherit;
+
+					&:hover {
+						background-color: transparent;
+						color: $pure-black;
+					}
+					&.btn {
+						font-weight: 500;
+						font-size: 1.2rem;
+					}
+					&.outline {
+						border-color: $blue;
+						color: $blue;
+					}
+					&.filled {
+						background-color: $blue;
+						color: #fff;
+					}
+				}
+			}
+
+			ul.dropdown-content {
+				opacity: 0;
+				display: none;
+			}
 		}
-		&.btn {
-			font-size: 1rem;
+
+// Buttons =================================\
+		.btn {
+			padding: 0 1.3rem;
+
+			// Outlined Buttons
+			&.outline {
+				background-color: transparent;
+				box-shadow: none;
+				line-height: $btn-height - 4; //adjusted to compensate for border
+				font-weight: 500;
+				border-radius: 4px;
+				border: 2px solid $faded-black;
+				border-color: inherit;
+				color: $faded-black;
+
+				&:hover {
+					border-color: $pure-black;
+					color: $pure-black;
+				}
+			}
+			// Filled buttons
+			&.filled {
+				$filled-color: rgba(0, 0, 0, 0.6);
+				background-color: $filled-color;
+				transition: background-color 400ms;
+				color: $pure-white;
+				box-shadow: none;
+				border-radius: 4px;
+				line-height: $btn-height;
+
+				&:hover {
+					// background-color: $filled-color;
+					background-color: rgba(0, 0, 0, .81);
+					color: $pure-white;
+					// font-weight: 300;
+				}
+			}
 		}
-        i {
-          margin-left: .5rem;
-        }
-        &.site-name {
-          font-size: 1.5rem;
-          font-weight: 300;
-          text-transform: uppercase;
-          strong {
-            font-weight: 900;
-          }
-        }
-      }
-
-      ul.side-nav {
-        li,
-        a i {
-          height: 48px;
-          line-height: 48px;
-        }
-        a {
-          color: #333;
-          line-height: inherit;
-
-          &:hover {
-            background-color: transparent;
-            color: $pure-black;
-          }
-          &.btn {
-            font-weight: 500;
-            font-size: 1.2rem;
-          }
-          &.outline {
-            border-color: $blue;
-            color: $blue;
-          }
-          &.filled {
-            background-color: $blue;
-            color: #fff;
-          }
-        }
-      }
-
-      ul.dropdown-content {
-        opacity: 0;
-        display: none;
-      }
-    }
-
-    // Buttons =================================\
-    .btn {
-      padding: 0 1.3rem;
-
-      // Outlined Buttons
-      &.outline {
-        background-color: transparent;
-        box-shadow: none;
-        line-height: $btn-height - 4; //adjusted to compensate for border
-        font-weight: 500;
-        border-radius: 4px;
-        border: 2px solid $faded-black;
-        border-color: inherit;
-        color: $faded-black;
-
-        &:hover {
-          border-color: $pure-black;
-          color: $pure-black;
-        }
-      }
-      // Filled buttons
-      &.filled {
-        $filled-color: rgba(0, 0, 0, 0.6);
-        background-color: $filled-color;
-        transition: background-color 400ms;
-        color: $pure-white;
-        box-shadow: none;
-        border-radius: 4px;
-        line-height: $btn-height;
-
-        &:hover {
-          // background-color: $filled-color;
-          background-color: rgba(0, 0, 0, .81);
-          color: $pure-white;
-          // font-weight: 300;
-        }
-      }
-    }
-  }
+	}
 }
+
