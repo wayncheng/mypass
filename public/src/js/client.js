@@ -1,5 +1,11 @@
-console.log('client.js loaded');
+// var $h = $(html);
+// var $w = $(window)
 
+// Flag details using boswer
+//==================================================
+	if (bowser.mobile || bowser.tablet) {
+		$('html').addClass('mobile');
+	}
 
 // Basic validation during signup
 //==================================================

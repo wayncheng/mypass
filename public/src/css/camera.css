@@ -50,7 +50,7 @@ button {
   display: inline-block;
   width: 4rem;
   height: 4rem;
-  margin-top: 4px;
+  margin-top: 3px;
   border-radius: 50%;
   background-color: #e74c3c;
 }
@@ -95,4 +95,8 @@ button {
 
 #deny {
   background-color: #e74c3c;
+}
+
+#camera div div {
+	border-radius: 10px;
 }
