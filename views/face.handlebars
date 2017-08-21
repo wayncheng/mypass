@@ -1,54 +1,49 @@
-<!-- HEADLINE -->
-<div class="headline-wrap">
-	{{#if isSignup}}
-	<p class="eyebrow">Step 2: Face Recognition Setup</p>
-	<h2 class="authtype headline">Ready for your close-up!</h2>
-	<div class="list-wrap bounds instructions">
-		<ol class="subheadline">
-			<li>Start by taking a snapshot.</li>
-			<li>Press the check to confirm if you are happy with the photo. If not, you can retake as many as you like </li>
-		</ol>
+<div class="no-trace content-group no-mobile notice">
+	<!-- HEADLINE -->
+	<div class="headline-wrap">
+		{{#if isSignup}}
+		<p class="eyebrow">Step 2: Face Recognition Setup</p>
+		<h2 class="authtype headline">Ready for your close-up!</h2>
+		<p class="subheadline">
+			Take a photo of yourself to use as your ID picture.
+		</p>
+
+		{{else}}
+		<p class="eyebrow">Face Authentication</p>
+		<h2 class="headline">MyPass Login</h2>
+		{{!-- <p class="subheadline"> </p> --}}
+		<p class="fineprint">Don't have an account?
+			<a href="/signup/text"> Sign up here. </a>
+		</p>
+		{{/if}}
 	</div>
 
+	<div id="upload_status" class="center-block"></div>
+	<div id="upload_result" class="center-block"></div>
 
-	{{else}}
-	<p class="eyebrow">Face Authentication</p>
-	<h2 class="headline">Login with Your Face</h2>
-	<p class="subheadline">
-		We never forget a face!
-	</p>
-	<p class="fineprint">Don't have an account?
-		<a href="/signup/text"> Sign up here. </a>
-	</p>
-	{{/if}}
-</div>
+	<div class="row">
 
-<div id="upload_status" class="center-block"></div>
-<div id="upload_result" class="center-block"></div>
+		<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12"
+		 style="max-width:30%;margin-left:35%">
 
-<div class="row">
+			<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}"> {{#if isSignup}}
 
-	<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12"
-	 style="max-width:30%;margin-left:35%">
-
-		<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}"> {{#if isSignup}}
-
-		<input id="username" type="hidden" name="username" autocomplete="off" value="{{username}}" disabled> {{else}}
+			<input id="username" type="hidden" name="username" autocomplete="off" value="{{username}}" disabled> {{else}}
 
 
-		<div class="input-field row">
+			<div class="input-field row">
 
-			<input id="username" type="text" name="username" autocomplete="off" value="{{username}}">
-			<label for="username">username</label>
-		</div>
-
-
-		{{/if}}
-	</form>
+				<input id="username" type="text" name="username" autocomplete="off" value="{{username}}">
+				<label for="username">username</label>
+			</div>
 
 
-	<!-- FOR LOGIN/SIGNUP, THERE IS NO NEED TO UPLOAD A PHOTO, AND PRESS SUBMIT BUTTON -->
-	<!--
+			{{/if}}
+		</form>
+
+
+		<!-- FOR LOGIN/SIGNUP, THERE IS NO NEED TO UPLOAD A PHOTO, AND PRESS SUBMIT BUTTON -->
+		<!--
 		<div class="file-field input-field row">
 			<div id="img-input-wrap" class="btn btn-large light">
 				<span> <i class="material-icons">photo</i>PassPhoto </span>
@@ -60,30 +55,44 @@
 		</div>
 		-->
 
-</div>
-
-<div id="camera-wrap">
-	<div id="camera">
-		<div class="placeholder"> Your browser does not support camera access. We recommend <a href="https://www.google.com/chrome/" target="_blank">Chrome</a>			&mdash; modern, secure, fast browser from Google.<br> It's free. </div>
 	</div>
-	<button id="shutter" class="btn">
+
+	<div id="camera-wrap">
+		<div id="camera">
+			<div class="placeholder"> Your browser does not support camera access. We recommend <a href="https://www.google.com/chrome/" target="_blank">Chrome</a></div>
+		</div>
+		<button id="shutter" class="btn">
 			<span id="shutter-filling"></span>
 		</button>
-	<div id="confirmation-wrap">
-		<button id="deny" class="prompt-btn icon-btn btn"><i class="material-icons">close</i></button>
-		<button id="accept" class="prompt-btn icon-btn btn"><i class="material-icons">done</i> </button>
+		<div id="confirmation-wrap">
+			<button id="deny" class="prompt-btn icon-btn btn"><i class="material-icons">close</i></button>
+			<button id="accept" class="prompt-btn icon-btn btn"><i class="material-icons">done</i> </button>
+		</div>
 	</div>
+	{{!-- <div id="camera-info-wrap">
+		<div id="camera_info"></div>
+		<div id="stream_stats"></div>
+	</div> --}}
+
+		{{!-- <a href="#!" id='cancel-btnFace' class='cancel-btnFace cancel-btn' value="Delete"> --}}
+		{{!-- <i class="material-icons">highlight_off</i> --}}
+		<a href="#!"  id='cancel-btnFace' class='cancel-btnFace cancel-btn cancel-top-right' value="Delete">
+			<i class="material-icons">close</i>
+		</a>
+	<div id="dump" name="dump"></div>
 </div>
-<div id="camera-info-wrap">
-	<div id="camera_info"></div>
-	<div id="stream_stats"></div>
+<!--==============================================-->
+{{!-- Notice for mobile users about incompatibility --}}
+<div class="notice dialog mobile-notice container">
+	<h2 class="headline">
+		Sorry. This feature is currently unavailable on mobile devices.
+	</h2>
+	<p class="description">
+		For security reasons, face authentication is currently disabled on mobile devices.
+		<strong> Please use a computer to access this feature. </strong> Can't get to a computer right now? You can still authenticate
+		with your
+		<a href="/login/text"> text password </a> or
+		<a href="/login/voice"> voice recognition. </a>
+	</p>
 
-	{{!-- <a href="#!" id='cancel-btnFace' class='cancel-btnFace cancel-btn' value="Delete"> --}}
-	    	<a href="#!"  id='cancel-btnFace' class='cancel-btnFace cancel-btn cancel-top-right' value="Delete">
-					{{!-- <i class="material-icons">highlight_off</i> --}}
-					<i class="material-icons">close</i>
-					</a>
 </div>
-
-
-<div id="dump" name="dump"></div>
