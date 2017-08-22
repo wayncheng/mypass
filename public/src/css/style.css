@@ -248,6 +248,7 @@ body {
   margin: 0;
   padding: 0;
   background-color: #fff;
+  background-color: #eee;
   text-align: center;
   color: #333;
   background-color: transparent;
@@ -475,4 +476,40 @@ section .section-wrapper {
   display: none;
   visibility: hidden;
   opacity: 0;
+}
+
+.panel-wrap {
+  display: block;
+  padding: 5%;
+  margin: auto;
+}
+
+.panel-wrap a.panel {
+  outline: 2px solid rgba(0, 0, 0, 0.08);
+  padding: 2rem;
+  background-color: #fff;
+  color: #242424;
+  display: inline-block;
+  margin: .5rem;
+}
+
+.panel-wrap a.panel .section-title {
+  font-weight: 400;
+  font-size: 2rem;
+  margin: 0;
+}
+
+.panel-wrap a.panel .feature-icon {
+  margin: 0;
+}
+
+.panel-wrap a.panel .feature-icon i {
+  font-size: 6rem;
+}
+
+.mold-fill {
+  width: 100%;
+  height: 100%;
+  display: inline-block;
+  margin: 0;
 }

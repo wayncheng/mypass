@@ -123,8 +123,9 @@ header {
 			}
 
 			ul.dropdown-content {
-				opacity: 0;
-				display: none;
+				// opacity: 0;
+				// display: none;
+				z-index: 1001;
 			}
 		}
 

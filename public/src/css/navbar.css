@@ -337,8 +337,7 @@ header nav .nav-wrapper ul.side-nav a.filled {
 }
 
 header nav .nav-wrapper ul.dropdown-content {
-  opacity: 0;
-  display: none;
+  z-index: 1001;
 }
 
 header nav .btn {
