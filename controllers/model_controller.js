@@ -58,8 +58,14 @@
       res.render(authtype, hbsParams);
     }
   });
-  router.get("/login", function(req, res) {
-    res.redirect("/login/text");
+  router.get("/login-options", function(req, res) {
+    res.render("login-options",{
+		title: "Select Login Method",
+		api_phase: "login",
+		layout: "login",
+		isSignup: false,
+	})
+	
   });
   //==================================================
   router.get("/verified", function(req, res) {
