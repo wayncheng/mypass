@@ -21,7 +21,8 @@ $('#cancel-btnFace').on('click',function(event){
 
 });
 
-
+// Select username input field by default
+$('#username').focus();
 
 
 // VOICE HANDLEBAR THERE WILL 1 MORE CANCEL BUTTON -- NAME IT DIFF

@@ -43,7 +43,7 @@ html {
     }
     ul.left,
     ul.right {
-      display: none;
+      display: inline-block;
     }
   }
 }
@@ -57,6 +57,7 @@ body {
   background-color: transparent;
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: $mono-white;
   // background: rgb(255,58,58);
   // background: -moz-linear-gradient(-45deg, rgba(255,58,58,1) 0%, rgba(255,126,45,1) 100%);
   // background: -webkit-linear-gradient(-45deg, rgba(255,58,58,1) 0%,rgba(255,126,45,1) 100%);
@@ -237,7 +238,7 @@ section {
 
 .fineprint {
 	font-size: 1.1rem;
-	font-weight: 300;
+	font-weight: 400;
 	color: $secondary-text;
 	margin: 0.5rem 0;
 	a {

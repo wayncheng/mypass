@@ -1,3 +1,10 @@
-.recording {
-	background-color: #e74c3c;
+@import "_variables";
+
+.ready-to-record .circle-wrap {
+	border: 4px solid $red;
+	background-color: $red-d;
+}
+.recording .circle-wrap {
+	background-color: $red;
+	
 }

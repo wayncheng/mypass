@@ -238,11 +238,13 @@
 
 .headline-wrap {
   padding: 2rem 0;
+  max-width: 600px;
+  margin: auto;
 }
 
 .headline-wrap .headline {
   font-size: 3rem;
-  font-weight: 100;
+  font-weight: 300;
   margin: .5rem 0;
   color: #242424;
 }
@@ -256,9 +258,9 @@
 form {
   background-color: transparent;
   width: 90%;
-  max-width: 400px;
+  max-width: 480px;
   margin: auto;
-  padding: 2rem;
+  padding: 1rem;
 }
 
 form input.text-input {
@@ -296,4 +298,28 @@ form .submit-btn {
 
 form.validated .submit-btn {
   background-color: #1abc9c;
+}
+
+.phrase-wrap {
+  max-width: 600px;
+  margin: 90%;
+  margin: auto;
+  padding: .5rem 1rem;
+  background-color: #fff;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  -ms-border-radius: 8px;
+  border-radius: 8px;
+  font-style: italic;
+  font-weight: 400;
+  background-color: #1abc9c;
+  color: #fff;
+}
+
+.phrase-wrap #enrollment-phrase {
+  font-size: 2.5rem;
+}
+
+.record-btn-wrap {
+  margin: 2rem 0;
 }

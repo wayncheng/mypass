@@ -75,10 +75,12 @@
 // Headliner ==============================
 .headline-wrap {
 	padding: 2rem 0;
+	max-width: 600px;
+	margin: auto;
 
 	.headline {
 		font-size: 3rem;
-		font-weight: 100;
+		font-weight: 300;
 		margin: .5rem 0;
 		color: $primary-text;
 	}
@@ -93,9 +95,9 @@
 form {
 	background-color: transparent;
 	width: 90%;
-	max-width: 400px;
+	max-width: 480px;
 	margin: auto;
-	padding: 2rem;
+	padding: 1rem;
 
 	input.text-input {
 		// outline: 1px solid green;
@@ -136,8 +138,41 @@ form {
 			background-color: $teal;
 		}
 	}
-
 }
+
+
+.phrase-wrap {
+	max-width: 600px;
+	margin: 90%;
+	margin: auto;
+	padding: .5rem 1rem;
+	background-color: #fff;
+	@include border-radius(8px);
+	font-style: italic;
+	font-weight: 400;
+	background-color: $teal;
+	color: #fff;
+
+	#enrollment-phrase {
+		font-size: 2.5rem;
+	}
+}
+
+.record-btn-wrap {
+	margin: 2rem 0;
+}
+
+
+
+
+
+
+
+
+
+
+
+
 // input:not([type]), input[type=text], input[type=password], input[type=email], input[type=url], input[type=time], input[type=date], input[type=datetime], input[type=datetime-local], input[type=tel], input[type=number], input[type=search], textarea.materialize-textarea {
 //     border-bottom: none;
 // }

@@ -1,3 +1,8 @@
-.recording {
+.ready-to-record .circle-wrap {
+  border: 4px solid #e74c3c;
+  background-color: #c0392b;
+}
+
+.recording .circle-wrap {
   background-color: #e74c3c;
 }

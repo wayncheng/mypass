@@ -241,7 +241,7 @@ html.signup .button-collapse, html.login .button-collapse {
 html.signup ul.left,
 html.signup ul.right, html.login ul.left,
 html.login ul.right {
-  display: none;
+  display: inline-block;
 }
 
 body {
@@ -254,6 +254,7 @@ body {
   background-color: transparent;
   min-height: 100vh;
   overflow-x: hidden;
+  background-color: #ecf0f1;
 }
 
 main {
@@ -409,7 +410,7 @@ section .section-wrapper {
 
 .fineprint {
   font-size: 1.1rem;
-  font-weight: 300;
+  font-weight: 400;
   color: #818181;
   margin: 0.5rem 0;
 }

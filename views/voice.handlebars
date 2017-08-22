@@ -1,39 +1,64 @@
-<h5 class="authtype headline">Voice Enrollment for <span class="username-target">username</span></h5>
+<!-- HEADLINE -->
+<div class="headline-wrap">
+	{{#if isSignup}}
+	<p class="eyebrow">Step 3: Voice Recognition Setup</p>
+	<h2 class="authtype headline">
+		Read the phrase 3 times
+		<br> to enroll your voice.
+	</h2>
+	<p class="subheadline">
+		When you're ready, press the mic button and begin reading.
+		<br> It may take a few seconds to process, so please be patient.
+	</p>
+	<p class="fineprint">Already have an account?
+		<a href="/login"> Login here. </a>
+	</p>
+
+	{{else}}
+	<p class="eyebrow">Voice Authentication</p>
+	<h2 class="headline">MyPass Login</h2>
+	{{!--
+	<p class="subheadline"> </p> --}}
+	<p class="fineprint">Don't have an account?
+		<a href="/signup/text"> Sign up here. </a>
+	</p>
+	<p class="fineprint">Can't speak right now? Login with your <a href="/login/text">text password</a> or <a href="/login/face">face</a>.
+	</p>
+	{{/if}}
+</div>
 
 <div id="error"></div>
 
+{{!-- Enrollment Phrase Wrap --}}
+<div class="phrase-wrap">
+	<h3 id="enrollment-phrase">Today is a nice day to go for a walk.</h3>
+</div>
 
-
-<div class="row" >
-		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" enctype="multipart/form-data"  class="voice-form col s12 m6 offset-m3 l4 offset-l4"> --}}
-		<form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4" >
-			
-		  {{#if isSignup}}
-			<input id="username" type="hidden" name="username" placeholder="username" disabled value="{{username}}">
-		  {{else}}	
-		  	<input id="username" type="text" name="username" placeholder="username" value="{{username}}">
-		  {{/if}}
-
+<div class="container">
+	{{!--
+	<form id="main-form" role="form" action="/api/voice/user" method="POST" enctype="multipart/form-data" class="voice-form col s12 m6 offset-m3 l4 offset-l4">
+		--}}
+		{{!-- <form id="main-form" role="form" action="/api/voice/user" method="POST" class="voice-form col s12 m6 offset-m3 l4 offset-l4"> --}}
+		<form id="main-form" class="container" role="form" action="/api/voice/user" method="POST" class="voice-form">
+			{{#if isSignup}}
+			<input id="username" class="input text-input" type="hidden" name="username" placeholder="username" disabled value="{{username}}">			
+			{{else}} {{!-- <input id="username" type="text" name="username" placeholder="username" value="{{username}}"> --}}
+			<input id="username" class="input text-input" type="text" placeholder="username" name="username" autocomplete="off" value="{{username}}">			
+			{{/if}}
 			<!-- <button class="btn" type="submit">Create User</button> -->
 		</form>
 
-
+	<div class="record-btn-wrap">
+		<a id="record" href="#!" class="circle-wrap waves">
+			<i class="material-icons marquee" id="keyboard_voice">keyboard_voice</i>
+		</a>
 	</div>
 
-	<div class="row">
-	<a id="record" href="#!" class="circle-wrap">
-		<i class="material-icons marquee" id="keyboard_voice">keyboard_voice</i>
-	</a>
 </div>
 
-<div class="row">
-	<h3 id="enrollment-phrase">Today is a nice day to go for a walk.</h3>
-</div>
 
 {{!-- <a href="#!" id="cancel-btnVoice" class="cancel-btnVoice cancel-btn"> --}}
 <a href="#!" id="cancel-btnVoice" class="cancel-btnVoice cancel-btn cancel-top-right">
 		{{!-- <i class="material-icons">highlight_off</i> --}}
 		<i class="material-icons">close</i>
 </a>
-
-			

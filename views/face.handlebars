@@ -21,21 +21,23 @@
 	<div id="upload_status" class="center-block"></div>
 	<div id="upload_result" class="center-block"></div>
 
-	<div class="row">
+	<div class="container">
 
-		<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12"
-		 style="max-width:30%;margin-left:35%">
+		{{!-- <form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="col s12 m12" style="max-width:30%;margin-left:35%"> --}}
+		<form id="main-form" role="form" action="/api/face/{{api_phase}}" enctype="multipart/form-data" method="POST" class="">
 
-			<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}"> {{#if isSignup}}
+			<input id="csrf" type="hidden" name="_csrf" value="{{csrf}}"> 
+		
+			{{#if isSignup}}
+				<input id="username" class="input text-input" type="hidden" name="username" autocomplete="off" value="{{username}}" disabled> 
+			{{else}}
 
-			<input id="username" type="hidden" name="username" autocomplete="off" value="{{username}}" disabled> {{else}}
 
+			{{!-- <div class="input-field row"> --}}
 
-			<div class="input-field row">
-
-				<input id="username" type="text" name="username" autocomplete="off" value="{{username}}">
-				<label for="username">username</label>
-			</div>
+				<input id="username" class="input text-input" type="text" placeholder="username" name="username" autocomplete="off" value="{{username}}">
+				{{!-- <label for="username">username</label> --}}
+			{{!-- </div> --}}
 
 
 			{{/if}}
